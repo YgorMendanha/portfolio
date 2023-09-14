@@ -1,52 +1,52 @@
+import { CustomLink } from "@/components";
+
 export function About() {
   return (
     <section
       id="about"
-      className="my-10 w-full flex flex-col items-center justify-center text-center container mx-auto p-5 backdrop-blur-sm bg-violet-900/40 rounded-lg [&_p]:my-3"
+      className="my-10 w-full flex flex-col justify-center text-justify container mx-auto p-5 backdrop-blur-sm bg-violet-900/40 rounded-lg [&_p]:my-3"
     >
-      <h2 className="text-2xl">
+      <h2 className="text-2xl mx-auto">
         <b>Sobre</b>
       </h2>
       <p>
-        Com 24 anos de idade e atualmente cursando Análise de Sistemas, sou um
-        desenvolvedor com dois anos de sólida experiência, com um foco especial
-        em e-commerce. Minha jornada profissional tem sido uma emocionante
-        exploração do mundo digital, e grande parte dessa aventura aconteceu no
-        dinâmico campo do comércio eletrônico.
+        Olá, eu sou um desenvolvedor apaixonado por tecnologia e inovação, com
+        24 anos de idade e dois anos de experiência sólida em desenvolvimento de
+        software. Minha jornada profissional me levou a mergulhar profundamente
+        no mundo do comércio eletrônico, onde pude vivenciar desafios
+        emocionantes e oportunidades de crescimento.
       </p>
 
       <p>
-        Durante esses dois anos, mergulhei de cabeça em projetos que me
-        permitiram aprimorar minhas habilidades técnicas e desenvolver uma
-        compreensão profunda das complexidades do e-commerce. Trabalhei na
-        criação de interfaces de usuário envolventes e responsivas, garantindo
-        que os clientes tenham experiências de compra excepcionais.
+        Minha trajetória no e-commerce me ensinou a importância de criar
+        experiências digitais excepcionais para os clientes. Trabalhei
+        intensamente para otimizar a performance de websites, tornando a
+        navegação suave e eficiente. Além disso, integrei sistemas de pagamento
+        seguros, garantindo transações online tranquilas e confiáveis.
       </p>
 
       <p>
-        Além disso, participei ativamente da integração de sistemas de pagamento
-        seguros e da otimização do desempenho de sites para garantir que os
-        visitantes tenham uma jornada fluida e sem problemas. A segurança dos
-        dados dos clientes é uma prioridade, e implementei medidas para proteger
-        essas informações de maneira eficaz.
+        Atualmente, estou comprometido em aprimorar meus conhecimentos e
+        habilidades, buscando uma graduação em Análise de Sistemas. Essa
+        formação acadêmica amplia minha visão e me mantém atualizado com as mais
+        recentes tendências tecnológicas.
       </p>
 
       <p>
-        Minha paixão pela tecnologia e pela aprendizagem constante me levou a
-        buscar uma formação em Análise de Sistemas, fortalecendo ainda mais
-        minhas habilidades e capacidades. Estou comprometido em continuar
-        crescendo como desenvolvedor, acompanhando as tendências tecnológicas e
-        aplicando meu conhecimento para criar soluções inovadoras no campo do
-        e-commerce.
+        Se você procura um desenvolvedor apaixonado, dedicado e orientado para
+        resultados, estou aqui para ajudar. Minha paixão por desafios
+        tecnológicos e meu comprometimento com a excelência fazem de mim um
+        recurso valioso para qualquer projeto de desenvolvimento de software.
       </p>
 
       <p>
-        Estou pronto e empolgado para enfrentar novos desafios e contribuir para
-        projetos que demandem expertise em desenvolvimento web com foco em
-        e-commerce. Se você está em busca de um desenvolvedor apaixonado e em
-        constante evolução, estou à disposição para discutir como posso agregar
-        valor à sua equipe e aos seus projetos. Vamos criar experiências online
-        incríveis juntos!
+        Entre em{" "}
+        <CustomLink className="text-purple-400 underline" href={"#contact"}>
+          <b>contato</b>
+        </CustomLink>{" "}
+        e vamos explorar como posso contribuir para o sucesso da sua equipe e
+        dos seus projetos. Juntos, podemos transformar ideias em realidade
+        digital.
       </p>
     </section>
   );

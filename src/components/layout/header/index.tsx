@@ -5,6 +5,7 @@ import { FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { BsWhatsapp } from "react-icons/bs";
 import { SlSocialInstagram } from "react-icons/sl";
 import Link from "next/link";
+import { CustomLink } from "@/components";
 
 export function Header() {
   const iconSize = 25;
@@ -34,39 +35,42 @@ export function Header() {
     >
       <div className="container mx-auto flex">
         <nav className="mr-auto flex items-center [&_a]:mr-3 [&_a]:my-2 [&_a]:text-lg">
-          <Link
+          <CustomLink
             id="iconGit"
             href="https://github.com/YgorMendanha"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaGithub size={iconSize} />
-          </Link>
-          <Link
+          </CustomLink>
+          <CustomLink
             id="iconLin"
             href="https://www.linkedin.com/in/ygormendanha"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaLinkedinIn size={iconSize} />
-          </Link>
-          <Link
+          </CustomLink>
+          <CustomLink
             id="iconWhats"
             href="https://wa.me/5592982145233"
             target="_blank"
             rel="noopener noreferrer"
           >
             <BsWhatsapp size={iconSize} />
-          </Link>
+          </CustomLink>
         </nav>
 
         <nav className="ml-auto flex items-center [&_a]:mr-3 [&_a]:my-2 [&_a]:text-lg">
-          <Link href="#intro">Inicio</Link>
-          <Link href="#about">Sobre</Link>
-          <Link href="#project">Projetos</Link>
-          <Link href="#contact" className="bg-violet-700 py-1 px-3 rounded-lg">
+          <CustomLink href="#intro">Inicio</CustomLink>
+          <CustomLink href="#about">Sobre</CustomLink>
+          <CustomLink href="#project">Projetos</CustomLink>
+          <CustomLink
+            href="#contact"
+            className="bg-violet-700 py-1 px-3 rounded-lg"
+          >
             Contato
-          </Link>
+          </CustomLink>
         </nav>
       </div>
     </header>

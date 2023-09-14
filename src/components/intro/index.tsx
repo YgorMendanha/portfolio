@@ -1,9 +1,14 @@
 "use client";
 
 import { Typewriter } from "react-simple-typewriter";
-import { BsArrowRight, BsWhatsapp } from "react-icons/bs";
+import { BsArrowRight } from "react-icons/bs";
+import { useParams } from "next/navigation";
+import { getDictionary } from "@/utils/functions/getDictionary";
 
 export function IntroSection() {
+  const { lang }: { lang?: "pt" | "en" } = useParams();
+  const dict = getDictionary(lang ?? "pt");
+
   return (
     <section className="flex flex-col h-screen">
       <main className="m-auto">
@@ -11,7 +16,7 @@ export function IntroSection() {
           <b>Ygor Mendanha</b>
         </h1>
         <div className="flex mt-2 text-4xl">
-          Desenvolvedor
+          {dict.developer}
           <span className="ml-2">
             <Typewriter
               words={["Front-end", "Back-End", "Full-Stack"]}

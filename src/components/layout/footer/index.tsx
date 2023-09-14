@@ -1,10 +1,6 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { BsWhatsapp } from "react-icons/bs";
-import { SlSocialInstagram } from "react-icons/sl";
-import Link from "next/link";
+import { CustomLink } from "@/components";
 
 export function Footer() {
   const iconSize = 25;
@@ -17,30 +13,30 @@ export function Footer() {
         </nav>
 
         <nav className="ml-auto flex items-center [&_a]:mr-3 [&_a]:my-2 [&_a]:text-lg">
-          <Link
+          <CustomLink
             id="iconGit"
             href="https://github.com/YgorMendanha"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaGithub size={iconSize} />
-          </Link>
-          <Link
+          </CustomLink>
+          <CustomLink
             id="iconLin"
             href="https://www.linkedin.com/in/ygormendanha"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaLinkedinIn size={iconSize} />
-          </Link>
-          <Link
+          </CustomLink>
+          <CustomLink
             id="iconWhats"
             href="https://wa.me/5592982145233"
             target="_blank"
             rel="noopener noreferrer"
           >
             <BsWhatsapp size={iconSize} />
-          </Link>
+          </CustomLink>
         </nav>
       </div>
     </footer>

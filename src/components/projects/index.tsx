@@ -1,5 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
+import ShopImg from "~/public/finesse-store.png";
+import NotesImg from "~/public/notes.png";
+import BlogImg from "~/public/blog.png";
+
+import { CustomLink } from "@/components";
 
 export function MyProjects() {
   return (
@@ -10,7 +14,7 @@ export function MyProjects() {
       <div className="flex my-10">
         <Image
           alt="banner Finesses store"
-          src={"/finesse-store.png"}
+          src={ShopImg}
           width={585}
           height={302}
         />
@@ -24,9 +28,9 @@ export function MyProjects() {
             accusantium consequuntur adipisci iste voluptatem, ea molestiae!
             Ducimus similique quaerat illo in!
           </p>
-          <Link className="mt-auto" href={"/"}>
+          <CustomLink className="mt-auto" href={"/"}>
             Visualizar
-          </Link>
+          </CustomLink>
         </div>
       </div>
       <div className="flex my-10">
@@ -40,19 +44,14 @@ export function MyProjects() {
             accusantium consequuntur adipisci iste voluptatem, ea molestiae!
             Ducimus similique quaerat illo in!
           </p>
-          <Link className="mt-auto" href={"/"}>
+          <CustomLink className="mt-auto" href={"/"}>
             Visualizar
-          </Link>
+          </CustomLink>
         </div>
-        <Image alt="banner blog" src={"/blog.png"} width={585} height={302} />
+        <Image alt="banner blog" src={BlogImg} width={585} height={302} />
       </div>
       <div className="flex my-10">
-        <Image
-          alt="banner Finesses store"
-          src={"/notes.png"}
-          width={585}
-          height={302}
-        />
+        <Image alt="banner notes" src={NotesImg} width={585} height={302} />
         <div className="ml-10 flex flex-col backdrop-blur-sm p-2 bg-violet-900/40 rounded-lg">
           <h3 className="text-4xl">
             <b>Notes</b>
@@ -63,9 +62,9 @@ export function MyProjects() {
             accusantium consequuntur adipisci iste voluptatem, ea molestiae!
             Ducimus similique quaerat illo in!
           </p>
-          <Link className="mt-auto" href={"/"}>
+          <CustomLink className="mt-auto" href={"/"}>
             Visualizar
-          </Link>
+          </CustomLink>
         </div>
       </div>
     </section>

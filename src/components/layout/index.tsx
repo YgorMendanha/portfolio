@@ -3,7 +3,7 @@
 import { Header } from "./header";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
-import options from "@/lib/particles";
+import options from "@/utils/lib/particles";
 import { useEffect, useState } from "react";
 import { Footer } from "./footer";
 
