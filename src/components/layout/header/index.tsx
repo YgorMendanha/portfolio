@@ -1,14 +1,17 @@
-"use client";
-
 import { useEffect, useState } from "react";
-import { FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { BsWhatsapp } from "react-icons/bs";
 import { SlSocialInstagram } from "react-icons/sl";
 import Link from "next/link";
 import { CustomLink } from "@/components";
+import { useParams } from "next/navigation";
+import { getDictionary } from "@/utils/functions/getDictionary";
 
 export function Header() {
   const iconSize = 25;
+
+  const { lang }: { lang?: "pt" | "en" } = useParams();
+  const dict = getDictionary(lang ?? "pt");
 
   const [show, setShow] = useState<boolean>(false);
 
@@ -35,41 +38,41 @@ export function Header() {
     >
       <div className="container mx-auto flex">
         <nav className="mr-auto flex items-center [&_a]:mr-3 [&_a]:my-2 [&_a]:text-lg">
-          <CustomLink
+          <Link
             id="iconGit"
             href="https://github.com/YgorMendanha"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaGithub size={iconSize} />
-          </CustomLink>
-          <CustomLink
+          </Link>
+          <Link
             id="iconLin"
             href="https://www.linkedin.com/in/ygormendanha"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaLinkedinIn size={iconSize} />
-          </CustomLink>
-          <CustomLink
+          </Link>
+          <Link
             id="iconWhats"
             href="https://wa.me/5592982145233"
             target="_blank"
             rel="noopener noreferrer"
           >
             <BsWhatsapp size={iconSize} />
-          </CustomLink>
+          </Link>
         </nav>
 
         <nav className="ml-auto flex items-center [&_a]:mr-3 [&_a]:my-2 [&_a]:text-lg">
-          <CustomLink href="#intro">Inicio</CustomLink>
-          <CustomLink href="#about">Sobre</CustomLink>
-          <CustomLink href="#project">Projetos</CustomLink>
+          <CustomLink href="#intro">{dict.home}</CustomLink>
+          <CustomLink href="#about">{dict.about}</CustomLink>
+          <CustomLink href="#project">{dict.projects}</CustomLink>
           <CustomLink
             href="#contact"
             className="bg-violet-700 py-1 px-3 rounded-lg"
           >
-            Contato
+            {dict.contact}
           </CustomLink>
         </nav>
       </div>

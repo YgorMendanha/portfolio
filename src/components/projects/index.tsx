@@ -2,14 +2,16 @@ import Image from "next/image";
 import ShopImg from "~/public/finesse-store.png";
 import NotesImg from "~/public/notes.png";
 import BlogImg from "~/public/blog.png";
+import { BiLinkExternal } from "react-icons/bi";
+import { getDictionary } from "@/utils/functions/getDictionary";
+import Link from "next/link";
 
-import { CustomLink } from "@/components";
-
-export function MyProjects() {
+export function MyProjects({ lang }: { lang: "pt" | "en" }) {
+  const dict = getDictionary(lang ?? "pt");
   return (
     <section id="project" className="container my-10 mx-auto flex flex-col">
       <h2 className="mx-auto text-2xl">
-        <b>Projetos</b>
+        <b>{dict.projects}</b>
       </h2>
       <div className="flex my-10">
         <Image
@@ -22,15 +24,14 @@ export function MyProjects() {
           <h3 className="text-4xl">
             <b>Finesse Store</b>
           </h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti
-            minima, eos eaque consequatur vitae voluptates ut numquam sapiente
-            accusantium consequuntur adipisci iste voluptatem, ea molestiae!
-            Ducimus similique quaerat illo in!
-          </p>
-          <CustomLink className="mt-auto" href={"/"}>
-            Visualizar
-          </CustomLink>
+          <p>{dict.shopDetails}</p>
+          <Link
+            target="_blank"
+            className="mt-auto text-lg underline font-bold flex items-center"
+            href={"https://finesse-store.vercel.app"}
+          >
+            {dict.toView} <BiLinkExternal className="ml-2" />
+          </Link>
         </div>
       </div>
       <div className="flex my-10">
@@ -38,15 +39,14 @@ export function MyProjects() {
           <h3 className="text-4xl">
             <b>Blog</b>
           </h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti
-            minima, eos eaque consequatur vitae voluptates ut numquam sapiente
-            accusantium consequuntur adipisci iste voluptatem, ea molestiae!
-            Ducimus similique quaerat illo in!
-          </p>
-          <CustomLink className="mt-auto" href={"/"}>
-            Visualizar
-          </CustomLink>
+          <p>{dict.blogDetails}</p>
+          <Link
+            target="_blank"
+            className="mt-auto text-lg underline font-bold flex items-center"
+            href={"https://blogymdevelopment.vercel.app"}
+          >
+            {dict.toView} <BiLinkExternal className="ml-2" />
+          </Link>
         </div>
         <Image alt="banner blog" src={BlogImg} width={585} height={302} />
       </div>
@@ -56,15 +56,14 @@ export function MyProjects() {
           <h3 className="text-4xl">
             <b>Notes</b>
           </h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti
-            minima, eos eaque consequatur vitae voluptates ut numquam sapiente
-            accusantium consequuntur adipisci iste voluptatem, ea molestiae!
-            Ducimus similique quaerat illo in!
-          </p>
-          <CustomLink className="mt-auto" href={"/"}>
-            Visualizar
-          </CustomLink>
+          <p>{dict.notesDetails}</p>
+          <Link
+            target="_blank"
+            className="mt-auto text-lg underline font-bold flex items-center"
+            href={"https://notes-ym.vercel.app"}
+          >
+            {dict.toView} <BiLinkExternal className="ml-2" />
+          </Link>
         </div>
       </div>
     </section>

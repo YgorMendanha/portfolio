@@ -17,3 +17,20 @@ body,
 ::selection {
   background: #4338ca;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 50%;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #a855f7;
+  width: 1px;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-corner {
+  background-color: #ffffff;
+}
