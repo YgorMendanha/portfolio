@@ -10,7 +10,7 @@ interface MyComponentProps {
 export const CustomInput = forwardRef<HTMLInputElement, MyComponentProps>(
   function MyInput(props, ref) {
     return (
-      <div className="relative w-full pt-5 mb-5 group ">
+      <div className="relative w-full pt-5 mb-2 group">
         <input
           {...props}
           className={`w-full border-b-2

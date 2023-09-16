@@ -12,10 +12,10 @@ export function IntroSection() {
   return (
     <section className="flex flex-col h-screen">
       <main className="m-auto">
-        <h1 className="text-9xl">
+        <h1 className="text-3xl min-[400px]:text-5xl min-[560px]:text-7xl  lg:text-9xl">
           <b>Ygor Mendanha</b>
         </h1>
-        <div className="flex mt-2 text-4xl">
+        <div className="flex mt-2 text-sm min-[400px]:text-xl min-[5560px]:text-2xl lg:text-4xl">
           {dict.developer}
           <span className="ml-2">
             <Typewriter
