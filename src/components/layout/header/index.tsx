@@ -41,35 +41,12 @@ export function Header() {
         show ? "top-0" : "-top-14 opacity-0"
       }`}
     >
-      <div className="container px-5  mx-auto flex">
-        <nav className="mr-auto flex items-center [&_a]:mr-3 [&_a]:my-2 [&_a]:text-lg">
-          <Link
-            id="iconGit"
-            href="https://github.com/YgorMendanha"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaGithub size={iconSize} />
-          </Link>
-          <Link
-            id="iconLin"
-            href="https://www.linkedin.com/in/ygormendanha"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaLinkedinIn size={iconSize} />
-          </Link>
-          <Link
-            id="iconWhats"
-            href="https://wa.me/5592982145233"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <BsWhatsapp size={iconSize} />
-          </Link>
-        </nav>
+      <div className="container px-5  mx-auto flex items-center ">
+        <div className="mr-auto">
+          <p className="text-3xl">YM</p>
+        </div>
 
-        <nav className="ml-auto flex items-center  [&_a]:my-2 [&_a]:text-lg">
+        <nav className="ml-auto flex items-center  [&_a]:text-lg">
           <CustomLink className="mr-3" href="#intro">
             {dict.home}
           </CustomLink>
@@ -79,12 +56,18 @@ export function Header() {
           <CustomLink className="mr-3" href="#project">
             {dict.projects}
           </CustomLink>
-          <CustomLink
-            href="#contact"
-            className="bg-violet-700 py-1 px-3 rounded-lg"
+          <Link
+            href="https://wa.me/5592982145233"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            {dict.contact}
-          </CustomLink>
+            <button
+              type="button"
+              className="py-1 px-3 my-2 bg-[#25D366] text-black rounded-lg"
+            >
+              <BsWhatsapp size={iconSize} />
+            </button>
+          </Link>
         </nav>
       </div>
     </header>
