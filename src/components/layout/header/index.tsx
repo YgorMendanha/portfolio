@@ -8,6 +8,7 @@ import { useParams } from "next/navigation";
 import { getDictionary } from "@/utils/functions/getDictionary";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { HeaderMenu } from "./partials/menu";
+import { SelectLang } from "./partials/selectLang";
 
 export function Header() {
   const iconSize = 25;
@@ -68,6 +69,7 @@ export function Header() {
               <BsWhatsapp size={iconSize} />
             </button>
           </Link>
+          <SelectLang />
         </nav>
       </div>
     </header>
