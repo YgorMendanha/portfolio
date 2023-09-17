@@ -81,16 +81,18 @@ export function HeaderMenu({
                 <FaLinkedinIn size={iconSize} />
               </Link>
               <Link
-                onClick={() => {
-                  GAEvent({ action: "click", label: "whatsapp" });
-                  onCLose();
-                }}
+                onClick={onCLose}
                 id="iconWhats"
                 href="https://wa.me/5592982145233"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <BsWhatsapp size={iconSize} />
+                <BsWhatsapp
+                  onClick={() => {
+                    GAEvent({ action: "click", label: "whatsapp" });
+                  }}
+                  size={iconSize}
+                />
               </Link>
             </nav>
           </nav>

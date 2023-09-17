@@ -34,13 +34,14 @@ export function Footer() {
             <FaLinkedinIn />
           </Link>
           <Link
-            onClick={() => GAEvent({ action: "click", label: "whatsapp" })}
             href="https://wa.me/5592982145233"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Whatsapp"
           >
-            <BsWhatsapp />
+            <BsWhatsapp
+              onClick={() => GAEvent({ action: "click", label: "whatsapp" })}
+            />
           </Link>
         </nav>
       </div>

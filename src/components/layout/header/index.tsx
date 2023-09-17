@@ -63,11 +63,11 @@ export function Header() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Whatsapp"
-            onClick={() => GAEvent({ action: "click", label: "whatsapp" })}
           >
             <button
               type="button"
               aria-label="Whatsapp"
+              onClick={() => GAEvent({ action: "click", label: "whatsapp" })}
               className="py-1 px-3 my-2 bg-[#25D366] text-black rounded-lg"
             >
               <BsWhatsapp size={iconSize} />

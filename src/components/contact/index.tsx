@@ -1,4 +1,5 @@
-import { CustomInput, CustomTextArea } from "@/components";
+"use client";
+
 import { getDictionary } from "@/utils/functions/getDictionary";
 import { GAEvent } from "@/utils/lib/analytics";
 import Link from "next/link";
@@ -20,10 +21,10 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
           href="https://wa.me/5592982145233"
           target="_blank"
           rel="noopener noreferrer"
-          onClick={() => GAEvent({ action: "click", label: "whatsapp" })}
         >
           <button
             type="button"
+            onClick={() => GAEvent({ action: "click", label: "whatsapp" })}
             className="mt-auto  py-1 px-3 m-2 bg-[#25D366]  text-2xl text-black rounded-lg"
           >
             <b>WhatsApp</b>
