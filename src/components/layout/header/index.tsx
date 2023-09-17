@@ -61,9 +61,11 @@ export function Header() {
             href="https://wa.me/5592982145233"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Whatsapp"
           >
             <button
               type="button"
+              aria-label="Whatsapp"
               className="py-1 px-3 my-2 bg-[#25D366] text-black rounded-lg"
             >
               <BsWhatsapp size={iconSize} />

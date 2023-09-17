@@ -5,7 +5,6 @@ import { getDictionary } from "@/utils/functions/getDictionary";
 import Link from "next/link";
 
 export function Footer() {
-  
   const { lang }: { lang?: "pt" | "en" } = useParams();
   const dict = getDictionary(lang ?? "pt");
 
@@ -21,6 +20,7 @@ export function Footer() {
             href="https://github.com/YgorMendanha"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Github"
           >
             <FaGithub />
           </Link>
@@ -28,6 +28,7 @@ export function Footer() {
             href="https://www.linkedin.com/in/ygormendanha"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="LinkedinIn"
           >
             <FaLinkedinIn />
           </Link>
@@ -35,6 +36,7 @@ export function Footer() {
             href="https://wa.me/5592982145233"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Whatsapp"
           >
             <BsWhatsapp />
           </Link>
