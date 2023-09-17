@@ -3,7 +3,6 @@ import { BsWhatsapp } from "react-icons/bs";
 import { useParams } from "next/navigation";
 import { getDictionary } from "@/utils/functions/getDictionary";
 import Link from "next/link";
-import { GAEvent } from "@/utils/lib/analytics";
 
 export function Footer() {
   const { lang }: { lang?: "pt" | "en" } = useParams();
@@ -39,9 +38,7 @@ export function Footer() {
             rel="noopener noreferrer"
             aria-label="Whatsapp"
           >
-            <BsWhatsapp
-              onClick={() => GAEvent({ action: "click", label: "whatsapp" })}
-            />
+            <BsWhatsapp />
           </Link>
         </nav>
       </div>

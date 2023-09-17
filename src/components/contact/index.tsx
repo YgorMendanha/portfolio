@@ -1,7 +1,6 @@
 "use client";
 
 import { getDictionary } from "@/utils/functions/getDictionary";
-import { GAEvent } from "@/utils/lib/analytics";
 import Link from "next/link";
 
 export function Contact({ lang }: { lang: "pt" | "en" }) {
@@ -24,7 +23,6 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
         >
           <button
             type="button"
-            onClick={() => GAEvent({ action: "click", label: "whatsapp" })}
             className="mt-auto  py-1 px-3 m-2 bg-[#25D366]  text-2xl text-black rounded-lg"
           >
             <b>WhatsApp</b>

@@ -1,5 +1,3 @@
-
-
 import Script from "next/script";
 
 export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_TRACKING!;
@@ -29,21 +27,3 @@ export function GoogleAnalytics(): any {
     </>
   );
 }
-
-export const GAPageview = (url: URL) => {
-  window.gtag("config", GA_TRACKING_ID, {
-    page_path: url,
-  });
-};
-
-type GTagEvent = {
-  action: string;
-  label: string;
-};
-
-export const GAEvent = ({ action, label }: GTagEvent) => {
-  window.gtag("event", action, {
-    event_category: "general",
-    event_label: label,
-  });
-};

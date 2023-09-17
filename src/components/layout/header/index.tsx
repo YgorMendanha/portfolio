@@ -9,7 +9,6 @@ import { getDictionary } from "@/utils/functions/getDictionary";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { HeaderMenu } from "./partials/menu";
 import { SelectLang } from "./partials/selectLang";
-import { GAEvent } from "@/utils/lib/analytics";
 
 export function Header() {
   const iconSize = 25;
@@ -67,7 +66,6 @@ export function Header() {
             <button
               type="button"
               aria-label="Whatsapp"
-              onClick={() => GAEvent({ action: "click", label: "whatsapp" })}
               className="py-1 px-3 my-2 bg-[#25D366] text-black rounded-lg"
             >
               <BsWhatsapp size={iconSize} />
