@@ -30,6 +30,7 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
+    "@types/gtag.js": "^0.0.13",
     "@types/negotiator": "^0.6.1"
   }
 }

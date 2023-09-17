@@ -6,6 +6,7 @@ import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { GrClose } from "react-icons/gr";
 
 import { BsWhatsapp } from "react-icons/bs";
+import { GAEvent } from "@/utils/lib/analytics";
 
 export function HeaderMenu({
   show,
@@ -80,7 +81,10 @@ export function HeaderMenu({
                 <FaLinkedinIn size={iconSize} />
               </Link>
               <Link
-                onClick={onCLose}
+                onClick={() => {
+                  GAEvent({ action: "click", label: "whatsapp" });
+                  onCLose();
+                }}
                 id="iconWhats"
                 href="https://wa.me/5592982145233"
                 target="_blank"

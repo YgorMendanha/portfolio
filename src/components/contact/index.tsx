@@ -1,5 +1,6 @@
 import { CustomInput, CustomTextArea } from "@/components";
 import { getDictionary } from "@/utils/functions/getDictionary";
+import { GAEvent } from "@/utils/lib/analytics";
 import Link from "next/link";
 
 export function Contact({ lang }: { lang: "pt" | "en" }) {
@@ -19,6 +20,7 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
           href="https://wa.me/5592982145233"
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => GAEvent({ action: "click", label: "whatsapp" })}
         >
           <button
             type="button"

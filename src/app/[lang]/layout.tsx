@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import { getDictionary } from "@/utils/functions/getDictionary";
 import { Analytics } from "@vercel/analytics/react";
+import { GoogleAnalytics } from "@/utils/lib/analytics";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -65,6 +66,7 @@ export default function RootLayout({
       <body className={nunito.className}>
         <Layout>{children}</Layout>
         <Analytics />
+        <GoogleAnalytics />
       </body>
     </html>
   );
