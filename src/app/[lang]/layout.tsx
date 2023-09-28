@@ -5,7 +5,6 @@ import { Nunito } from "next/font/google";
 import { getDictionary } from "@/utils/functions/getDictionary";
 import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@/utils/lib/analytics";
-import imgOpenGraph from "~/public/ym.png";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -21,19 +20,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: dict.metatags.title,
     description: dict.metatags.description,
     openGraph: {
-      url: "/",
+      url: "https://myymbucket.s3.sa-east-1.amazonaws.com/imagens/ym.png",
       title: dict.metatags.title,
       description: dict.metatags.description,
       siteName: "Ygor Mendanha",
       images: [
         {
-          url: "/ym.png",
+          url: "https://myymbucket.s3.sa-east-1.amazonaws.com/imagens/ym.png",
           width: 800,
           height: 600,
         },
       ],
     },
-    authors: [{ name: "Ygor Mendanha", url: "/" }],
+    authors: [
+      { name: "Ygor Mendanha", url: "https://www.ygormendanha.com.br" },
+    ],
     colorScheme: "dark",
     themeColor: "#2e1065",
     creator: "Ygor Mendanha",
