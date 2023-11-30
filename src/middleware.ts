@@ -11,7 +11,7 @@ function getLocale(request: NextRequest) {
   const { country } = geolocation(request);
   console.info({ country });
   return countries.find(
-    (x) => x.id["ISO-3166-1-ALPHA-2"] === ('GB' ?? "BR")
+    (x) => x.id["ISO-3166-1-ALPHA-2"] === (country ?? "BR")
   )!;
 }
 
