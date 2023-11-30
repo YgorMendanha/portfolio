@@ -6,149 +6,103 @@ import BlogImg from "~/public/blog.png";
 import { BiLinkExternal } from "react-icons/bi";
 import { getDictionary } from "@/utils/functions/getDictionary";
 import Link from "next/link";
-import { useState } from "react";
-import { useWindowSize } from "@/hooks/useWindowSize";
+import { twMerge } from "tailwind-merge";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 export function MyProjects({ lang }: { lang: "pt" | "en" }) {
   const dict = getDictionary(lang ?? "pt");
 
-  const WindowSize = useWindowSize();
-  const [showDetails, setShowDetails] = useState<{
-    shop: boolean;
-    blog: boolean;
-    notes: boolean;
-  }>({ blog: false, notes: false, shop: false });
-
-  const formatText = (text: string, show: boolean) => {
-    return show
-      ? text
-      : text.length > 300
-      ? text.substring(0, 300) + "..."
-      : text;
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1280 },
+      items: 3,
+      slidesToSlide: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1280, min: 768 },
+      items: 2,
+      slidesToSlide: 2,
+    },
+    mobile: {
+      breakpoint: { max: 768, min: 0 },
+      items: 1,
+      slidesToSlide: 1,
+    },
   };
+
+  const dataSlider = [
+    {
+      img: ShopImg,
+      title: "Finesse Store",
+      details: dict.shopDetails,
+      link: "https://finesse-store.vercel.app",
+    },
+    {
+      img: BlogImg,
+      title: "Blog",
+      details: dict.blogDetails,
+      link: "https://blogymdevelopment.vercel.app",
+    },
+    {
+      img: NotesImg,
+      title: "Notes",
+      details: dict.notesDetails,
+      link: "https://notes-ym.vercel.app",
+    },
+  ];
 
   return (
     <section
       id="project"
       className="container px-2 my-10 mx-auto flex flex-col"
     >
-      <h2 className="mx-auto text-2xl">
+      <h2 className="mx-auto mb-10 text-2xl">
         <b>{dict.projects}</b>
       </h2>
-
-      <div className="flex flex-col xl:flex-row my-10 items-center">
-        <Image
-          alt="banner Finesses store"
-          src={ShopImg}
-          width={585}
-          height={302}
-          className="object-contain"
-        />
-        <div className="mt-10 ml-0 xl:ml-10 xl:mt-0 flex flex-col backdrop-blur-sm p-2 bg-violet-900/40 rounded-lg">
-          <h3 className="text-4xl">
-            <b>Finesse Store</b>
-          </h3>
-          <p className="">
-            {!WindowSize.width || WindowSize.width > 400
-              ? dict.shopDetails
-              : formatText(dict.shopDetails, showDetails.shop)}
-          </p>
-          {WindowSize.width && WindowSize.width < 400 && (
-            <small
-              className="mb-4 underline"
-              onClick={() =>
-                setShowDetails({ ...showDetails, shop: !showDetails.shop })
-              }
+      <Carousel
+        showDots={true}
+        responsive={responsive}
+        ssr
+        autoPlay={true}
+        autoPlaySpeed={3000}
+        keyBoardControl={true}
+        customTransition="all .5"
+        transitionDuration={500}
+      >
+        {dataSlider.map((data) => {
+          return (
+            <div
+              key={data.title}
+              className={twMerge(
+                `flex group flex-col mx-2 justify-center items-center`
+              )}
             >
-              {!showDetails.shop ? dict.readMore : dict.readLess}
-            </small>
-          )}
-
-          <Link
-            target="_blank"
-            className="mt-auto text-lg underline font-bold flex items-center"
-            href={"https://finesse-store.vercel.app"}
-          >
-            {dict.toView} <BiLinkExternal className="ml-2" />
-          </Link>
-        </div>
-      </div>
-
-      <div className="flex flex-col-reverse items-center xl:flex-row my-10">
-        <div className="mt-10 mr-0 xl:mr-10 xl:mt-0  flex flex-col backdrop-blur-sm p-2 bg-violet-900/40 rounded-lg ">
-          <h3 className="text-4xl">
-            <b>Blog</b>
-          </h3>
-          <p>
-            {!WindowSize.width || WindowSize.width > 400
-              ? dict.blogDetails
-              : formatText(dict.blogDetails, showDetails.blog)}
-          </p>
-          {WindowSize.width && WindowSize.width < 400 && (
-            <small
-              className="mb-4 underline"
-              onClick={() =>
-                setShowDetails({ ...showDetails, blog: !showDetails.blog })
-              }
-            >
-              {!showDetails.blog ? dict.readMore : dict.readLess}
-            </small>
-          )}
-
-          <Link
-            target="_blank"
-            className="mt-auto text-lg underline font-bold flex items-center"
-            href={"https://blogymdevelopment.vercel.app"}
-          >
-            {dict.toView} <BiLinkExternal className="ml-2" />
-          </Link>
-        </div>
-        <Image
-          alt="banner blog"
-          src={BlogImg}
-          width={585}
-          height={302}
-          className="object-contain"
-        />
-      </div>
-
-      <div className="flex flex-col xl:flex-row items-center my-10">
-        <Image
-          alt="banner notes"
-          src={NotesImg}
-          width={585}
-          height={302}
-          className="object-contain"
-        />
-        <div className="mt-10 ml-0 xl:ml-10 xl:mt-0 flex flex-col backdrop-blur-sm p-2 bg-violet-900/40 rounded-lg">
-          <h3 className="text-4xl">
-            <b>Notes</b>
-          </h3>
-          <p>
-            {!WindowSize.width || WindowSize.width > 400
-              ? dict.notesDetails
-              : formatText(dict.notesDetails, showDetails.notes)}
-          </p>
-
-          {WindowSize.width && WindowSize.width < 400 && (
-            <small
-              className="mb-4 underline"
-              onClick={() =>
-                setShowDetails({ ...showDetails, notes: !showDetails.notes })
-              }
-            >
-              {!showDetails.notes ? dict.readMore : dict.readLess}
-            </small>
-          )}
-          <Link
-            target="_blank"
-            className="mt-auto text-lg underline font-bold flex items-center"
-            href={"https://notes-ym.vercel.app"}
-          >
-            {dict.toView} <BiLinkExternal className="ml-2" />
-          </Link>
-        </div>
-      </div>
+              <Image
+                alt="banner Finesses store"
+                src={data.img}
+                width={500}
+                height={500}
+                className="rounded-lg"
+              />
+              <div className="flex invisible absolute h-[90%] w-[90%] max-h-[450px] max-w-[450px] group-hover:visible flex-col p-2 backdrop-blur-sm bg-violet-900/70 rounded-lg transition-all">
+                <h3 className="text-4xl">
+                  <b>{data.title}</b>
+                </h3>
+                <p>{data.details}</p>
+                <Link
+                  target="_blank"
+                  className="mt-auto text-lg underline font-bold flex items-center"
+                  href={"https://notes-ym.vercel.app"}
+                >
+                  {dict.toView} <BiLinkExternal className="ml-2" />
+                </Link>
+              </div>
+            </div>
+          );
+        })}
+      </Carousel>
     </section>
   );
 }

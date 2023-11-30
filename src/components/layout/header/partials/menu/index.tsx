@@ -57,7 +57,7 @@ export function HeaderMenu({
               href="#contact"
               className="bg-violet-500 py-1 px-3 rounded-lg"
             >
-              {dict.contact}
+              {dict.contact.title}
             </CustomLink>
 
             <nav className="mt-5 flex items-center [&_a]:mr-3 [&_a]:my-2 [&_a]:text-lg">
@@ -82,7 +82,7 @@ export function HeaderMenu({
               <Link
                 onClick={onCLose}
                 id="iconWhats"
-                href="https://wa.me/5592982145233"
+                href="https://wa.me/message/YQXEGG4GZBDDG1"
                 target="_blank"
                 rel="noopener noreferrer"
               >

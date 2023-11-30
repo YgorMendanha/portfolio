@@ -13,6 +13,11 @@ const config: Config = {
         geo: ["var(--font-kanita)"],
         dos: ["var(--font-dosis)"],
       },
+      backgroundImage: {
+        "img-finesse": "url('~/public/finesse-store.png')",
+        "img-blog": "url('~/public/blog.png')",
+        "img-notes": "url('~/public/notes.png')",
+      },
     },
   },
 };

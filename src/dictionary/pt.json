@@ -2,7 +2,8 @@
   "developer": "Desenvolvedor",
   "home": "Início",
   "toView": "Visualizar",
-  "toSend": "Enviar E-mail",
+  "toSend": "Enviar",
+  "sendingEmail": "Enviando Email",
   "callWhatsapp": "Procurando por um desenvolvedor experiente para o seu próximo projeto? Não procure mais! Envie uma mensagem no WhatsApp e vamos conversar.",
   "labelName": "Nome",
   "labelcontactForm": "Forma de Contato",
@@ -10,22 +11,25 @@
   "YM": "Y.M. Desenvolvimento © 2023. Todos os direitos reservados.",
   "about": "Sobre",
   "projects": "Projetos",
-  "contact": "Contato",
+  "contact": {
+    "title": "Contato",
+    "call": "Fale Comigo",
+    "text": "Fique à vontade para entrar em contato comigo via WhatsApp ou e-mail. Estou pronto para discutir seus projetos, responder suas dúvidas e explorar oportunidades de colaboração. Vamos construir algo extraordinário juntos!"
+  },
   "readMore": "Leia mais",
   "readLess": "Leia menos",
-  "shopDetails": "No meu portfólio de desenvolvedor, tenho o prazer de apresentar um projeto de e-commerce que foi construído com as tecnologias mais modernas e eficazes da web: Next.js 13 e Tailwind CSS. Este e-commerce representa a convergência da velocidade, flexibilidade e beleza no desenvolvimento web. Utilizando o poderoso Next.js 13, conseguimos criar uma experiência de usuário altamente responsiva e carregamentos instantâneos de páginas, proporcionando aos clientes uma jornada de compra fluida e sem interrupções. A estilização meticulosa com o Tailwind CSS não apenas tornou o site visualmente impressionante, mas também facilitou a manutenção e a escalabilidade do código. Este projeto ilustra meu compromisso com a adoção de tecnologias de ponta para oferecer soluções web de alto desempenho e aparência incrível para meus clientes.",
-  "blogDetails": "No meu portfólio de desenvolvedor, tenho a satisfação de apresentar um projeto de blog que se destaca pela utilização das tecnologias de ponta Next.js 13, Tailwind CSS e Notion para a edição de posts. Este blog representa a confluência perfeita entre tecnologia e facilidade de uso na gestão de conteúdo. Com o Next.js 13, garantimos carregamento rápido de páginas e uma experiência de usuário suave e responsiva. O design elegante, desenvolvido com o Tailwind CSS, não apenas aprimora a estética visual, mas também garante uma aparência consistente em todos os dispositivos. O diferencial deste projeto é a inovadora utilização do Notion como sistema de gerenciamento de conteúdo. Através do Notion, tornamos a criação e edição de postagens simples e eficientes, proporcionando um fluxo de trabalho intuitivo para os autores. Este projeto de blog exemplifica meu compromisso em oferecer soluções tecnicamente avançadas e centradas no usuário, facilitando a criação de conteúdo tanto para desenvolvedores quanto para blogueiros.",
-  "notesDetails": "Dentro do meu portfólio de desenvolvedor, tenho o prazer de apresentar um projeto de Bloco de Notas que foi desenvolvido utilizando as tecnologias de ponta Next.js 13 e Tailwind CSS. Este Bloco de Notas é uma demonstração do meu comprometimento em criar aplicativos funcionais e com um design atraente. Com o Next.js 13, conseguimos garantir uma experiência de usuário incrivelmente responsiva, tornando a criação e organização de notas uma tarefa fluida e eficiente. O design moderno e elegante, desenvolvido com o Tailwind CSS, não apenas torna o Bloco de Notas visualmente agradável, mas também garante que a aplicação seja intuitiva e fácil de usar. Este projeto ilustra a minha capacidade de criar aplicações web com tecnologia de ponta que combinam funcionalidade sólida com um design atrativo e amigável ao usuário.",
-  "about1": "Olá, sou Ygor, um desenvolvedor apaixonado por tecnologia com 24 anos de idade e dois anos de experiência profissional. Minha jornada no mundo da programação tem sido incrível e cheia de desafios estimulantes.",
-  "about2": "Nos últimos dois anos, grande parte da minha trajetória profissional foi dedicada a aprimorar minhas habilidades em um dinâmico e-commerce. Trabalhando em um ambiente onde cada segundo conta, aprendi a escrever códigos eficientes e confiáveis, garantindo que nossos clientes tenham a melhor experiência de compra online possível. Desde carrinhos de compras até sistemas de pagamento, fui parte fundamental no desenvolvimento de soluções que impactam positivamente a vida das pessoas.",
-  "about3": "Além disso, sempre busquei novos desafios e oportunidades. Minha incursão em projetos freelancer me permitiu explorar diversas tecnologias e colaborar com clientes de diferentes segmentos. Isso expandiu meu conhecimento e minha habilidade de resolver problemas, tornando-me um desenvolvedor versátil e adaptável.",
-  "about4": "A cereja do bolo está chegando! Estou a poucos passos de concluir minha graduação em Análise de Sistemas. Essa jornada acadêmica complementou minha experiência prática, proporcionando-me uma base sólida em teoria e prática.",
-  "about5": "Hoje, estou ansioso para aplicar meu conhecimento e minha paixão pela programação em novos desafios e projetos empolgantes. Se você procura um desenvolvedor comprometido, criativo e sempre disposto a superar obstáculos, estou pronto para fazer parte da sua equipe.",
-  "about6": "Juntos, podemos transformar ideias em realidade, construir soluções inovadoras e conquistar o mundo da tecnologia. Vamos trabalhar juntos para criar um futuro melhor!",
-  "about7": "Contate-me hoje e vamos começar essa jornada!",
+  "shopDetails": "O e-commerce foi desenvolvido de forma robusta, utilizando tecnologias avançadas como Next.js para a camada front-end, Tailwind CSS para estilização responsiva e PostgreSQL como banco de dados, garantindo uma experiência de usuário aprimorada e eficiente.",
+  "blogDetails": "O blog foi desenvolvido com expertise, utilizando Next.js para uma experiência dinâmica, Tailwind CSS para um design elegante e responsivo, e integrado ao Notion para uma gestão eficiente de conteúdo, resultando em uma experiência de usuário fluída e visualmente atraente.",
+  "notesDetails": "O projeto de notas foi habilmente criado, combinando Next.js para uma experiência de usuário dinâmica, Tailwind CSS para um design moderno e PostgreSQL para um backend robusto. Essa combinação de tecnologias resultou em uma aplicação eficiente e visualmente atraente para organizar e gerenciar notas de forma prática e intuitiva.",
+  "aboutText": "Com 24 anos e dois anos de experiência como desenvolvedor web, dediquei uma parte significativa do meu tempo ao aprimoramento de plataformas de e-commerce. Ao longo desse percurso, não só refinei minhas habilidades técnicas, mas também me envolvi em projetos freelancer, explorando oportunidades para inovação e mostrando minha versatilidade no campo do desenvolvimento web.",
+  "aboutLink": "Contate-me hoje e vamos começar essa jornada!",
   "contactText": "Está pronto para transformar suas ideias em realidade? Eu também! Como desenvolvedor dedicado, estou ansioso para trabalhar lado a lado com você no seu próximo projeto. Seja para criar um website incrível, desenvolver um aplicativo personalizado ou aprimorar sua presença online, estou pronto para tornar isso possível. Entre em contato comigo agora mesmo por e-mail ou, se preferir uma resposta mais rápida e direta, me chame pelo WhatsApp. Vamos conversar, planejar e começar a transformar suas ideias em código imediatamente. Mal posso esperar para ouvir de você e juntos construirmos algo incrível.",
   "metatags": {
     "title": "Portfólio - Y.M. Desenvolvimento",
     "description": "Portfólio de um desenvolvedor apaixonado por código e inovação, exibindo criações digitais excepcionais."
-  }
+  },
+  "skills": "Habilidades",
+  "errorEmail": "Houve um erro no envio 😢",
+  "successEmail": "Obrigado pelo contato",
+  "speakWhatsapp": "Ou fale diretamente no Whatsapp"
 }

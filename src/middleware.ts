@@ -1,28 +1,18 @@
-import { match as matchLocale } from "@formatjs/intl-localematcher";
-import Negotiator from "negotiator";
+import { geolocation } from "@vercel/edge";
 import { NextRequest, NextResponse } from "next/server";
+import countries from "@/utils/lib/countries.json";
 
 const i18n = {
   defaultLocale: "pt",
   locales: ["en", "pt"],
 } as const;
 
-export type Locale = (typeof i18n)["locales"][number];
-
-function getLocale(request: NextRequest): string | undefined {
-  const negotiatorHeaders: Record<string, string> = {};
-  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
-  // @ts-ignore locales
-  const locales: string[] = i18n.locales;
-  let languages = new Negotiator({ headers: negotiatorHeaders }).languages(
-    locales
-  );
-  const userLocale = matchLocale(languages, locales, i18n.defaultLocale);
-
-  if (userLocale !== i18n.defaultLocale) {
-    return "en";
-  }
-  return "pt";
+function getLocale(request: NextRequest) {
+  const { country } = geolocation(request);
+  console.info({ country });
+  return countries.find(
+    (x) => x.id["ISO-3166-1-ALPHA-2"] === (country ?? "BR")
+  )!;
 }
 
 export function middleware(request: NextRequest) {
@@ -33,9 +23,9 @@ export function middleware(request: NextRequest) {
 
   if (pathnameIsMissingLocale) {
     const locale = getLocale(request);
-    if (locale === "pt") {
+    if (locale.id["ISO-3166-1-ALPHA-2"] === "BR") {
       return NextResponse.rewrite(
-        new URL(`/${locale}${pathname}`, request.url)
+        new URL(`/pt${pathname}`, request.url)
       );
     }
     return NextResponse.redirect(new URL(`/${"en"}/${pathname}`, request.url));

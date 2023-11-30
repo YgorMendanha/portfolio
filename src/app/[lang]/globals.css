@@ -34,3 +34,6 @@ body,
 ::-webkit-scrollbar-corner {
   background-color: #ffffff;
 }
+.react-multiple-carousel__arrow {
+  z-index: 28 !important;
+}

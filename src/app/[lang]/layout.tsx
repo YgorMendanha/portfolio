@@ -1,6 +1,6 @@
 import { Layout } from "@/components";
 import "./globals.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Nunito } from "next/font/google";
 import { getDictionary } from "@/utils/functions/getDictionary";
 import { Analytics } from "@vercel/analytics/react";
@@ -20,13 +20,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: dict.metatags.title,
     description: dict.metatags.description,
     openGraph: {
-      url: "https://myymbucket.s3.sa-east-1.amazonaws.com/imagens/ym.png",
+      url: "https://myymbucket.s3.sa-east-1.amazonaws.com/imagens/Logo.png",
       title: dict.metatags.title,
       description: dict.metatags.description,
       siteName: "Ygor Mendanha",
       images: [
         {
-          url: "https://myymbucket.s3.sa-east-1.amazonaws.com/imagens/ym.png",
+          url: "https://myymbucket.s3.sa-east-1.amazonaws.com/imagens/Logo.png",
           width: 800,
           height: 600,
         },
@@ -35,8 +35,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     authors: [
       { name: "Ygor Mendanha", url: "https://www.ygormendanha.com.br" },
     ],
-    colorScheme: "dark",
-    themeColor: "#2e1065",
     creator: "Ygor Mendanha",
     keywords: ["Next.js", "React", "JavaScript", "Ygor Mendanha"],
     twitter: {
@@ -53,6 +51,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         pt: "/pt",
       },
     },
+  };
+}
+
+export function generateViewport({ params }: Props): Viewport {
+  return {
+    colorScheme: "dark",
+    themeColor: "#2e1065",
   };
 }
 

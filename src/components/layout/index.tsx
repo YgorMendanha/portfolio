@@ -6,6 +6,7 @@ import { loadSlim } from "tsparticles-slim";
 import options from "@/utils/lib/particles";
 import { useEffect, useState } from "react";
 import { Footer } from "./footer";
+import { Toaster } from "react-hot-toast";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const op = options();
@@ -20,6 +21,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Header />
         {children}
         <Footer />
+        <Toaster position="bottom-center" reverseOrder={false} />
       </main>
       <Particles
         id="tsparticles"

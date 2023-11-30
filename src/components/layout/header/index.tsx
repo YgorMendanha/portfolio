@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { BsWhatsapp } from "react-icons/bs";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
 import Link from "next/link";
@@ -9,6 +8,8 @@ import { getDictionary } from "@/utils/functions/getDictionary";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { HeaderMenu } from "./partials/menu";
 import { SelectLang } from "./partials/selectLang";
+import Image from "next/image";
+import logo from "~/public/logo.png";
 
 export function Header() {
   const iconSize = 25;
@@ -44,7 +45,7 @@ export function Header() {
     >
       <div className="container px-5  mx-auto flex items-center ">
         <div className="mr-auto">
-          <p className="text-3xl">YM</p>
+          <Image alt="logo" src={logo} width={70} height={60} />
         </div>
 
         <nav className="ml-auto flex items-center  [&_a]:text-lg">
@@ -57,20 +58,9 @@ export function Header() {
           <CustomLink className="mr-3" href="#project">
             {dict.projects}
           </CustomLink>
-          <Link
-            href="https://wa.me/5592982145233"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Whatsapp"
-          >
-            <button
-              type="button"
-              aria-label="Whatsapp"
-              className="py-1 px-3 my-2 bg-[#25D366] text-black rounded-lg"
-            >
-              <BsWhatsapp size={iconSize} />
-            </button>
-          </Link>
+          <CustomLink className="mr-3" href="#contact">
+            {dict.contact.title}
+          </CustomLink>
           <SelectLang />
         </nav>
       </div>
