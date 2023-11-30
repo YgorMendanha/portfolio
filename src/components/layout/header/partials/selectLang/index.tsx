@@ -18,8 +18,7 @@ export function SelectLang() {
         onChange={(e) => {
           if (e.target.value === "pt-BR") {
             if (pathname.split("/")[1] === "en") {
-              const newUrl = pathname.split("/").slice(2).join("/");
-              return router.push(`/${newUrl}`);
+              return router.push(`/pt`);
             }
           }
           return router.push(`/en/${pathname}`);
