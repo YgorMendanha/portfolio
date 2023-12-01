@@ -17,11 +17,9 @@ export function SelectLang() {
       <select
         onChange={(e) => {
           if (e.target.value === "pt-BR") {
-            if (pathname.split("/")[1] === "en") {
-              return router.push(`/pt`);
-            }
+            return router.push(`/pt`);
           }
-          return router.push(`/en/${pathname}`);
+          return router.push(`/en`);
         }}
         value={lang === "en" ? "en-US" : "pt-BR"}
         className="ml-2 text-xs border-2 text-end appearance-none rounded outline-10 outline-none cursor-pointer p-1"
