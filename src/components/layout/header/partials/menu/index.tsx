@@ -52,11 +52,7 @@ export function HeaderMenu({
             <CustomLink onClick={onCLose} className="mb-3" href="#project">
               {dict.projects}
             </CustomLink>
-            <CustomLink
-              onClick={onCLose}
-              href="#contact"
-              className="bg-violet-500 py-1 px-3 rounded-lg"
-            >
+            <CustomLink onClick={onCLose} href="#contact">
               {dict.contact.title}
             </CustomLink>
 

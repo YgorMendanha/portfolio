@@ -65,7 +65,6 @@ export function MyProjects({ lang }: { lang: "pt" | "en" }) {
         showDots={true}
         responsive={responsive}
         ssr
-        autoPlay={true}
         autoPlaySpeed={3000}
         keyBoardControl={true}
         customTransition="all .5"

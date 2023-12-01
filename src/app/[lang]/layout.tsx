@@ -5,6 +5,27 @@ import { Nunito } from "next/font/google";
 import { getDictionary } from "@/utils/functions/getDictionary";
 import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@/utils/lib/analytics";
+import { ProfilePage, WithContext, Organization } from "schema-dts";
+import Script from "next/script";
+
+const jsonLdPerson: WithContext<ProfilePage> = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  mainEntity: {
+    "@id": "#main-author",
+    "@type": "Person",
+    name: "Ygor Mendanha",
+  },
+  alternateName: "YM Desenvolvimento",
+};
+
+const jsonLdOrganization: WithContext<Organization> = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  url: "https://www.ygormendanha.com.br",
+  logo: "https://myymbucket.s3.sa-east-1.amazonaws.com/imagens/Logo.png",
+  name: "YM Desenvolvimento",
+};
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -36,7 +57,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       { name: "Ygor Mendanha", url: "https://www.ygormendanha.com.br" },
     ],
     creator: "Ygor Mendanha",
-    keywords: ["Next.js", "React", "JavaScript", "Ygor Mendanha"],
+    keywords: [
+      "Next.js",
+      "React.js",
+      "JavaScript",
+      "Ygor Mendanha",
+      "YM Desenvolvimento",
+      "YM Development",
+      "Ygor Guimarães",
+      "Phyton",
+      "Desenvolvedor",
+    ],
     twitter: {
       site: "@site",
       card: "summary",
@@ -44,8 +75,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       creator: "@YgorMendanha",
       title: dict.metatags.title,
     },
-
     alternates: {
+      canonical: "/",
       languages: {
         en: "/en",
         pt: "/pt",
@@ -77,8 +108,19 @@ export default function RootLayout({
 
   return (
     <html lang={lang}>
+      <Script
+        id="jsonLdPerson"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPerson) }}
+      />
+      <Script
+        id="jsonLdOrganization"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }}
+      />
       <body className={nunito.className}>
         <Layout>{children}</Layout>
+
         <Analytics />
         <GoogleAnalytics />
       </body>

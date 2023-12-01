@@ -44,14 +44,11 @@ export function About({ lang }: { lang: "pt" | "en" }) {
 
   return (
     <section className="flex container mx-auto flex-col lg:flex-row">
-      <section
-        id="about"
-        className="my-10 w-auto lg:w-1/2 flex flex-col justify-between text-justify container mx-5 p-5 backdrop-blur-sm bg-violet-900/80 rounded-lg [&_p]:my-3"
-      >
+      <section className="my-10 w-auto lg:w-1/2 flex flex-col justify-between text-justify container mx-5 p-5 backdrop-blur-sm bg-violet-900/80 rounded-lg [&_p]:my-3">
         <h2 className="text-2xl mx-auto mb-5">
-          <b>{dict.about}</b>
+          <b id="about">{dict.about}</b>
         </h2>
-        <p>{dict.aboutText}</p>
+        <p id={"main-author"}>{dict.aboutText}</p>
 
         <p className="flex items-center mt-auto ">
           <CustomLink className="text-purple-400 underline" href={"#contact"}>
