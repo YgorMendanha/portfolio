@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     creator: "Ygor Mendanha",
     keywords: [
       "Next.js",
-      "React.js",
+      "React",
       "JavaScript",
       "Ygor Mendanha",
       "YM Desenvolvimento",
@@ -67,6 +67,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       "Ygor Guimarães",
       "Phyton",
       "Desenvolvedor",
+      "Developer",
+      "Portfolio",
     ],
     twitter: {
       site: "@site",
