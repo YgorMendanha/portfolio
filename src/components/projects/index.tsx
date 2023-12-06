@@ -93,7 +93,7 @@ export function MyProjects({ lang }: { lang: "pt" | "en" }) {
                 <Link
                   target="_blank"
                   className="mt-auto text-lg underline font-bold flex items-center"
-                  href={data.}
+                  href={data.link}
                 >
                   {dict.toView} <BiLinkExternal className="ml-2" />
                 </Link>
