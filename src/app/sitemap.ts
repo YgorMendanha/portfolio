@@ -5,6 +5,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: "https://www.ygormendanha.com.br",
       lastModified: new Date(),
+      hreflang = "de",
       priority: 1,
     },
     {
