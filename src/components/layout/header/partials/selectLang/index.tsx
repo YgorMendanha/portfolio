@@ -1,16 +1,9 @@
 "use client";
-import {
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 
 export function SelectLang() {
   const { lang }: { lang?: "pt" | "en" } = useParams();
   const router = useRouter();
-
-  const pathname = usePathname();
 
   return (
     <label>
