@@ -82,7 +82,8 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
           <p className="mb-auto text-lg">{dict.contact.text}</p>
           <div className="flex mt-5 my-2">
             <BsTelephoneForwardFill className="mr-4" size={24} />
-            <p>+55 (92) 98283-2103</p>
+            <p>‪+55 (92) 98158‑8155‬</p>
+
           </div>
           <div className="flex my-2">
             <MdEmail className="mr-4" size={24} />
