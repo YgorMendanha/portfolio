@@ -78,7 +78,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: dict.metatags.title,
     },
     alternates: {
-      canonical: params?.lang === "en" ? "/en" : "/pt",
+      canonical: "/",
       languages: {
         en: "/en",
         "pt": "/pt",
