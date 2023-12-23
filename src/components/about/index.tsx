@@ -36,7 +36,7 @@ export function About({ lang }: { lang: "pt" | "en" }) {
     },
     {
       id: 5,
-      name: "Phyton",
+      name: "Python",
       size: "w-[50%]",
       percentage: "50",
     },
