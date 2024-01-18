@@ -6,6 +6,7 @@ import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { GrClose } from "react-icons/gr";
 
 import { BsWhatsapp } from "react-icons/bs";
+import { SelectLang } from "../selectLang";
 
 export function HeaderMenu({
   show,
@@ -84,6 +85,7 @@ export function HeaderMenu({
               >
                 <BsWhatsapp size={iconSize} />
               </Link>
+              <SelectLang className="ml-1 mt-3 mb-2 " />
             </nav>
           </nav>
         </section>
