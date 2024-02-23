@@ -7,6 +7,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@/utils/lib/analytics";
 import { ProfilePage, WithContext, Organization } from "schema-dts";
 import Script from "next/script";
+import { CSPostHogProvider } from "../providers";
 
 const jsonLdPerson: WithContext<ProfilePage> = {
   "@context": "https://schema.org",
@@ -81,7 +82,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: "/",
       languages: {
         en: "/en",
-        "pt": "/pt",
+        pt: "/pt",
         "x-default": "/",
       },
     },
@@ -121,12 +122,15 @@ export default function RootLayout({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }}
       />
-      <body className={nunito.className}>
-        <Layout>{children}</Layout>
 
-        <Analytics />
-        <GoogleAnalytics />
-      </body>
+      <CSPostHogProvider>
+        <body className={nunito.className}>
+          <Layout>{children}</Layout>
+
+          <Analytics />
+          <GoogleAnalytics />
+        </body>
+      </CSPostHogProvider>
     </html>
   );
 }
