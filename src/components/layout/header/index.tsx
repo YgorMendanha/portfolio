@@ -10,6 +10,7 @@ import { HeaderMenu } from "./partials/menu";
 import { SelectLang } from "./partials/selectLang";
 import Image from "next/image";
 import logo from "~/public/logo.png";
+import posthog from "posthog-js";
 
 export function Header() {
   const iconSize = 25;
@@ -28,6 +29,9 @@ export function Header() {
       window.removeEventListener("scroll", changeShowState);
     };
   }, []);
+  useEffect(() => {
+    getDetailsPosthog();
+  }, []);
 
   function changeShowState() {
     const refHeader = document.body;
@@ -35,6 +39,32 @@ export function Header() {
     const posicoes = refHeader?.getBoundingClientRect();
     const fim = posicoes.y;
     fim > -10 ? setShow(false) : setShow(true);
+  }
+
+  async function getDetailsPosthog() {
+    // const getDetais: PostResponsePerson = await PostHog.GetDetais(id)
+    // console.log(getDetais)
+
+    const idReplay = posthog.get_session_id();
+
+    const getReplay = await fetch(
+      `https://app.posthog.com/api/projects/36558/session_recordings/${idReplay}/sharing`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({
+          enabled: true,
+        }),
+        headers: {
+          "Content-type": "application/json;",
+          Authorization:
+            "Bearer phx_7QY1tC4lOEXuA3XyW9dk32s8yL2Q2ztWSUvlSNbHOQd",
+        },
+      }
+    );
+
+    const data = await getReplay.json();
+
+    console.log(data);
   }
 
   return WindowSize.width && WindowSize.width > 450 ? (
