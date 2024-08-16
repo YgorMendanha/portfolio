@@ -79,11 +79,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: dict.metatags.title,
     },
     alternates: {
-      canonical: "/",
+      canonical: `/${params.lang}`,
       languages: {
         en: "/en",
         pt: "/pt",
-        "x-default": "/",
       },
     },
   };
