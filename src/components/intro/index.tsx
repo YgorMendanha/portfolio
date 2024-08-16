@@ -1,46 +1,95 @@
 "use client";
 
-import { Typewriter } from "react-simple-typewriter";
-import { BsArrowRight } from "react-icons/bs";
 import { useParams } from "next/navigation";
 import { getDictionary } from "@/utils/functions/getDictionary";
+import Lottie from "react-lottie";
+import animationData from "@/lotties/contactMe.json";
+import Link from "next/link";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { BsWhatsapp } from "react-icons/bs";
+import { useWindowSize } from "@/hooks/useWindowSize";
+import { useEffect, useState } from "react";
 
 export function IntroSection() {
   const { lang }: { lang?: "pt" | "en" } = useParams();
   const dict = getDictionary(lang ?? "pt");
 
-  return (
-    <section className="flex flex-col h-screen">
-      <main className="m-auto">
-        <h1 className="text-3xl min-[400px]:text-5xl min-[560px]:text-7xl  lg:text-9xl">
-          <b>Ygor Mendanha</b>
-        </h1>
-        <div className="flex mt-2 text-sm min-[400px]:text-xl min-[5560px]:text-2xl lg:text-4xl">
-          {dict.developer}
-          <span className="ml-2">
-            <Typewriter
-              words={["Front-end", "Back-End", "Full-Stack"]}
-              loop={0}
-              cursor
-              cursorStyle="_"
-              typeSpeed={100}
-              deleteSpeed={70}
-              delaySpeed={1100}
-            />
-          </span>
-        </div>
-      </main>
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
 
-      <section className="animate-bounce text-lg absolute rotate-90 flex left-0 items-center bottom-8 ">
-        <div className="rotate-90 flex items-center ">
-          Scroll <BsArrowRight className="ml-2" />
+  const { width } = useWindowSize();
+  const [size, setSize] = useState<number>(250);
+
+  useEffect(() => {
+    if (width) {
+      if (width > 500) {
+        setSize(500);
+      }
+      if (width < 768) {
+        setSize(350);
+      }
+      if (width < 640) {
+        setSize(250);
+      }
+    }
+  }, [width]);
+
+  return (
+    <section className="flex flex-col py-28 sm:py-36  lg:min-h-[700px] lg:h-screen  bg-black-purple">
+      <div className="container px-5 mx-auto flex h-full flex-col lg:flex-row  items-center justify-center  ">
+        <div className="w-full lg:w-1/2 mb-0 z-10 flex flex-col  justify-center">
+          <h1 className="text-4xl md:text-8xl">
+            Ygor
+            <br /> Mendanha <br />
+            {dict.developer}
+          </h1>
+          <div className="flex mt-7 ">
+            <Link
+              href={"#about"}
+              className=" bg-blue hover:bg-purple rounded-3xl mr-7 px-2 sm:px-3 md:px-6 py-1 md:py-3"
+            >
+              {dict.learnMore}
+            </Link>
+
+            <nav className="flex items-center [&_a]:mr-7 text-xl md:text-4xl ">
+              <Link
+                href="https://github.com/YgorMendanha"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Github"
+              >
+                <FaGithub />
+              </Link>
+              <Link
+                href="https://www.linkedin.com/in/ygormendanha"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedinIn"
+              >
+                <FaLinkedinIn />
+              </Link>
+              <Link
+                href="https://wa.me/message/YQXEGG4GZBDDG1"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Whatsapp"
+              >
+                <BsWhatsapp />
+              </Link>
+            </nav>
+          </div>
         </div>
-      </section>
-      <section className="animate-bounce text-lg absolute rotate-90 flex right-0 items-center bottom-8 ">
-        <div className="rotate-90 flex items-center ">
-          Scroll <BsArrowRight className="ml-2" />
+
+        <div className="w-full lg:w-1/2 absolute top-24 lg:static opacity-30 lg:opacity-100 ">
+          <Lottie options={defaultOptions} height={size} width={size} />
         </div>
-      </section>
+      </div>
     </section>
   );
 }

@@ -10,17 +10,22 @@
   "YM": "Y.M. Development © 2023. All rights reserved.",
   "about": "About",
   "projects": "Projects",
+  "currently": "Currently",
   "contact": {
     "title": "Contact",
     "call": "Talk to me",
     "text": "Feel free to reach out to me via WhatsApp or email. I'm ready to discuss your projects, answer your questions, and explore collaboration opportunities. Let's build something extraordinary together!"
   },
-  "readMore": "Read more",
-  "readLess": "Read less",
+  "learnMore": "Learn more.",
+  "professionalExperience": {
+    "name": "Professional Experience",
+    "yonix": "an ERP system to manage the company's internal operations and vehicle tracking. This system aimed to optimize the management of tracked vehicles, improving process efficiency and providing a clearer view of operations, contributing to the administration and control of the company's activities.",
+    "i9": "I have been with my current company for over two years, where I have developed several applications, including an e-commerce platform, an ERP system, and a page for promoting events offered by the company. The company primarily operates in the audiovisual sector. These projects have enhanced operational efficiency and improved the promotion of the company's events, catering to the specific needs of the industry and contributing to the company’s growth and success."
+  },
   "shopDetails": "The e-commerce platform was meticulously crafted leveraging cutting-edge technologies, incorporating Next.js for a dynamic front-end, Tailwind CSS for responsive styling, and PostgreSQL as the backend database, ensuring a seamless and efficient user experience.",
   "blogDetails": "The blog was skillfully developed using Next.js for a dynamic and performant front-end, Tailwind CSS for sleek and responsive design, and seamlessly integrated with Notion for efficient content management, creating a streamlined and visually appealing user experience.",
   "notesDetails": "The note-taking project was expertly crafted, utilizing Next.js for a dynamic user experience, Tailwind CSS for a modern design aesthetic, and PostgreSQL for a robust backend. This combination of technologies has resulted in an efficient and visually appealing application for organizing and managing notes in a practical and intuitive manner.",
-  "aboutText": "At 24 years old with two years of experience as a web developer, I've dedicated a significant portion of my career to enhancing e-commerce platforms. Throughout this journey, I've not only honed my technical skills but also delved into freelance projects, showcasing versatility and a commitment to innovation in the realm of web development.",
+  "aboutText": "At 26 years old, with over two years of experience as a web developer and a degree in Systems Analysis and Development, I have been intensely focused on enhancing e-commerce platforms and working with ERP systems. During this time, I have not only refined my technical skills but also engaged in freelance projects, exploring innovations and demonstrating my versatility in web development",
   "aboutLink": "Contact me today and let's embark on this journey together!",
   "contactText": "Ready to turn your digital dreams into reality? So am I! As a dedicated developer, I'm thrilled to collaborate with you on your next project. Whether you're looking to create an outstanding website, develop a custom app, or enhance your online presence, I'm ready to make it happen. Feel free to reach out to me via email, and for an even quicker and more direct response, don't hesitate to message me on WhatsApp. Let's have a conversation, plan things out, and start turning your ideas into code right away. I can't wait to hear from you, and together, we'll build something amazing.",
   "metatags": {

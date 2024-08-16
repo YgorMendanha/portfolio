@@ -1,10 +1,8 @@
 "use client";
 
-import { CustomLink } from "@/components";
-import { useWindowSize } from "@/hooks/useWindowSize";
 import { getDictionary } from "@/utils/functions/getDictionary";
-import { useState } from "react";
-import { BsLink45Deg } from "react-icons/bs";
+import { HorizontalTimeline } from "@/components/partials/timeline";
+import dayjs from "dayjs";
 
 export function About({ lang }: { lang: "pt" | "en" }) {
   const dict = getDictionary(lang ?? "pt");
@@ -43,38 +41,60 @@ export function About({ lang }: { lang: "pt" | "en" }) {
   ];
 
   return (
-    <section className="flex container mx-auto flex-col lg:flex-row">
-      <section className="my-10 w-auto lg:w-1/2 flex flex-col justify-between text-justify container mx-5 p-5 backdrop-blur-sm bg-violet-900/80 rounded-lg [&_p]:my-3">
-        <h2 className="text-2xl mx-auto mb-5">
-          <b id="about">{dict.about}</b>
-        </h2>
-        <p id={"main-author"}>{dict.aboutText}</p>
-
-        <p className="flex items-center mt-auto ">
-          <CustomLink className="text-purple-400 underline" href={"#contact"}>
-            <b>{dict.aboutLink}</b>
-          </CustomLink>
-          <BsLink45Deg className="ml-2 text-xl" />
-        </p>
+    <section id={"about"} className="container mx-auto px-5 py-20 ">
+      <section className="flex mb-20 flex-col 2xl:flex-row text-black">
+        <section className="w-full 2xl:w-1/2 mb-20 text-4xl font-bold underline-offset-4  underline text-purple decoration-purple">
+          {dict.about}
+        </section>
+        <section className="w-full 2xl:w-1/2 text-xl">{dict.aboutText}</section>
       </section>
-      <section className="my-10 w-auto lg:w-1/2 flex flex-col justify-center text-justify container mx-5 p-5 backdrop-blur-sm bg-violet-900/80 rounded-lg [&_p]:my-3">
-        <h2 className="text-2xl mx-auto mb-5">
-          <b>{dict.skills}</b>
-        </h2>
-        <div className="flex flex-col">
-          {skills.map((s) => (
-            <div key={s.id}>
-              <p>
-                <b>{s.name}</b>
-              </p>
-              <div className="w-full h-2 bg-indigo-200 rounded-full">
-                <div
-                  className={`${s.size}  h-full text-center text-xs text-white bg-indigo-600 rounded-full`}
-                ></div>
-              </div>
-            </div>
-          ))}
-        </div>
+      <section className="flex flex-col text-black">
+        <section className="font-bold underline-offset-4 text-4xl underline text-purple decoration-purple">
+          {dict.professionalExperience.name}
+        </section>
+        <section className="flex h-full flex-col 2xl:flex-row text-black ">
+          <section className="w-full 2xl:w-1/2 text-4xl flex flex-col justify-evenly ">
+            <section className="m-auto my-20 2xl:m-0">
+              <HorizontalTimeline
+                lastTitle={dict.currently}
+                events={[
+                  {
+                    title: "Yonix",
+                    description: "Dev. Full Stack",
+                    startDate: "2022-03-01",
+                    endDate: "2022-06-30",
+                  },
+                  {
+                    title: "I9 Store",
+                    description: "Dev. Frontend",
+                    startDate: "2022-06-01",
+                    endDate: dayjs().format("YYYY-MM-DD"),
+                  },
+                  {
+                    title: dict.currently,
+                    description: "",
+                    startDate: dayjs().format("YYYY-MM-DD"),
+                    endDate: dayjs().format("YYYY-MM-DD"),
+                  },
+                ]}
+              />
+            </section>
+          </section>
+          <section className="h-full w-full 2xl:w-1/2 text-xl flex flex-col justify-evenly ">
+            <section className="mb-8">
+              <section className="text-2xl underline text-purple decoration-purple">
+                <b>Yonix</b>
+              </section>
+              <section>{dict.professionalExperience.yonix}</section>
+            </section>
+            <section>
+              <section className="text-2xl underline text-purple decoration-purple">
+                <b>I9 Store</b>
+              </section>
+              <section>{dict.professionalExperience.i9}</section>
+            </section>
+          </section>
+        </section>
       </section>
     </section>
   );

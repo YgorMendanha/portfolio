@@ -9,7 +9,6 @@ import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 export function MyProjects({ lang }: { lang: "pt" | "en" }) {
   const dict = getDictionary(lang ?? "pt");
@@ -54,54 +53,53 @@ export function MyProjects({ lang }: { lang: "pt" | "en" }) {
   ];
 
   return (
-    <section
-      id="project"
-      className="container px-2 my-10 mx-auto flex flex-col"
-    >
-      <h2 className="mx-auto mb-10 text-2xl">
-        <b>{dict.projects}</b>
-      </h2>
-      <Carousel
-        showDots={true}
-        responsive={responsive}
-        ssr
-        autoPlaySpeed={3000}
-        keyBoardControl={true}
-        customTransition="all .5"
-        transitionDuration={500}
-      >
-        {dataSlider.map((data) => {
-          return (
-            <div
-              key={data.title}
-              className={twMerge(
-                `flex group flex-col mx-2 justify-center items-center`
-              )}
-            >
-              <Image
-                alt="banner Finesses store"
-                src={data.img}
-                width={500}
-                height={500}
-                className="rounded-lg"
-              />
-              <div className="flex invisible absolute h-[90%] w-[90%] max-h-[450px] max-w-[450px] group-hover:visible flex-col p-2 backdrop-blur-sm bg-violet-900/70 rounded-lg transition-all">
-                <h3 className="text-4xl">
-                  <b>{data.title}</b>
-                </h3>
-                <p>{data.details}</p>
-                <Link
-                  target="_blank"
-                  className="mt-auto text-lg underline font-bold flex items-center"
-                  href={data.link}
-                >
-                  {dict.toView} <BiLinkExternal className="ml-2" />
-                </Link>
+    <section className="bg-black-purple py-20">
+      <section id="project" className="container p-5 mx-auto flex flex-col ">
+        <section className="w-1/2 text-4xl font-bold underline-offset-4 mb-16 underline text-white decoration-white">
+          {dict.projects}
+        </section>
+        <Carousel
+          showDots={true}
+          responsive={responsive}
+          ssr
+          autoPlaySpeed={3000}
+          keyBoardControl={true}
+          customTransition="all .5"
+          transitionDuration={500}
+        >
+          {dataSlider.map((data) => {
+            return (
+              <div
+                key={data.title}
+                className={twMerge(
+                  `flex group flex-col mx-2 justify-center items-center`
+                )}
+              >
+                <Image
+                  alt="banner Finesses store"
+                  src={data.img}
+                  width={500}
+                  height={500}
+                  className="rounded-lg"
+                />
+                <div className="flex invisible absolute h-[90%] w-[90%] max-h-[450px] max-w-[450px] group-hover:visible flex-col p-2 backdrop-blur-sm bg-purple rounded-lg transition-all">
+                  <h3 className="text-4xl">
+                    <b>{data.title}</b>
+                  </h3>
+                  <p>{data.details}</p>
+                  <Link
+                    target="_blank"
+                    className="mt-auto text-lg underline font-bold flex items-center"
+                    href={data.link}
+                  >
+                    {dict.toView} <BiLinkExternal className="ml-2" />
+                  </Link>
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </Carousel>
+            );
+          })}
+        </Carousel>
+      </section>
     </section>
   );
 }

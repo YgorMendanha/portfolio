@@ -29,12 +29,12 @@ export function HeaderMenu({
 
       <div
         className={`max-w-[500px] w-full h-full fixed top-0 transition-all duration-500  ${
-          show ? "z-30 bg-violet-950 left-0 " : "-left-32 invisible opacity-0"
+          show ? "z-30 bg-[#19092E] left-0 " : "-left-32 invisible opacity-0"
         } `}
       >
         <section
           className={`m-auto mt-2 w-[95%] p-5  rounded-xl transition-all duration-500  ${
-            show ? "z-400 bg-violet-800 left-0" : "-left-32 opacity-0 "
+            show ? "z-400 bg-[#5E1DAD] left-0" : "-left-32 opacity-0 "
           }`}
         >
           <section

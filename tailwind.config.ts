@@ -9,6 +9,12 @@ const config: Config = {
   plugins: [],
   theme: {
     extend: {
+      colors: {
+        "black-purple": "#19092E",
+        purple: "#5E1DAD",
+        blueLight: "#42A0ED",
+        blue: "#267CC1",
+      },
       fontFamily: {
         geo: ["var(--font-kanita)"],
         dos: ["var(--font-dosis)"],

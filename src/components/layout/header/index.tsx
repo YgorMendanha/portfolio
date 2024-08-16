@@ -1,20 +1,13 @@
 import { useEffect, useState } from "react";
-import { BsWhatsapp } from "react-icons/bs";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
-import Link from "next/link";
 import { CustomLink } from "@/components";
 import { useParams } from "next/navigation";
 import { getDictionary } from "@/utils/functions/getDictionary";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { HeaderMenu } from "./partials/menu";
 import { SelectLang } from "./partials/selectLang";
-import Image from "next/image";
-import logo from "~/public/logo.png";
-import posthog from "posthog-js";
 
 export function Header() {
-  const iconSize = 25;
-
   const { lang }: { lang?: "pt" | "en" } = useParams();
   const dict = getDictionary(lang ?? "pt");
 
@@ -29,9 +22,6 @@ export function Header() {
       window.removeEventListener("scroll", changeShowState);
     };
   }, []);
-  useEffect(() => {
-    getDetailsPosthog();
-  }, []);
 
   function changeShowState() {
     const refHeader = document.body;
@@ -41,74 +31,61 @@ export function Header() {
     fim > -10 ? setShow(false) : setShow(true);
   }
 
-  async function getDetailsPosthog() {
-    // const getDetais: PostResponsePerson = await PostHog.GetDetais(id)
-    // console.log(getDetais)
-
-    const idReplay = posthog.get_session_id();
-
-    const getReplay = await fetch(
-      `https://app.posthog.com/api/projects/36558/session_recordings/${idReplay}/sharing`,
-      {
-        method: "PATCH",
-        body: JSON.stringify({
-          enabled: true,
-        }),
-        headers: {
-          "Content-type": "application/json;",
-          Authorization:
-            "Bearer phx_7QY1tC4lOEXuA3XyW9dk32s8yL2Q2ztWSUvlSNbHOQd",
-        },
-      }
-    );
-
-    const data = await getReplay.json();
-
-    console.log(data);
-  }
-
-  return WindowSize.width && WindowSize.width > 450 ? (
+  return (
     <header
-      className={`bg-violet-900 fixed w-screen transition-[top,opacity] ease-in duration-500 z-10 ${
-        show ? "top-0" : "-top-14 opacity-0"
-      }`}
+      className={`bg-neutral-50 fixed w-screen z-50 h-14 flex items-center`}
     >
-      <div className="container px-5  mx-auto flex items-center ">
-        <div className="mr-auto">
-          <Image alt="logo" src={logo} width={70} height={60} />
+      <div className="container px-5 text-black font-bold mx-auto flex items-center ">
+        <div className="mr-auto text-base sm:text-xl md:text-3xl  ">
+          YM {dict.developer}
         </div>
 
-        <nav className="ml-auto flex items-center  [&_a]:text-lg">
-          <CustomLink className="mr-3" href="#intro">
+        <nav className="ml-auto  items-center hidden sm:flex sm:[&_a]:text-base  md:[&_a]:text-lg underline-offset-4  hover:[&_a]:underline hover:[&_a]:decoration-purple">
+          <CustomLink
+            className="mr-3 "
+            style={{
+              textDecorationThickness: "3px",
+            }}
+            href="#intro"
+          >
             {dict.home}
           </CustomLink>
-          <CustomLink className="mr-3" href="#about">
+          <CustomLink
+            className="mr-3 "
+            style={{
+              textDecorationThickness: "3px",
+            }}
+            href="#about"
+          >
             {dict.about}
           </CustomLink>
-          <CustomLink className="mr-3" href="#project">
+          <CustomLink
+            className="mr-3 "
+            style={{
+              textDecorationThickness: "3px",
+            }}
+            href="#project"
+          >
             {dict.projects}
           </CustomLink>
-          <CustomLink className="mr-3" href="#contact">
+          <CustomLink
+            className="mr-3 "
+            style={{
+              textDecorationThickness: "3px",
+            }}
+            href="#contact"
+          >
             {dict.contact.title}
           </CustomLink>
-          <SelectLang />
+          <SelectLang className="bg-white" />
         </nav>
-      </div>
-    </header>
-  ) : (
-    <>
-      <header
-        className={`bg-violet-200 w-10 h-10 fixed flex top-5 rounded-full transition-[right,opacity] ease-in duration-300 z-10 ${
-          show && !showMenu ? "right-5" : "-right-5 opacity-0"
-        }`}
-      >
         <AiOutlineMenuUnfold
-          className="m-auto text-violet-950"
+          className=" text-black-purple  sm:hidden"
           size={30}
           onClick={() => setShowMenu(true)}
         />
-      </header>
+      </div>
       <HeaderMenu show={showMenu} onCLose={() => setShowMenu(false)} />
-    </>
+    </header>
   );
 }

@@ -6,17 +6,10 @@ html,
 body,
 :root {
   height: 100%;
-  color-scheme: dark;
   scroll-behavior: smooth;
 }
 
-::-moz-selection {
-  background: #4338ca;
-}
 
-::selection {
-  background: #4338ca;
-}
 
 ::-webkit-scrollbar {
   width: 5px;

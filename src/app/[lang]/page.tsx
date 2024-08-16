@@ -2,7 +2,7 @@ import { About, Contact, IntroSection, MyProjects } from "@/components";
 
 const App = ({ params }: { params: { lang: "en" | "pt" } }) => {
   return (
-    <main className="px-5">
+    <main className="">
       <IntroSection />
       <About lang={params.lang} />
       <MyProjects lang={params.lang} />

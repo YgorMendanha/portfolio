@@ -69,21 +69,17 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
   return (
     <section
       id="contact"
-      className="flex min-h-[400px]  flex-col container mx-auto my-10 backdrop-blur-sm bg-violet-900/80 rounded-lg p-5"
+      className="flex min-h-[400px] text-black flex-col container mx-auto mt-10 pb-10 backdrop-blur-sm  rounded-lg p-5"
     >
-      <h3 className="mx-auto text-2xl">
-        <b>{dict.contact.title}</b>
-      </h3>
+      <section className="w-1/2 text-4xl font-bold underline-offset-4 mb-16 underline text-purple decoration-purple">
+        {dict.contact.call}
+      </section>
       <div className="flex flex-col lg:flex-row h-[100%] w-full items-center mt-4">
         <div className="w-1/1 lg:w-1/2 my-2 lg:mx-2 flex flex-col">
-          <h4 className="mr-auto text-2xl mb-2">
-            <b>{dict.contact.call}</b>
-          </h4>
           <p className="mb-auto text-lg">{dict.contact.text}</p>
           <div className="flex mt-5 my-2">
             <BsTelephoneForwardFill className="mr-4" size={24} />
             <p>‪+55 (92) 98158‑8155‬</p>
-
           </div>
           <div className="flex my-2">
             <MdEmail className="mr-4" size={24} />
@@ -92,26 +88,26 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-[100%] lg:w-1/2 my-2 lg:mx-2 flex flex-col selection:bg-indigo-200"
+          className="w-[100%] lg:w-1/2 my-2 lg:mx-2 flex flex-col"
         >
           <input
             {...register("name", { required: true })}
-            className="my-2 bg-purple-100 rounded h-10 p-3 text-black border-4 border-transparent focus:outline-none focus:border-indigo-300"
+            className="my-2 bg-white rounded h-10 p-3  border-4 border-blueLight focus:outline-none focus:border-blue"
             placeholder="Nome"
           />
           <input
             {...register("contact", { required: true })}
-            className="my-2 bg-purple-100 rounded h-10 p-3 text-black border-4 border-transparent focus:outline-none focus:border-indigo-300"
+            className="my-2 bg-white rounded h-10 p-3  border-4 border-blueLight focus:outline-none focus:border-blue"
             placeholder="Email/Telefone"
           />
           <textarea
             {...register("msg", { required: true })}
-            className="my-2 bg-purple-100 rounded  p-3 text-black border-4 border-transparent focus:outline-none focus:border-indigo-300"
+            className="my-2 bg-white rounded  p-3  border-4 border-blueLight focus:outline-none focus:border-blue"
             placeholder="Mensagem"
           />
           <button
             type="submit"
-            className="py-2 px-5 my-2 bg-indigo-600 rounded-md flex items-center space-x-1.5 justify-center hover:bg-indigo-700"
+            className="py-2 px-5 my-2 text-white bg-blue rounded-md flex items-center space-x-1.5 justify-center hover:bg-purple"
           >
             {loading && (
               <div aria-label="Loading..." role="status">
@@ -139,7 +135,7 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Whatsapp"
-            className="py-2 w-[100%] px-5 my-2 text-center bg-indigo-400 hover:bg-indigo-500 rounded-md"
+            className="py-2 text-white w-[100%] px-5 my-2 text-center bg-blueLight hover:bg-purple rounded-md"
           >
             {dict.speakWhatsapp}
           </Link>
