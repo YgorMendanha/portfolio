@@ -55,7 +55,7 @@ export function MyProjects({ lang }: { lang: "pt" | "en" }) {
   return (
     <section className="bg-black-purple py-20">
       <section id="project" className="container p-5 mx-auto flex flex-col ">
-        <section className="w-1/2 text-4xl font-bold underline-offset-4 mb-16 underline text-white decoration-white">
+        <section className="w-1/2 text-4xl font-bold underline-offset-4 mb-16 ">
           {dict.projects}
         </section>
         <Carousel

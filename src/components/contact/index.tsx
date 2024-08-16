@@ -71,7 +71,7 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
       id="contact"
       className="flex min-h-[400px] text-black flex-col container mx-auto mt-10 pb-10 backdrop-blur-sm  rounded-lg p-5"
     >
-      <section className="w-1/2 text-4xl font-bold underline-offset-4 mb-16 underline text-purple decoration-purple">
+      <section className="w-full text-purple text-4xl font-bold underline-offset-4 mb-16 ">
         {dict.contact.call}
       </section>
       <div className="flex flex-col lg:flex-row h-[100%] w-full items-center mt-4">

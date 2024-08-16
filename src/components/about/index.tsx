@@ -43,13 +43,13 @@ export function About({ lang }: { lang: "pt" | "en" }) {
   return (
     <section id={"about"} className="container mx-auto px-5 py-20 ">
       <section className="flex mb-20 flex-col 2xl:flex-row text-black">
-        <section className="w-full 2xl:w-1/2 mb-20 text-4xl font-bold underline-offset-4  underline text-purple decoration-purple">
+        <section className="w-full 2xl:w-1/2 mb-20 text-4xl font-bold underline-offset-4  text-purple">
           {dict.about}
         </section>
         <section className="w-full 2xl:w-1/2 text-xl">{dict.aboutText}</section>
       </section>
       <section className="flex flex-col text-black">
-        <section className="font-bold underline-offset-4 text-4xl underline text-purple decoration-purple">
+        <section className="font-bold underline-offset-4 text-4xl text-purple">
           {dict.professionalExperience.name}
         </section>
         <section className="flex h-full flex-col 2xl:flex-row text-black ">
@@ -82,13 +82,13 @@ export function About({ lang }: { lang: "pt" | "en" }) {
           </section>
           <section className="h-full w-full 2xl:w-1/2 text-xl flex flex-col justify-evenly ">
             <section className="mb-8">
-              <section className="text-2xl underline text-purple decoration-purple">
+              <section className="text-2xl text-purple">
                 <b>Yonix</b>
               </section>
               <section>{dict.professionalExperience.yonix}</section>
             </section>
             <section>
-              <section className="text-2xl underline text-purple decoration-purple">
+              <section className="text-2xl text-purple">
                 <b>I9 Store</b>
               </section>
               <section>{dict.professionalExperience.i9}</section>

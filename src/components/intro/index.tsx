@@ -52,7 +52,7 @@ export function IntroSection() {
           <div className="flex mt-7 ">
             <Link
               href={"#about"}
-              className=" bg-blue hover:bg-purple rounded-3xl mr-7 px-2 sm:px-3 md:px-6 py-1 md:py-3"
+              className=" bg-blue flex text-center hover:bg-purple rounded-3xl mr-7 px-2 sm:px-3 md:px-6 py-1 md:py-3"
             >
               {dict.learnMore}
             </Link>
