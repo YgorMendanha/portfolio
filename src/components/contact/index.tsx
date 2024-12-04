@@ -35,12 +35,12 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
           method: "POST",
           body: JSON.stringify({
             message: {
-              from_email: "contato@ygormendanha.com.br",
+              from_email: "contato@ygormendanha.com",
               subject: "Contato Portfolio",
               text: `Nome:${dataForm.name} || Contato: ${dataForm.contact} || Msg:${dataForm.msg}`,
               to: [
                 {
-                  email: "contato@ygormendanha.com.br",
+                  email: "contato@ygormendanha.com",
                   type: "to",
                 },
               ],

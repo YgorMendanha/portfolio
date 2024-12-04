@@ -23,7 +23,7 @@ const jsonLdPerson: WithContext<ProfilePage> = {
 const jsonLdOrganization: WithContext<Organization> = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  url: "https://www.ygormendanha.com.br",
+  url: "https://www.ygormendanha.com",
   logo: "https://myymbucket.s3.sa-east-1.amazonaws.com/imagens/Logo.png",
   name: "YM Desenvolvimento",
 };
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const dict = getDictionary(params.lang ?? "pt");
 
   return {
-    metadataBase: new URL("https://www.ygormendanha.com.br"),
+    metadataBase: new URL("https://www.ygormendanha.com"),
     title: dict.metatags.title,
     description: dict.metatags.description,
     openGraph: {
@@ -54,9 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         },
       ],
     },
-    authors: [
-      { name: "Ygor Mendanha", url: "https://www.ygormendanha.com.br" },
-    ],
+    authors: [{ name: "Ygor Mendanha", url: "https://www.ygormendanha.com" }],
     creator: "Ygor Mendanha",
     keywords: [
       "Next.js",
@@ -79,7 +77,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: dict.metatags.title,
     },
     alternates: {
-      canonical: `/${params.lang}`,
+      canonical: `/`,
       languages: {
         en: "/en",
         pt: "/pt",
