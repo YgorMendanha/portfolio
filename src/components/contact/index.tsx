@@ -18,8 +18,6 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
   const dict = getDictionary(lang ?? "pt");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const MailchimpToken = process.env.NEXT_PUBLIC_TOKEN_MAIL;
-
   const {
     register,
     handleSubmit,
@@ -29,40 +27,29 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
   const onSubmit: SubmitHandler<Inputs> = async (dataForm) => {
     setLoading(true);
     try {
-      const response = await fetch(
-        "https://mandrillapp.com/api/1.0/messages/send",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            message: {
-              from_email: "contato@ygormendanha.com",
-              subject: "Contato Portfolio",
-              text: `Nome:${dataForm.name} || Contato: ${dataForm.contact} || Msg:${dataForm.msg}`,
-              to: [
-                {
-                  email: "contato@ygormendanha.com",
-                  type: "to",
-                },
-              ],
-            },
-            key: MailchimpToken,
-          }),
-        }
-      );
-      const data = await response.json();
+      const response = await fetch("/sendEmail", {
+        method: "POST",
+        body: JSON.stringify({
+          subject: "Novo Contato",
+          html: `
+          <p>Nome:${dataForm.name}</p> 
+          <p>Contato: ${dataForm.contact} </p> 
+          <p>Msg:${dataForm.msg}</p>
+          `,
+        }),
+      });
 
-      if (data[0].status !== "sent") {
+      if (response.status !== 200) {
         toast.error(dict.errorEmail);
         setLoading(false);
-        reset();
         return;
       }
 
+      reset();
       toast.success(dict.successEmail);
     } catch (error) {
       console.error(error);
     }
-    reset();
     setLoading(false);
   };
 
@@ -116,10 +103,10 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
                   height="24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   viewBox="0 0 24 24"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   xmlns="http://www.w3.org/2000/svg"
                   className="animate-spin w-6 h-6 stroke-white"
                 >
