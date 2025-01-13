@@ -24,9 +24,7 @@ export function middleware(request: NextRequest) {
   if (pathnameIsMissingLocale) {
     const locale = getLocale(request);
     if (locale.id["ISO-3166-1-ALPHA-2"] === "BR") {
-      return NextResponse.rewrite(
-        new URL(`/pt${pathname}`, request.url)
-      );
+      return NextResponse.redirect(new URL(`/${"pt"}/${pathname}`, request.url))
     }
     return NextResponse.redirect(new URL(`/${"en"}/${pathname}`, request.url));
   }
