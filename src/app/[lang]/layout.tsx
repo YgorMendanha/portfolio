@@ -37,7 +37,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const dict = getDictionary(params.lang ?? "pt");
 
-  console.log(params)
+
 
   return {
     metadataBase: new URL("https://www.ygormendanha.com"),
