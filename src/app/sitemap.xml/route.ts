@@ -13,20 +13,15 @@ export async function GET() {
     http://www.w3.org/1999/xhtml
     http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd">
 
-  ${paths
-    .map(
-      (path) => `
-    <url>
-      <loc>https://${siteUrl}${path}</loc>
+   <url>
+      <loc>https://${siteUrl}</loc>
       <lastmod>${new Date().toISOString()}</lastmod>
       <changefreq>daily</changefreq>
       <priority>0.7</priority>
-      <xhtml:link rel="alternate" hreflang="pt" href="https://${siteUrl}/pt${path}" />
-      <xhtml:link rel="alternate" hreflang="en" href="https://${siteUrl}/en${path}" />
+      <xhtml:link rel="alternate" hreflang="pt" href="https://${siteUrl}/pt" />
+      <xhtml:link rel="alternate" hreflang="en" href="https://${siteUrl}/en" />
 
-    </url>`
-    )
-    .join("\n")}
+    </url>
 
 </urlset>`;
 
