@@ -3,11 +3,12 @@ import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Nunito } from "next/font/google";
 import { getDictionary } from "@/utils/functions/getDictionary";
-import { Analytics } from "@vercel/analytics/react";
+import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalytics } from "@/utils/lib/analytics";
 import { ProfilePage, WithContext, Organization } from "schema-dts";
 import Script from "next/script";
 import { CSPostHogProvider } from "../providers";
+import { cookies } from "next/headers";
 
 const jsonLdPerson: WithContext<ProfilePage> = {
   "@context": "https://schema.org",
@@ -30,14 +31,14 @@ const jsonLdOrganization: WithContext<Organization> = {
 
 const nunito = Nunito({ subsets: ["latin"] });
 
-type Props = {
-  params: { lang: "pt" | "en" };
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore = await cookies();
+  const pathname = cookieStore.get("pathname");
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const dict = getDictionary(params.lang ?? "pt");
+  const path = pathname?.value || "/";
+  const lang = path.startsWith("/en") ? "en" : "pt";
 
-
+  const dict = getDictionary(lang ?? "pt");
 
   return {
     metadataBase: new URL("https://www.ygormendanha.com"),
@@ -79,34 +80,35 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: dict.metatags.title,
     },
     alternates: {
-      canonical: `${params.lang === 'pt' ? '/pt' : '/en'}`,
+      canonical: `${lang === "pt" ? "/pt" : "/en"}`,
       languages: {
         en: "/en",
         pt: "/pt",
-        'x-default':'/'
+        "x-default": "/",
       },
     },
   };
 }
 
-export function generateViewport({ params }: Props): Viewport {
+export function generateViewport(): Viewport {
   return {
     colorScheme: "dark",
     themeColor: "#2e1065",
   };
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: { lang: "en" | "pt" };
+  params: Promise<{ lang: "en" | "pt" }>;
 }) {
+  const paramsPage = await params;
   let lang: "pt-BR" | "en-US" = "pt-BR";
-  if (params.lang === "en") {
+  if (paramsPage.lang === "en") {
     lang = "en-US";
-  } else if (params.lang === "pt") {
+  } else if (paramsPage.lang === "pt") {
     lang = "pt-BR";
   }
 

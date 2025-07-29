@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
 import { CustomLink } from "@/components";
 import { useParams } from "next/navigation";
 import { getDictionary } from "@/utils/functions/getDictionary";
-import { useWindowSize } from "@/hooks/useWindowSize";
 import { HeaderMenu } from "./partials/menu";
 import { SelectLang } from "./partials/selectLang";
 
@@ -11,25 +10,7 @@ export function Header() {
   const { lang }: { lang?: "pt" | "en" } = useParams();
   const dict = getDictionary(lang ?? "pt");
 
-  const [show, setShow] = useState<boolean>(false);
   const [showMenu, setShowMenu] = useState<boolean>(false);
-
-  const WindowSize = useWindowSize();
-
-  useEffect(() => {
-    window.addEventListener("scroll", changeShowState);
-    return () => {
-      window.removeEventListener("scroll", changeShowState);
-    };
-  }, []);
-
-  function changeShowState() {
-    const refHeader = document.body;
-    if (!refHeader) return null;
-    const posicoes = refHeader?.getBoundingClientRect();
-    const fim = posicoes.y;
-    fim > -10 ? setShow(false) : setShow(true);
-  }
 
   return (
     <header
@@ -40,9 +21,9 @@ export function Header() {
           YM {dict.developer}
         </div>
 
-        <nav className="ml-auto  items-center hidden sm:flex sm:[&_a]:text-base  md:[&_a]:text-lg underline-offset-4  hover:[&_a]:underline hover:[&_a]:decoration-purple">
+        <nav className="ml-auto  items-center hidden sm:flex sm:[&_a]:text-base  md:[&_a]:text-lg underline-offset-4  ">
           <CustomLink
-            className="mr-3 "
+            className="mr-3 hover:underline hover:decoration-purple"
             style={{
               textDecorationThickness: "3px",
             }}
@@ -51,7 +32,7 @@ export function Header() {
             {dict.home}
           </CustomLink>
           <CustomLink
-            className="mr-3 "
+            className="mr-3 hover:underline hover:decoration-purple"
             style={{
               textDecorationThickness: "3px",
             }}
@@ -60,7 +41,7 @@ export function Header() {
             {dict.about}
           </CustomLink>
           <CustomLink
-            className="mr-3 "
+            className="mr-3 hover:underline hover:decoration-purple"
             style={{
               textDecorationThickness: "3px",
             }}
@@ -69,7 +50,7 @@ export function Header() {
             {dict.projects}
           </CustomLink>
           <CustomLink
-            className="mr-3 "
+            className="mr-3 hover:underline hover:decoration-purple"
             style={{
               textDecorationThickness: "3px",
             }}

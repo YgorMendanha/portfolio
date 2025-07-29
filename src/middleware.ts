@@ -1,37 +1,86 @@
-import { geolocation } from "@vercel/edge";
+import { geolocation } from "@vercel/functions";
 import { NextRequest, NextResponse } from "next/server";
-import countries from "@/utils/lib/countries.json";
-
-const i18n = {
-  defaultLocale: "pt",
-  locales: ["en", "pt"],
-} as const;
-
-function getLocale(request: NextRequest) {
-  const { country } = geolocation(request);
-  console.info({ country });
-  return countries.find(
-    (x) => x.id["ISO-3166-1-ALPHA-2"] === (country ?? "BR")
-  )!;
-}
 
 export function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
-  const pathnameIsMissingLocale = i18n.locales.every(
-    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
-  );
+  const { pathname } = request.nextUrl;
+  const cookieLocale = request.cookies.get("locale")?.value;
+  const cookieLang = request.cookies.get("lang")?.value;
 
-  if (pathnameIsMissingLocale) {
-    const locale = getLocale(request);
-    if (locale.id["ISO-3166-1-ALPHA-2"] === "BR") {
-      return NextResponse.redirect(new URL(`/${"pt"}/${pathname}`, request.url))
+  const hasBRPrefix = pathname.startsWith("/pt");
+  const hasUSAPrefix = pathname.startsWith("/en");
+
+  // 1) Sem prefixo e sem cookie: usa geolocation
+  if (!hasBRPrefix && !hasUSAPrefix && !cookieLocale) {
+    const { country = "BR" } = geolocation(request);
+    const isBrazil = country === "BR";
+
+    if (isBrazil) {
+      const newUrl = request.nextUrl.clone();
+      newUrl.pathname = `/pt${pathname}`;
+      const response = NextResponse.rewrite(newUrl);
+      response.cookies.set("locale", "BR");
+      response.cookies.set("lang", "pt");
+      response.cookies.set("pathname", pathname);
+      return response;
     }
-    return NextResponse.redirect(new URL(`/${"en"}/${pathname}`, request.url));
+
+    const newUrl = request.nextUrl.clone();
+    newUrl.pathname = `/en${pathname}`;
+    const response = NextResponse.redirect(newUrl);
+    response.cookies.set("locale", "USA");
+    response.cookies.set("lang", "en");
+    response.cookies.set("pathname", pathname);
+    return response;
   }
+
+  // 2) Sem prefixo e com cookie: redireciona conforme cookieLocale
+  if (!hasBRPrefix && !hasUSAPrefix && cookieLocale) {
+    if (cookieLocale === "BR") {
+      const newUrl = request.nextUrl.clone();
+      newUrl.pathname = `/pt${pathname}`;
+      const response = NextResponse.rewrite(newUrl);
+      response.cookies.set("pathname", pathname);
+      !cookieLang && response.cookies.set("lang", "pt");
+      return response;
+    }
+
+    const newUrl = request.nextUrl.clone();
+    newUrl.pathname = `/en${pathname}`;
+    const response = NextResponse.redirect(newUrl);
+    response.cookies.set("pathname", pathname);
+    !cookieLang && response.cookies.set("lang", "en");
+    return response;
+  }
+
+  // 3) Já tem /pt no início: tira o /pt e serve sem alterar query
+  if (hasBRPrefix) {
+    const newUrl = request.nextUrl.clone();
+    newUrl.pathname = pathname;
+    const response = NextResponse.rewrite(newUrl);
+    response.cookies.set("locale", "BR");
+    response.cookies.set("lang", "pt");
+    response.cookies.set("pathname", pathname);
+    return response;
+  }
+
+  // 3) Já tem /en no início
+  if (hasUSAPrefix) {
+    const newPathname = pathname || "/";
+    const newUrl = request.nextUrl.clone();
+    newUrl.pathname = newPathname;
+    const response = NextResponse.rewrite(newUrl);
+    response.cookies.set("locale", "USA");
+    response.cookies.set("lang", "en");
+    response.cookies.set("pathname", pathname);
+    return response;
+  }
+
+  // 4) Se tiver /usa ou for API/estático, cai aqui:
+  return NextResponse.next();
 }
 
 export const config = {
   matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|sitemap\\.xml$|sitemap-.*\\.xml$|robots.txt|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
   ],
 };

@@ -7,39 +7,6 @@ import dayjs from "dayjs";
 export function About({ lang }: { lang: "pt" | "en" }) {
   const dict = getDictionary(lang ?? "pt");
 
-  const skills = [
-    {
-      id: 1,
-      name: "React / Next / TypeScript / JavaScript / Node / Git",
-      size: "w-[90%]",
-      percentage: "90",
-    },
-    {
-      id: 2,
-      name: "AWS",
-      size: "w-[75%]",
-      percentage: "75",
-    },
-    {
-      id: 3,
-      name: "SEO",
-      size: "w-[75%]",
-      percentage: "75",
-    },
-    {
-      id: 4,
-      name: "UX/UI",
-      size: "w-[60%]",
-      percentage: "60",
-    },
-    {
-      id: 5,
-      name: "Python",
-      size: "w-[50%]",
-      percentage: "50",
-    },
-  ];
-
   return (
     <section id={"about"} className="container mx-auto px-5 py-20 ">
       <section className="flex mb-20 flex-col 2xl:flex-row text-black">

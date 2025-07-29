@@ -18,16 +18,11 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
   const dict = getDictionary(lang ?? "pt");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<Inputs>();
+  const { register, handleSubmit, reset } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (dataForm) => {
     setLoading(true);
     try {
-      const response = await fetch("/sendEmail", {
+      const response = await fetch("/api/sendEmail", {
         method: "POST",
         body: JSON.stringify({
           subject: "Novo Contato",

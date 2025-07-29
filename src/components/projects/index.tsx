@@ -6,7 +6,6 @@ import BlogImg from "~/public/blog.png";
 import { BiLinkExternal } from "react-icons/bi";
 import { getDictionary } from "@/utils/functions/getDictionary";
 import Link from "next/link";
-import { twMerge } from "tailwind-merge";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -71,9 +70,9 @@ export function MyProjects({ lang }: { lang: "pt" | "en" }) {
             return (
               <div
                 key={data.title}
-                className={twMerge(
-                  `flex group flex-col mx-2 justify-center items-center`
-                )}
+                className={
+                  "flex group flex-col mx-2 justify-center items-center"
+                }
               >
                 <Image
                   alt="banner Finesses store"

@@ -1,7 +1,6 @@
 "use client";
 
 import { Header } from "./header";
-import { useEffect, useState } from "react";
 import { Footer } from "./footer";
 import { Toaster } from "react-hot-toast";
 

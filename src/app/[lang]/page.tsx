@@ -1,13 +1,17 @@
 import { About, Contact, IntroSection, MyProjects } from "@/components";
 
-const App = ({ params }: { params: { lang: "en" | "pt" } }) => {
+export default async function App({
+  params,
+}: {
+  params: Promise<{ lang: "en" | "pt" }>;
+}) {
+  const { lang } = await params;
   return (
     <main className="">
       <IntroSection />
-      <About lang={params.lang} />
-      <MyProjects lang={params.lang} />
-      <Contact lang={params.lang} />
+      <About lang={lang} />
+      <MyProjects lang={lang} />
+      <Contact lang={lang} />
     </main>
   );
-};
-export default App;
+}

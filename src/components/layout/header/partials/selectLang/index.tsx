@@ -1,5 +1,5 @@
 "use client";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 export function SelectLang({ className = "" }: { className?: string }) {
   const { lang }: { lang?: "pt" | "en" } = useParams();

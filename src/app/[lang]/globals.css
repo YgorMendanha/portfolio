@@ -1,15 +1,22 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 html,
 body,
 :root {
   height: 100%;
   scroll-behavior: smooth;
+  background-color: #fad102;
 }
 
+@theme {
+  --color-black-purple: #19092e;
+  --color-purple: #5e1dad;
+  --color-blueLight: #42a0ed;
+  --color-blue: #267cc1;
 
+  --font-geo: "var(--font-kanita)";
+  --font-dos: "var(--font-dosis)";
+}
 
 ::-webkit-scrollbar {
   width: 5px;

@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 
 export async function POST(request: Request) {
   const res = await request.json();
-  const { to, subject, html } = res;
+  const { subject, html } = res;
 
   const transporter = nodemailer.createTransport({
     host: "smtp.hostinger.com",
@@ -22,9 +22,9 @@ export async function POST(request: Request) {
       subject,
       html,
       headers: {
-        "X-Priority": "1", 
+        "X-Priority": "1",
         "X-MSMail-Priority": "High",
-        Importance: "high", 
+        Importance: "high",
       },
     });
 
