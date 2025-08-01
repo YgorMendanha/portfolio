@@ -105,6 +105,12 @@ export default async function RootLayout({
   params: Promise<{ lang: "en" | "pt" }>;
 }) {
   const paramsPage = await params;
+  const cookieStore = await cookies();
+  const pathname = cookieStore.get("pathname");
+
+  const path = pathname?.value || "/";
+  const unblockUrl = path.startsWith("/en") || path.startsWith("/pt");
+
   let lang: "pt-BR" | "en-US" = "pt-BR";
   if (paramsPage.lang === "en") {
     lang = "en-US";
@@ -114,6 +120,7 @@ export default async function RootLayout({
 
   return (
     <html lang={lang}>
+      {!unblockUrl && <meta name="robots" content="noindex, nofollow"></meta>}
       <Script
         id="jsonLdPerson"
         type="application/ld+json"
