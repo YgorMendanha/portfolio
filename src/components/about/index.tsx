@@ -13,7 +13,7 @@ export function About({ lang }: { lang: "pt" | "en" }) {
         <section className="w-full 2xl:w-1/2 mb-20 text-4xl font-bold underline-offset-4  text-purple">
           {dict.about}
         </section>
-        <section className="w-full 2xl:w-1/2 text-xl">{dict.aboutText}</section>
+        <section className="w-full 2xl:w-1/2 text-xl" style={{ whiteSpace: "pre-line" }}>{dict.aboutText}</section>
       </section>
       <section className="flex flex-col text-black">
         <section className="font-bold underline-offset-4 text-4xl text-purple">
@@ -52,13 +52,13 @@ export function About({ lang }: { lang: "pt" | "en" }) {
               <section className="text-2xl text-purple">
                 <b>Yonix</b>
               </section>
-              <section>{dict.professionalExperience.yonix}</section>
+              <section style={{ whiteSpace: "pre-line" }}>{dict.professionalExperience.yonix}</section>
             </section>
             <section>
               <section className="text-2xl text-purple">
                 <b>I9 Store</b>
               </section>
-              <section>{dict.professionalExperience.i9}</section>
+              <section style={{ whiteSpace: "pre-line" }}>{dict.professionalExperience.i9}</section>
             </section>
           </section>
         </section>

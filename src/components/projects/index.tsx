@@ -3,6 +3,7 @@ import Image from "next/image";
 import ShopImg from "~/public/finesse-store.png";
 import NotesImg from "~/public/notes.png";
 import BlogImg from "~/public/blog.png";
+import BotImg from "~/public/bot_telegram.png"; 
 import { BiLinkExternal } from "react-icons/bi";
 import { getDictionary } from "@/utils/functions/getDictionary";
 import Link from "next/link";
@@ -49,6 +50,12 @@ export function MyProjects({ lang }: { lang: "pt" | "en" }) {
       details: dict.notesDetails,
       link: "https://notes-ym.vercel.app",
     },
+    {
+      img: BotImg,
+      title: "Bot telegram",
+      details: dict.botDetails,
+      link: "https://t.me/financial_life_bot",
+    },
   ];
 
   return (
@@ -82,10 +89,10 @@ export function MyProjects({ lang }: { lang: "pt" | "en" }) {
                   className="rounded-lg"
                 />
                 <div className="flex invisible absolute h-[90%] w-[90%] max-h-[450px] max-w-[450px] group-hover:visible flex-col p-2 backdrop-blur-sm bg-purple rounded-lg transition-all">
-                  <h3 className="text-4xl">
+                  <h3 className="text-4xl mb-2">
                     <b>{data.title}</b>
                   </h3>
-                  <p>{data.details}</p>
+                  <p style={{ whiteSpace: "pre-line" }}>{data.details}</p>
                   <Link
                     target="_blank"
                     className="mt-auto text-lg underline font-bold flex items-center"

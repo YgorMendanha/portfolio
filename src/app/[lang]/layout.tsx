@@ -100,10 +100,7 @@ export function generateViewport(): Viewport {
 export default async function RootLayout({
   children,
   params,
-}: {
-  children: React.ReactNode;
-  params: Promise<{ lang: "en" | "pt" }>;
-}) {
+}: LayoutProps<'/[lang]'>) {
   const paramsPage = await params;
   const cookieStore = await cookies();
   const pathname = cookieStore.get("pathname");
