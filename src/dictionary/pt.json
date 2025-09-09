@@ -44,11 +44,15 @@
   "stepDevelopmentDescription": "Criação ágil, transparente e personalizada",
   "stepDeliveryTitle": "Entrega e suporte",
   "stepDeliveryDescription": "Você recebe a solução pronta, com acompanhamento para garantir resultados",
-  "shopDetails": "O e-commerce foi desenvolvido de forma robusta, utilizando tecnologias como Next.js para a camada front-end e Tailwind CSS para estilização responsiva.\n\nPostgreSQL foi usado como banco de dados, garantindo uma experiência de usuário aprimorada e eficiente.",
-  "blogDetails": "O blog foi desenvolvido com Next.js para uma experiência dinâmica e Tailwind CSS para um design elegante e responsivo.\n\nFoi integrado ao Notion para uma gestão eficiente de conteúdo, resultando em uma experiência de usuário fluída e visualmente atraente.",
-  "notesDetails": "O projeto de notas combina Next.js para uma experiência dinâmica, Tailwind CSS para um design moderno e PostgreSQL para um backend robusto.\n\nEssa combinação resultou em uma aplicação eficiente e visualmente atraente para organizar e gerenciar notas de forma prática e intuitiva.",
-  "botDetails": "Com o Bot Financeiro, você organiza sua vida financeira de forma simples e rápida.\n\n • Registre despesas e receitas em segundos.\n • Acompanhe suas contas sem complicação.\n • Defina metas diárias de gastos.\n • Veja resumos mensais claros e objetivos.\n • Tudo isso sem planilhas ou aplicativos cheios de menus.\n • Basta abrir o Telegram e conversar com o bot.\n • Praticidade e controle na palma da sua mão.",
   "errorEmail": "Houve um erro no envio 😢",
   "successEmail": "Obrigado pelo contato",
-  "speakWhatsapp": "Ou fale diretamente no Whatsapp"
+  "speakWhatsapp": "Ou fale diretamente no Whatsapp",
+  "titleFinesse": "Finesse Store – Loja Virtual",
+  "descFinesse": "E-commerce desenvolvido com Next.js, Tailwind e PostgreSQL. Permite cadastro de produtos, carrinho dinâmico e checkout otimizado. O desafio foi criar uma loja rápida e escalável para simular a experiência de um cliente real. Minha solução incluiu um front responsivo, backend robusto e fluxo de compra seguro. A loja demo mostra como estruturo soluções modernas de e-commerce, reduzindo tempo de carregamento e melhorando a experiência do usuário.",
+  "titleNotes": "Notes App – Aplicativo de Anotações",
+  "descNotes": "Aplicativo web para anotações pessoais, com login e persistência em banco de dados. Desenvolvido com Next.js, Tailwind e PostgreSQL. O diferencial é a simplicidade e produtividade, com interface clara e segura. O resultado é uma ferramenta adaptável para empresas ou uso pessoal, garantindo organização eficiente.",
+  "titleBot": "Bot Financeiro – Telegram",
+  "descBot": "Bot criado para o Telegram com Python e banco de dados integrado. Permite registrar despesas, definir metas e gerar relatórios diários/mensais. O objetivo foi automatizar o controle financeiro de forma simples. O impacto é economizar tempo e tornar o acompanhamento de gastos acessível em qualquer dispositivo.",
+  "titleBlog": "Blog",
+  "descriptionBlog": "Artigos sobre tecnologia, desenvolvimento web e minhas experiências como programador, compartilhando ideias, aprendizados e insights."
 }

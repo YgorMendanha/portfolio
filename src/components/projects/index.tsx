@@ -15,26 +15,26 @@ export function MyProjects({ lang }: { lang: "pt" | "en" }) {
   const dataSlider = [
     {
       img: ShopImg,
-      title: "Finesse Store",
-      details: dict.shopDetails,
+      title: dict.titleFinesse,
+      details: dict.descFinesse,
       link: "https://finesse-store.vercel.app",
     },
     {
       img: BlogImg,
-      title: "Blog",
-      details: dict.blogDetails,
+      title: dict.titleBlog,
+      details: dict.descriptionBlog,
       link: "https://blogymdevelopment.vercel.app",
     },
     {
       img: NotesImg,
-      title: "Notes",
-      details: dict.notesDetails,
+      title: dict.titleNotes,
+      details: dict.descNotes,
       link: "https://notes-ym.vercel.app",
     },
     {
       img: BotImg,
-      title: "Bot telegram",
-      details: dict.botDetails,
+      title: dict.titleBot,
+      details: dict.descBot,
       link: "https://t.me/financial_life_bot",
     },
   ];

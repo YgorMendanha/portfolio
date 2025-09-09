@@ -43,11 +43,15 @@
   "stepDevelopmentDescription": "Agile, transparent, and personalized creation",
   "stepDeliveryTitle": "Delivery & Support",
   "stepDeliveryDescription": "You receive the ready solution, with follow-up to ensure results",
-  "shopDetails": "The e-commerce platform was meticulously crafted leveraging cutting-edge technologies, incorporating Next.js for a dynamic front-end and Tailwind CSS for responsive styling.\n\nPostgreSQL was used as the backend database, ensuring a seamless and efficient user experience.",
-  "blogDetails": "The blog was skillfully developed using Next.js for a dynamic front-end and Tailwind CSS for sleek and responsive design.\n\nIntegrated with Notion for efficient content management, creating a streamlined and visually appealing user experience.",
-  "notesDetails": "The note-taking project was expertly crafted, utilizing Next.js for a dynamic user experience, Tailwind CSS for a modern design aesthetic, and PostgreSQL for a robust backend.\n\nThis combination of technologies resulted in an efficient and visually appealing application for organizing and managing notes practically and intuitively.",
-  "botDetails": "• With Bot Financeiro, you organize your finances simply and quickly.\n• Add expenses and income in seconds.\n• Track your accounts without hassle.\n• Set daily spending goals.\n• See clear, monthly summaries.\n• All this without spreadsheets or apps full of menus.\n• Just open Telegram and chat with the bot.\n• Practicality and control in the palm of your hand.",
   "errorEmail": "There was an error sending 😢",
   "successEmail": "Thank you for the contact",
-  "speakWhatsapp": "Or speak directly on Whatsapp"
+  "speakWhatsapp": "Or speak directly on Whatsapp",
+  "titleFinesse": "Finesse Store – Online Shop",
+  "descFinesse": "E-commerce built with Next.js, Tailwind, and PostgreSQL. It supports product registration, dynamic cart, and optimized checkout. The challenge was to create a fast and scalable store to simulate a real customer experience. My solution included a responsive front end, robust backend, and secure purchase flow. The demo store showcases how I structure modern e-commerce solutions, reducing load times and improving user experience.",
+  "titleNotes": "Notes App – Note Taking Application",
+  "descNotes": "Web app for personal notes, with login and database persistence. Developed with Next.js, Tailwind, and PostgreSQL. Its main strength is simplicity and productivity, with a clear and secure interface. The result is a tool adaptable for companies or personal use, ensuring efficient organization.",
+  "titleBot": "Finance Bot – Telegram",
+  "descBot": "Bot built for Telegram using Python and an integrated database. It allows users to register expenses, set goals, and generate daily/monthly reports. The goal was to automate financial control in a simple way. The impact is saving time and making expense tracking accessible on any device.",
+  "titleBlog": "Blog",
+  "descriptionBlog": "Articles about technology, web development, and my experiences as a developer, sharing ideas, lessons learned, and insights."
 }
