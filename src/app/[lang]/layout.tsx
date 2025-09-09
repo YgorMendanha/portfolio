@@ -1,5 +1,5 @@
 import { Layout } from "@/components";
-import "./globals.css";
+import "@/app/globals.css";
 import type { Metadata, Viewport } from "next";
 import { Nunito } from "next/font/google";
 import { getDictionary } from "@/utils/functions/getDictionary";

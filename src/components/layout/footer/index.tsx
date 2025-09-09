@@ -33,7 +33,7 @@ export function Footer() {
             <FaLinkedinIn />
           </Link>
           <Link
-            href="https://wa.me/message/YQXEGG4GZBDDG1"
+            href="https://wa.me/5592982832103"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Whatsapp"

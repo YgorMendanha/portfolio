@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+html,
+body,
+:root {
+  height: 100%;
+  scroll-behavior: smooth;
+  background-color: #19092e;
+}
+
+@theme {
+  /* Cores de fundo / principais */
+  --color-black-purple: #19092e; /* Roxo escuro, identidade, fundo e áreas fortes */
+  --color-white: #ffffff; /* Branco puro */
+  --color-gray-lightest: #f4f4f4; /* Cinza muito claro (quase branco) */
+
+  /* Cores de destaque / CTAs */
+  --color-purple-bright: #3f20ba; /* Roxo vibrante para destaques sutis */
+  --color-cyan-light: #00c2ff; /* Azul claro/ciano para botões e ícones de ação */
+  --color-yellow: #ffcc00; /* Amarelo vibrante para detalhes ou ênfase */
+
+  /* Cores de texto */
+  --color-dark: #222222; /* Cinza escuro para corpo do texto sobre fundo claro */
+  --color-light-gray: #eaeaea; /* Cinza claro para legenda sobre fundo escuro */
+  --color-white: #ffffff; /* Branco para títulos sobre fundo roxo */
+
+  /* Fontes */
+  --font-geo: "var(--font-kanita)";
+  --font-dos: "var(--font-dosis)";
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 50%;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #a855f7;
+  width: 1px;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-corner {
+  background-color: #ffffff;
+}
+.react-multiple-carousel__arrow {
+  z-index: 28 !important;
+}

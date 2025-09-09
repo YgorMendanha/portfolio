@@ -6,6 +6,7 @@ import { Contact } from "./contact";
 import { CustomInput } from "./partials/input";
 import { CustomTextArea } from "./partials/textarea";
 import { CustomLink } from "./partials/link";
+import { Steps } from "./steps";
 
 export {
   About,
@@ -16,4 +17,5 @@ export {
   CustomInput,
   CustomTextArea,
   CustomLink,
+  Steps,
 };

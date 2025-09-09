@@ -1,4 +1,4 @@
-import { About, Contact, IntroSection, MyProjects } from "@/components";
+import { About, Contact, IntroSection, MyProjects, Steps } from "@/components";
 
 export default async function App({
   params,
@@ -10,6 +10,7 @@ export default async function App({
     <main className="">
       <IntroSection />
       <About lang={lang} />
+      <Steps lang={lang} />
       <MyProjects lang={lang} />
       <Contact lang={lang} />
     </main>

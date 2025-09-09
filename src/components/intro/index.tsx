@@ -43,18 +43,20 @@ export function IntroSection() {
   return (
     <section className="flex flex-col py-28 sm:py-36  lg:min-h-[700px] lg:h-screen  bg-black-purple">
       <div className="container px-5 mx-auto flex h-full flex-col lg:flex-row  items-center justify-center  ">
-        <div className="w-full lg:w-1/2 mb-0 z-10 flex flex-col  justify-center">
-          <h1 className="text-4xl md:text-8xl">
-            Ygor
-            <br /> Mendanha <br />
-            {dict.developer}
-          </h1>
-          <div className="flex mt-7 ">
+        <div className="w-full lg:w-1/2 mb-0 z-10 flex flex-col gap-4 justify-center">
+          <h2 className="text-4xl md:text-6xl text-white">
+            {dict.digitalIdeasIntoResults}
+          </h2>
+          <h4 className="text-xl md:text-3xl text-light-gray ">
+            {dict.ecommerceErpExpert}
+          </h4>
+
+          <div className="flex">
             <Link
-              href={"#about"}
-              className=" bg-blue flex text-center hover:bg-purple rounded-3xl mr-7 px-2 sm:px-3 md:px-6 py-1 md:py-3"
+              href={"#contact"}
+              className="bg-cyan-light/80 flex text-center hover:bg-cyan-light text-gray-lightest hover:text-gray-lightest hover:scale-105 rounded-2xl mr-7 px-2 sm:px-3 md:px-6 py-1 md:py-3"
             >
-              {dict.learnMore}
+              {dict.letsTalk}
             </Link>
 
             <nav className="flex items-center [&_a]:mr-7 text-xl md:text-4xl ">
@@ -75,7 +77,7 @@ export function IntroSection() {
                 <FaLinkedinIn />
               </Link>
               <Link
-                href="https://wa.me/message/YQXEGG4GZBDDG1"
+                href="https://wa.me/5592982832103"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Whatsapp"

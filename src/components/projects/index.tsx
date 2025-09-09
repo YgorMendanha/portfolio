@@ -3,33 +3,14 @@ import Image from "next/image";
 import ShopImg from "~/public/finesse-store.png";
 import NotesImg from "~/public/notes.png";
 import BlogImg from "~/public/blog.png";
-import BotImg from "~/public/bot_telegram.png"; 
+import BotImg from "~/public/bot_telegram.png";
 import { BiLinkExternal } from "react-icons/bi";
 import { getDictionary } from "@/utils/functions/getDictionary";
 import Link from "next/link";
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 export function MyProjects({ lang }: { lang: "pt" | "en" }) {
   const dict = getDictionary(lang ?? "pt");
-
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1280 },
-      items: 3,
-      slidesToSlide: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1280, min: 768 },
-      items: 2,
-      slidesToSlide: 2,
-    },
-    mobile: {
-      breakpoint: { max: 768, min: 0 },
-      items: 1,
-      slidesToSlide: 1,
-    },
-  };
 
   const dataSlider = [
     {
@@ -60,51 +41,45 @@ export function MyProjects({ lang }: { lang: "pt" | "en" }) {
 
   return (
     <section className="bg-black-purple py-20">
-      <section id="project" className="container p-5 mx-auto flex flex-col ">
-        <section className="w-1/2 text-4xl font-bold underline-offset-4 mb-16 ">
+      <section id="project" className="container px-5 mx-auto flex flex-col">
+        <h2 className="text-3xl sm:text-4xl font-bold underline-offset-4 mb-16 text-white">
           {dict.projects}
-        </section>
-        <Carousel
-          showDots={true}
-          responsive={responsive}
-          ssr
-          autoPlaySpeed={3000}
-          keyBoardControl={true}
-          customTransition="all .5"
-          transitionDuration={500}
-        >
-          {dataSlider.map((data) => {
-            return (
-              <div
-                key={data.title}
-                className={
-                  "flex group flex-col mx-2 justify-center items-center"
-                }
-              >
-                <Image
-                  alt="banner Finesses store"
-                  src={data.img}
-                  width={500}
-                  height={500}
-                  className="rounded-lg"
-                />
-                <div className="flex invisible absolute h-[90%] w-[90%] max-h-[450px] max-w-[450px] group-hover:visible flex-col p-2 backdrop-blur-sm bg-purple rounded-lg transition-all">
-                  <h3 className="text-4xl mb-2">
-                    <b>{data.title}</b>
-                  </h3>
-                  <p style={{ whiteSpace: "pre-line" }}>{data.details}</p>
-                  <Link
-                    target="_blank"
-                    className="mt-auto text-lg underline font-bold flex items-center"
-                    href={data.link}
-                  >
-                    {dict.toView} <BiLinkExternal className="ml-2" />
-                  </Link>
-                </div>
+        </h2>
+
+        {dataSlider.map((data, idx) => {
+          const flexDirection =
+            idx % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse";
+
+          return (
+            <div
+              key={data.title}
+              className={`flex flex-col ${flexDirection} my-10 gap-6 justify-center items-center`}
+            >
+              <Image
+                alt={data.title}
+                src={data.img}
+                width={400}
+                height={400}
+                className="rounded-lg border-2 border-light-gray w-full lg:w-1/2 object-cover"
+              />
+              <div className="flex text-black-purple bg-gray-lightest shadow-xl flex-col p-6 rounded-lg w-full lg:w-1/2 min-h-[300px] hover:scale-105 transition-transform duration-300">
+                <h3 className="text-2xl sm:text-3xl font-bold mb-3">
+                  {data.title}
+                </h3>
+                <p className="text-base sm:text-lg mb-4 whitespace-pre-line">
+                  {data.details}
+                </p>
+                <Link
+                  target="_blank"
+                  className="mt-auto text-lg underline font-bold flex items-center"
+                  href={data.link}
+                >
+                  {dict.toView} <BiLinkExternal className="ml-2" />
+                </Link>
               </div>
-            );
-          })}
-        </Carousel>
+            </div>
+          );
+        })}
       </section>
     </section>
   );

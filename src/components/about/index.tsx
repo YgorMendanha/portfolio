@@ -1,68 +1,61 @@
 "use client";
 
 import { getDictionary } from "@/utils/functions/getDictionary";
-import { HorizontalTimeline } from "@/components/partials/timeline";
-import dayjs from "dayjs";
+import { BsCartFill, BsFillGearFill, BsFillPinAngleFill } from "react-icons/bs";
 
 export function About({ lang }: { lang: "pt" | "en" }) {
   const dict = getDictionary(lang ?? "pt");
 
   return (
-    <section id={"about"} className="container mx-auto px-5 py-20 ">
-      <section className="flex mb-20 flex-col 2xl:flex-row text-black">
-        <section className="w-full 2xl:w-1/2 mb-20 text-4xl font-bold underline-offset-4  text-purple">
-          {dict.about}
-        </section>
-        <section className="w-full 2xl:w-1/2 text-xl" style={{ whiteSpace: "pre-line" }}>{dict.aboutText}</section>
-      </section>
-      <section className="flex flex-col text-black">
-        <section className="font-bold underline-offset-4 text-4xl text-purple">
-          {dict.professionalExperience.name}
-        </section>
-        <section className="flex h-full flex-col 2xl:flex-row text-black ">
-          <section className="w-full 2xl:w-1/2 text-4xl flex flex-col justify-evenly ">
-            <section className="m-auto my-20 2xl:m-0">
-              <HorizontalTimeline
-                lastTitle={dict.currently}
-                events={[
-                  {
-                    title: "Yonix",
-                    description: "Dev. Full Stack",
-                    startDate: "2022-03-01",
-                    endDate: "2022-06-30",
-                  },
-                  {
-                    title: "I9 Store",
-                    description: "Dev. Frontend",
-                    startDate: "2022-06-01",
-                    endDate: dayjs().format("YYYY-MM-DD"),
-                  },
-                  {
-                    title: dict.currently,
-                    description: "",
-                    startDate: dayjs().format("YYYY-MM-DD"),
-                    endDate: dayjs().format("YYYY-MM-DD"),
-                  },
-                ]}
-              />
-            </section>
-          </section>
-          <section className="h-full w-full 2xl:w-1/2 text-xl flex flex-col justify-evenly ">
-            <section className="mb-8">
-              <section className="text-2xl text-purple">
-                <b>Yonix</b>
-              </section>
-              <section style={{ whiteSpace: "pre-line" }}>{dict.professionalExperience.yonix}</section>
-            </section>
-            <section>
-              <section className="text-2xl text-purple">
-                <b>I9 Store</b>
-              </section>
-              <section style={{ whiteSpace: "pre-line" }}>{dict.professionalExperience.i9}</section>
-            </section>
-          </section>
-        </section>
-      </section>
+    <section id="about" className="bg-gray-lightest border-light-gray pt-20">
+      <div className="container mx-auto px-5">
+        {/* Novo título da seção */}
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-black-purple mb-8">
+          {dict.turningIdeasIntoResults}
+        </h2>
+        <h3 className="text-black-purple text-2xl text-center mx-auto">
+          {dict.introYgor}
+          <br className="hidden sm:block" />
+          {dict.recentExperience}
+          <br className="hidden sm:block" />
+          {dict.servicesSummary}
+        </h3>
+
+        <div className="flex flex-col sm:flex-row gap-6 justify-center items-stretch mt-20">
+          <div className="flex-1 group bg-white hover:scale-105 transition-transform duration-400 rounded-2xl p-6 shadow-xl flex flex-col">
+            <p className="text-black-purple text-xl mb-4 flex items-center gap-3">
+              <BsCartFill
+                size={40}
+                className="text-purple-bright group-hover:text-cyan-light"
+              />{" "}
+              {dict.ecommerceTitle}
+            </p>
+            <p className="text-dark flex-1">{dict.ecommerceDescription}</p>
+          </div>
+
+          <div className="flex-1 group bg-white hover:scale-105 transition-transform duration-400 rounded-2xl p-6 shadow-xl flex flex-col">
+            <p className="text-black-purple text-xl mb-4 flex items-center gap-3">
+              <BsFillGearFill
+                size={40}
+                className="text-purple-bright group-hover:text-cyan-light"
+              />{" "}
+              {dict.erpAutomationTitle}
+            </p>
+            <p className="text-dark flex-1">{dict.erpAutomationDescription}</p>
+          </div>
+
+          <div className="flex-1 group bg-white hover:scale-105 transition-transform duration-400 rounded-2xl p-6 shadow-xl flex flex-col">
+            <p className="text-black-purple text-xl mb-4 flex items-center gap-3">
+              <BsFillPinAngleFill
+                size={40}
+                className="text-purple-bright group-hover:text-cyan-light"
+              />{" "}
+              {dict.landingPagesTitle}
+            </p>
+            <p className="text-dark flex-1">{dict.landingPagesDescription}</p>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
