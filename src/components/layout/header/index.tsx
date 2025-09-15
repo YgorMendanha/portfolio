@@ -30,7 +30,7 @@ export function Header() {
             style={{
               textDecorationThickness: "3px",
             }}
-            href="#intro"
+            href="/#intro"
           >
             {dict.home}
           </CustomLink>
@@ -39,7 +39,7 @@ export function Header() {
             style={{
               textDecorationThickness: "3px",
             }}
-            href="#about"
+            href="/#about"
           >
             {dict.about}
           </CustomLink>
@@ -66,7 +66,7 @@ export function Header() {
             style={{
               textDecorationThickness: "3px",
             }}
-            href="#contact"
+            href="/#contact"
           >
             {dict.contact.title}
           </CustomLink>

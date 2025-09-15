@@ -44,16 +44,19 @@ export function HeaderMenu({
             <GrClose className="m-auto text-violet-950" />
           </section>
           <nav className="container px-5  mx-auto flex flex-col">
-            <CustomLink onClick={onCLose} className="mb-3" href="#intro">
+            <CustomLink onClick={onCLose} className="mb-3" href="/#intro">
               {dict.home}
             </CustomLink>
-            <CustomLink onClick={onCLose} className="mb-3" href="#about">
+            <CustomLink onClick={onCLose} className="mb-3" href="/#about">
               {dict.about}
             </CustomLink>
-            <CustomLink onClick={onCLose} className="mb-3" href="#project">
+            <CustomLink onClick={onCLose} className="mb-3" href="/#project">
               {dict.projects}
             </CustomLink>
-            <CustomLink onClick={onCLose} href="#contact">
+            <CustomLink onClick={onCLose} className="mb-3" href="/blog">
+              Blog
+            </CustomLink>
+            <CustomLink onClick={onCLose} href="/#contact">
               {dict.contact.title}
             </CustomLink>
 
