@@ -12,8 +12,8 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string; lang: "en" | "pt" }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
-  const post = await getPostMarkdownBySlug({ slug });
+  const { slug, lang } = await params;
+  const post = await getPostMarkdownBySlug({ slug, lang });
 
   const cookieStore = await cookies();
   const pathname = cookieStore.get("pathname");
