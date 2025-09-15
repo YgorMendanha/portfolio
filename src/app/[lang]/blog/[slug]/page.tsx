@@ -1,12 +1,42 @@
 import { colorMap } from "@/components/blog/card";
-import { getPostMarkdownBySlug } from "@/lib/notion";
+import { getPostMarkdownBySlug, listPosts } from "@/lib/notion";
 import dayjs from "dayjs";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { WithContext, BlogPosting } from "schema-dts";
+
+
+export const revalidate = 60;
+
+
+export async function generateStaticParams() {
+
+  const langs = ["en", "pt"] as const;
+
+  const params: Array<{ slug: string; lang: (typeof langs)[number] }> = [];
+
+  for (const lang of langs) {
+    const posts = await listPosts({ lang }); 
+    for (const p of posts) {
+      if (p?.slug) {
+        params.push({ slug: p.slug, lang });
+      }
+    }
+  }
+
+ 
+  const dedup = new Map<string, { slug: string; lang: string }>();
+  for (const p of params) {
+    dedup.set(`${p.lang}::${p.slug}`, p);
+  }
+
+  return Array.from(dedup.values());
+}
 
 export async function generateMetadata({
   params,
@@ -89,8 +119,26 @@ export default async function blogPage({
 
   const time = readingTime(post?.markdown ?? "");
 
+  const jsonLdBlogPost: WithContext<BlogPosting> = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    author: [
+      {
+        "@id": "#main-author",
+        "@type": "Person",
+        name: "Ygor Mendanha",
+      },
+    ],
+  };
+
   return (
     <main className="mx-auto container px-4 py-8 min-h-[calc(100vh-70px)]">
+      <Script
+        id="jsonLdPerson"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBlogPost) }}
+      />
       <div className="flex flex-col h-60 items-center justify-center text-center mb-8">
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">
           {post.title}
