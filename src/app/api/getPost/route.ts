@@ -32,7 +32,11 @@ export async function GET(request: Request) {
       slug: post.slug,
     };
 
-    return NextResponse.json(response);
+    return NextResponse.json(response, {
+      headers: {
+        "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
+      },
+    });
   } catch (err: any) {
     console.error("API /api/post error:", err);
     return NextResponse.json(
