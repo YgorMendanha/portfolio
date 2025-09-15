@@ -4,6 +4,8 @@ import { getDictionary } from "@/utils/functions/getDictionary";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 
+export const revalidate = 10;
+
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
   const pathname = cookieStore.get("pathname");
