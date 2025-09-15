@@ -30,9 +30,13 @@ export async function generateMetadata({
       description: description || undefined,
       url: path,
     },
-    robots: {
-      index: true,
-      follow: true,
+    alternates: {
+      canonical: `${lang === "pt" ? "/pt" : "/en"}/blog/${post?.slug}`,
+      languages: {
+        en: `/en/blog/${post?.slug}`,
+        pt: `/pt/blog/${post?.slug}`,
+        "x-default": `/blog/${post?.slug}`,
+      },
     },
   };
 }
