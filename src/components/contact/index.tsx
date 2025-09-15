@@ -66,7 +66,7 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
             </div>
             <div className="flex my-2">
               <MdEmail className="mr-4" size={24} />
-              <p>contato@ygormendanha.com.br</p>
+              <p>contato@ygormendanha.com</p>
             </div>
           </div>
           <form
