@@ -42,10 +42,14 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     metadataBase: new URL("https://www.ygormendanha.com"),
-    title: dict.metatags.title,
+    title: {
+      absolute: dict.metatags.title,
+      template: `%s - ${dict.metatags.title}`,
+      default: dict.metatags.title,
+    },
     description: dict.metatags.description,
     openGraph: {
-      url: "https://myymbucket.s3.sa-east-1.amazonaws.com/imagens/Logo.png",
+      url: path,
       title: dict.metatags.title,
       description: dict.metatags.description,
       siteName: "Ygor Mendanha",
@@ -100,7 +104,7 @@ export function generateViewport(): Viewport {
 export default async function RootLayout({
   children,
   params,
-}: LayoutProps<'/[lang]'>) {
+}: LayoutProps<"/[lang]">) {
   const paramsPage = await params;
   const cookieStore = await cookies();
   const pathname = cookieStore.get("pathname");

@@ -23,7 +23,7 @@ export function MyProjects({ lang }: { lang: "pt" | "en" }) {
       img: BlogImg,
       title: dict.titleBlog,
       details: dict.descriptionBlog,
-      link: "https://blogymdevelopment.vercel.app",
+      link: "/blog",
     },
     {
       img: NotesImg,

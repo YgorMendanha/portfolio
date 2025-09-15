@@ -53,5 +53,10 @@
   "titleBot": "Finance Bot – Telegram",
   "descBot": "Bot built for Telegram using Python and an integrated database. It allows users to register expenses, set goals, and generate daily/monthly reports. The goal was to automate financial control in a simple way. The impact is saving time and making expense tracking accessible on any device.",
   "titleBlog": "Blog",
-  "descriptionBlog": "Articles about technology, web development, and my experiences as a developer, sharing ideas, lessons learned, and insights."
+  "descriptionBlog": "Articles about technology, web development, and my experiences as a developer, sharing ideas, lessons learned, and insights.",
+  "subTitleBlog": "A record of the creation process of my projects.",
+  "noPostsFound": "No posts found.",
+  "readPost": "Read post",
+  "removedPost": "The post you are looking for does not exist or has been removed.",
+  "backBlog": " Back to blog"
 }

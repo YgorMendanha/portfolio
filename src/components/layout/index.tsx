@@ -5,11 +5,9 @@ import { Footer } from "./footer";
 import { Toaster } from "react-hot-toast";
 
 export function Layout({ children }: { children: React.ReactNode }) {
-
-
   return (
     <>
-      <main className={"bg-white"}>
+      <main>
         <Header />
         {children}
         <Footer />

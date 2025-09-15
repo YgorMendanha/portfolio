@@ -14,12 +14,15 @@ export function Header() {
 
   return (
     <header
-      className={`bg-neutral-50 fixed w-screen z-50 h-14 flex items-center`}
+      className={`bg-neutral-50 top-0 fixed w-screen z-50 h-14 flex items-center`}
     >
       <div className="container px-5 text-black font-bold mx-auto flex items-center ">
-        <div className="mr-auto text-base sm:text-xl md:text-3xl  ">
+        <CustomLink
+          href={"/"}
+          className="mr-auto text-base sm:text-xl md:text-3xl  "
+        >
           YM {dict.developer}
-        </div>
+        </CustomLink>
 
         <nav className="ml-auto  items-center hidden sm:flex sm:[&_a]:text-base  md:[&_a]:text-lg underline-offset-4  ">
           <CustomLink
@@ -48,6 +51,15 @@ export function Header() {
             href="#project"
           >
             {dict.projects}
+          </CustomLink>
+          <CustomLink
+            className="mr-3 hover:underline hover:decoration-purple"
+            style={{
+              textDecorationThickness: "3px",
+            }}
+            href="/blog"
+          >
+            Blog
           </CustomLink>
           <CustomLink
             className="mr-3 hover:underline hover:decoration-purple"

@@ -9,7 +9,7 @@ export function Footer() {
   const dict = getDictionary(lang ?? "pt");
 
   return (
-    <footer className={"  bg-black-purple px-5"}>
+    <footer className={"bg-black-purple px-5"}>
       <div className="container mx-auto flex flex-col sm:flex-row items-center py-3">
         <nav className="text-center mb-2 sm:mb-0 mr-0 sm:mr-auto text-sm sm:text-lg flex items-center [&_a]:mr-3">
           {dict.YM}
