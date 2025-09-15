@@ -1,4 +1,5 @@
 import { colorMap } from "@/components/blog/card";
+import { Post } from "@/components/blog/post";
 import { getPostMarkdownBySlug, listPosts } from "@/lib/notion";
 import dayjs from "dayjs";
 import { Metadata } from "next";
@@ -8,18 +9,18 @@ import Script from "next/script";
 import React from "react";
 import { WithContext, BlogPosting } from "schema-dts";
 
-
 export const revalidate = 60;
 
-
 export async function generateStaticParams() {
-
   const langs = ["en", "pt"] as const;
 
   const params: Array<{ slug: string; lang: (typeof langs)[number] }> = [];
 
   for (const lang of langs) {
-    const posts = await listPosts({ lang }); 
+    const posts = await listPosts({ lang });
+    if (!posts) {
+      return;
+    }
     for (const p of posts) {
       if (p?.slug) {
         params.push({ slug: p.slug, lang });
@@ -27,7 +28,6 @@ export async function generateStaticParams() {
     }
   }
 
- 
   const dedup = new Map<string, { slug: string; lang: string }>();
   for (const p of params) {
     dedup.set(`${p.lang}::${p.slug}`, p);
@@ -42,7 +42,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string; lang: "en" | "pt" }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPostMarkdownBySlug(slug);
+  const post = await getPostMarkdownBySlug({ slug });
 
   const cookieStore = await cookies();
   const pathname = cookieStore.get("pathname");
@@ -66,8 +66,6 @@ export async function generateMetadata({
   };
 }
 
-
-
 export default async function blogPage({
   params,
 }: {
@@ -75,22 +73,11 @@ export default async function blogPage({
 }) {
   const { slug, lang } = await params;
 
-  const post = await getPostMarkdownBySlug(slug, lang);
+  const post = await getPostMarkdownBySlug({ slug, lang });
 
   if (!post) {
     return notFound();
   }
-
-  const date = dayjs(post.date).format("DD/MM/YYYY");
-  const tags = post?.tags ?? [];
-
-  function readingTime(text: string) {
-    const words = text ? text.trim().split(/\s+/).length : 0;
-    const minutes = Math.max(1, Math.ceil(words / 200));
-    return `${minutes} min`;
-  }
-
-  const time = readingTime(post?.markdown ?? "");
 
   const jsonLdBlogPost: WithContext<BlogPosting> = {
     "@context": "https://schema.org",
@@ -112,32 +99,7 @@ export default async function blogPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBlogPost) }}
       />
-      <div className="flex flex-col h-60 items-center justify-center text-center mb-8">
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">
-          {post.title}
-        </h1>
-
-        <div className="flex gap-3 items-center text-sm text-gray-400">
-          <span>{date}</span>
-          <span className="text-gray-600">•</span>
-          <span>{time}</span>
-        </div>
-
-        <div className="flex gap-2 mt-4 flex-wrap justify-center">
-          {tags.map((tag) => (
-            <span
-              key={tag.name}
-              className={`rounded-xl py-1 px-3 text-sm bg-white/3 ${
-                colorMap[tag.color ?? "red"] ?? "bg-gray-700"
-              } bg-opacity-50`}
-            >
-              {tag.name}
-            </span>
-          ))}
-        </div>
-      </div>
-
-     
+      <Post initialPost={post} />
     </main>
   );
 }

@@ -150,10 +150,15 @@ export async function listPosts({
   });
 }
 
-export async function getPostMarkdownBySlug(
-  slug: string,
-  lang?: string
-): Promise<NotionPostFomat | null> {
+export async function getPostMarkdownBySlug({
+  slug,
+  content = false,
+  lang,
+}: {
+  slug: string;
+  lang?: string;
+  content?: boolean;
+}): Promise<NotionPostFomat | null> {
   if (!slug) throw new Error("slug é obrigatório");
 
   const db: any = await notion.databases.retrieve({
@@ -184,26 +189,6 @@ export async function getPostMarkdownBySlug(
   const page: NotionBlog = res.results[0];
   const pageId = page.id;
 
-  const mdBlocks = await n2m.pageToMarkdown(pageId);
-  const mdObj = n2m.toMarkdownString(mdBlocks);
-
-  let markdown = "";
-  if (typeof mdObj === "string") {
-    markdown = mdObj;
-  } else if (mdObj && typeof mdObj === "object") {
-    if (mdObj.parent && typeof mdObj.parent === "string") {
-      markdown += mdObj.parent;
-    }
-    const children = mdObj.children ?? [];
-    if (Array.isArray(children) && children.length > 0) {
-      for (const c of children) {
-        if (c?.parent && typeof c.parent === "string") {
-          markdown += `\n\n---\n\n${c.parent}`;
-        }
-      }
-    }
-  }
-
   const props = page.properties ?? {};
   const title = props.Title?.rich_text?.map((item) => item.plain_text).join("");
   const date = props.Date?.date?.start ?? null;
@@ -227,15 +212,42 @@ export async function getPostMarkdownBySlug(
       description.push(opt.text?.content ?? "")
     );
   }
-
-  return {
+  const response = {
     id: pageId,
     slug,
-    markdown,
     title: title ?? "",
     date,
     tags,
     description,
     lang,
   };
+
+  if (content) {
+    const mdBlocks = await n2m.pageToMarkdown(pageId);
+    const mdObj = n2m.toMarkdownString(mdBlocks);
+
+    let markdown = "";
+    if (typeof mdObj === "string") {
+      markdown = mdObj;
+    } else if (mdObj && typeof mdObj === "object") {
+      if (mdObj.parent && typeof mdObj.parent === "string") {
+        markdown += mdObj.parent;
+      }
+      const children = mdObj.children ?? [];
+      if (Array.isArray(children) && children.length > 0) {
+        for (const c of children) {
+          if (c?.parent && typeof c.parent === "string") {
+            markdown += `\n\n---\n\n${c.parent}`;
+          }
+        }
+      }
+    }
+
+    return {
+      ...response,
+      markdown,
+    };
+  } else {
+    return response;
+  }
 }
