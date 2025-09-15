@@ -1,7 +1,6 @@
 import { NotionBlog, NotionPostFomat, TagsForBlog } from "@/types/notion";
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
-
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
@@ -151,7 +150,10 @@ export async function listPosts({
   });
 }
 
-export async function getPostMarkdownBySlug(slug: string, lang?: string) {
+export async function getPostMarkdownBySlug(
+  slug: string,
+  lang?: string
+): Promise<NotionPostFomat | null> {
   if (!slug) throw new Error("slug é obrigatório");
 
   const db: any = await notion.databases.retrieve({
@@ -176,7 +178,7 @@ export async function getPostMarkdownBySlug(slug: string, lang?: string) {
   });
 
   if (!res.results || res.results.length === 0) {
-    return;
+    return null;
   }
 
   const page: NotionBlog = res.results[0];
@@ -230,8 +232,7 @@ export async function getPostMarkdownBySlug(slug: string, lang?: string) {
     id: pageId,
     slug,
     markdown,
-    mdObject: mdObj,
-    title,
+    title: title ?? "",
     date,
     tags,
     description,

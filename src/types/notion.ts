@@ -1,11 +1,14 @@
+
 export interface NotionPostFomat {
   id: string;
   title: string;
   slug: string;
   date: Date | null;
-  published: boolean;
+  published?: boolean;
   tags: Array<{ name: string; color: ColorFortags }>;
   description: string[];
+  markdown?: string;
+  lang?: string;
 }
 
 export interface TagsForBlog {
