@@ -48,7 +48,7 @@ export function Header() {
             style={{
               textDecorationThickness: "3px",
             }}
-            href="#project"
+            href="/#project"
           >
             {dict.projects}
           </CustomLink>

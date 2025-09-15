@@ -1,6 +1,6 @@
 import { getPostMarkdownBySlug } from "@/lib/notion";
 import { NotionPostFomat } from "@/types/notion";
-import { NextResponse } from "next/server"; // ou seu caminho
+import { NextResponse } from "next/server"; 
 
 export async function GET(request: Request) {
   try {
