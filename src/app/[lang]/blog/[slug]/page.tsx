@@ -9,33 +9,6 @@ import Script from "next/script";
 import React from "react";
 import { WithContext, BlogPosting } from "schema-dts";
 
-export const revalidate = 60;
-
-export async function generateStaticParams() {
-  const langs = ["en", "pt"] as const;
-
-  const params: Array<{ slug: string; lang: (typeof langs)[number] }> = [];
-
-  for (const lang of langs) {
-    const posts = await listPosts({ lang });
-    if (!posts) {
-      return;
-    }
-    for (const p of posts) {
-      if (p?.slug) {
-        params.push({ slug: p.slug, lang });
-      }
-    }
-  }
-
-  const dedup = new Map<string, { slug: string; lang: string }>();
-  for (const p of params) {
-    dedup.set(`${p.lang}::${p.slug}`, p);
-  }
-
-  return Array.from(dedup.values());
-}
-
 export async function generateMetadata({
   params,
 }: {

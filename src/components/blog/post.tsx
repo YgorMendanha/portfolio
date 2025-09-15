@@ -44,7 +44,7 @@ export function Post({ initialPost }: { initialPost: NotionPostFomat }) {
           <span className="text-gray-400 text-xs"></span>
         </div>
 
-        <pre className="overflow-x-auto rounded-b-xl bg-[#353c44] p-4 text-sm leading-6">
+        <pre className="overflow-x-auto rounded-b-xl bg-dark p-4 text-sm leading-6 mt-0">
           <code className={`language-${language} block whitespace-pre`}>
             {codeString}
           </code>
