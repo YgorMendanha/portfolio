@@ -2,30 +2,11 @@
 
 import { NotionPostFomat } from "@/types/notion";
 import dayjs from "dayjs";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { colorMap } from "./card";
 
-export function Post({ initialPost }: { initialPost: NotionPostFomat }) {
-  const { lang, slug } = useParams<{ slug: string; lang: string }>();
-
-  const [post, setPost] = useState<NotionPostFomat>(initialPost);
-
-  useEffect(() => {
-    getPostDetails();
-  }, [lang, slug]);
-
-  async function getPostDetails() {
-    const response = await fetch(`/api/getPost?slug=${slug}&lang=${lang}`, {
-      method: "GET",
-    });
-
-    const data = await response.json();
-    setPost(data);
-  }
-
+export function Post({ initialPost: post }: { initialPost: NotionPostFomat }) {
   function CodeBlock({
     className,
     children,
