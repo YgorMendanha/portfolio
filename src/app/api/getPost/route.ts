@@ -11,7 +11,7 @@ const redis =
     : null;
 
 
-const FRESH_TTL_SECONDS = 60 * 60; // 1 hora (fresh)
+const FRESH_TTL_SECONDS = 15 * 60; // 15 minutos (fresh)
 const STALE_TTL_SECONDS = 30 * 24 * 3600; // 30 dias (stale window)
 const LOCK_TTL_SECONDS = 10; // lock anti-stampede (segundos)
 
