@@ -20,7 +20,7 @@ export function GoogleAnalytics(): any {
            function gtag(){dataLayer.push(arguments);}
            gtag('js', new Date());
          
-           gtag('config', '${String(GA_TRACKING_ID)}');
+           gtag('config', '${String(GA_TRACKING_ID)}', { 'debug_mode':true });
              `,
         }}
       />
