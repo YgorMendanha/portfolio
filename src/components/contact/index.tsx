@@ -7,7 +7,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { BsTelephoneForwardFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import Link from "next/link";
-import { customEvent } from "@/utils/lib/customEvent";
+import { sendEventGA } from "@/utils/lib/customEvent";
 
 type Inputs = {
   name: string;
@@ -23,6 +23,10 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
   const onSubmit: SubmitHandler<Inputs> = async (dataForm) => {
     setLoading(true);
     try {
+      sendEventGA({
+        name: "click_email",
+        params: { linkText: "E-mail" },
+      });
       const response = await fetch("/api/sendEmail", {
         method: "POST",
         body: JSON.stringify({
@@ -90,12 +94,6 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
               placeholder="Mensagem"
             />
             <button
-              onClick={() =>
-                customEvent({
-                  eventName: "click_email",
-                  linkText: "E-mail",
-                })
-              }
               type="submit"
               className="py-2 px-5 my-2 text-white bg-purple-bright rounded-md flex items-center space-x-1.5 justify-center hover:bg-purple transition-all hover:scale-102 "
             >
@@ -121,9 +119,9 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
             </button>
             <Link
               onClick={() =>
-                customEvent({
-                  eventName: "click_whatsapp",
-                  linkText: "WhatsApp",
+                sendEventGA({
+                  name: "click_whatsapp",
+                  params: { linkText: "E-WhatsApp" },
                 })
               }
               href="https://wa.me/5592982832103"

@@ -3,7 +3,7 @@ import { BsWhatsapp } from "react-icons/bs";
 import { useParams } from "next/navigation";
 import { getDictionary } from "@/utils/functions/getDictionary";
 import Link from "next/link";
-import { customEvent } from "@/utils/lib/customEvent";
+import { sendEventGA } from "@/utils/lib/customEvent";
 
 export function Footer() {
   const { lang }: { lang?: "pt" | "en" } = useParams();
@@ -35,9 +35,9 @@ export function Footer() {
           </Link>
           <Link
             onClick={() =>
-              customEvent({
-                eventName: "click_whatsapp",
-                linkText: "WhatsApp",
+              sendEventGA({
+                name: "click_whatsapp",
+                params: { linkText: "E-WhatsApp" },
               })
             }
             href="https://wa.me/5592982832103"

@@ -9,7 +9,7 @@ import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { BsWhatsapp } from "react-icons/bs";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { useEffect, useState } from "react";
-import { customEvent } from "@/utils/lib/customEvent";
+import { sendEventGA } from "@/utils/lib/customEvent";
 
 export function IntroSection() {
   const { lang }: { lang?: "pt" | "en" } = useParams();
@@ -79,9 +79,9 @@ export function IntroSection() {
               </Link>
               <Link
                 onClick={() =>
-                  customEvent({
-                    eventName: "click_whatsapp",
-                    linkText: "WhatsApp",
+                  sendEventGA({
+                    name: "click_whatsapp",
+                    params: { linkText: "E-WhatsApp" },
                   })
                 }
                 href="https://wa.me/5592982832103"

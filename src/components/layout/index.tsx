@@ -5,16 +5,16 @@ import { Footer } from "./footer";
 import { Toaster } from "react-hot-toast";
 import { BsWhatsapp } from "react-icons/bs";
 import Link from "next/link";
-import { customEvent } from "@/utils/lib/customEvent";
+import { sendEventGA } from "@/utils/lib/customEvent";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const WhatsappButton = () => {
     return (
       <Link
         onClick={() =>
-          customEvent({
-            eventName: "click_whatsapp",
-            linkText: "WhatsApp",
+          sendEventGA({
+            name: "click_whatsapp",
+            params: { linkText: "E-WhatsApp" },
           })
         }
         href="https://wa.me/5592982832103"
