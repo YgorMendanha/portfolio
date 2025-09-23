@@ -3,6 +3,7 @@ import { BsWhatsapp } from "react-icons/bs";
 import { useParams } from "next/navigation";
 import { getDictionary } from "@/utils/functions/getDictionary";
 import Link from "next/link";
+import { customEvent } from "@/utils/lib/customEvent";
 
 export function Footer() {
   const { lang }: { lang?: "pt" | "en" } = useParams();
@@ -33,6 +34,12 @@ export function Footer() {
             <FaLinkedinIn />
           </Link>
           <Link
+            onClick={() =>
+              customEvent({
+                eventName: "click_whatsapp",
+                linkText: "WhatsApp",
+              })
+            }
             href="https://wa.me/5592982832103"
             target="_blank"
             rel="noopener noreferrer"
