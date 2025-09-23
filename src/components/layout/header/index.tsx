@@ -21,7 +21,7 @@ export function Header() {
           href={"/"}
           className="mr-auto text-base sm:text-xl md:text-3xl  "
         >
-          YM {dict.developer}
+          YM {dict.stepDevelopmentTitle}
         </CustomLink>
 
         <nav className="ml-auto  items-center hidden sm:flex sm:[&_a]:text-base  md:[&_a]:text-lg underline-offset-4  ">
