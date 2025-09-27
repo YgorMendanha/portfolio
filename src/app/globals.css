@@ -24,10 +24,6 @@ body,
   --color-dark: #222222; /* Cinza escuro para corpo do texto sobre fundo claro */
   --color-light-gray: #eaeaea; /* Cinza claro para legenda sobre fundo escuro */
   --color-white: #ffffff; /* Branco para títulos sobre fundo roxo */
-
-  /* Fontes */
-  --font-geo: "var(--font-kanita)";
-  --font-dos: "var(--font-dosis)";
 }
 
 ::-webkit-scrollbar {
