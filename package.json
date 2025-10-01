@@ -14,8 +14,11 @@
     "@upstash/redis": "^1.35.3",
     "@vercel/analytics": "^1.5.0",
     "@vercel/functions": "^3.0.0",
+    "clsx": "^2.1.1",
     "cookies-next": "^6.1.0",
     "dayjs": "^1.11.18",
+    "lucide-react": "^0.544.0",
+    "motion": "^12.23.22",
     "next": "15.5.2",
     "nodemailer": "^7.0.6",
     "notion-to-md": "^3.1.9",
@@ -29,7 +32,8 @@
     "react-markdown": "^10.1.0",
     "react-multi-carousel": "^2.8.6",
     "remark-gfm": "^4.0.1",
-    "schema-dts": "^1.1.5"
+    "schema-dts": "^1.1.5",
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

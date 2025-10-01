@@ -1,31 +1,68 @@
 "use client";
+import { useState, useRef } from "react";
 import { setCookie } from "cookies-next";
 import { useParams, usePathname, useRouter } from "next/navigation";
+import { CiGlobe } from "react-icons/ci";
 
 export function SelectLang({ className = "" }: { className?: string }) {
   const { lang }: { lang?: "pt" | "en" } = useParams();
   const router = useRouter();
   const pathname = usePathname();
-  const newPathname = pathname.replace(/^\/(pt|en)/, "");
+  const newPathname = pathname?.replace(/^\/(pt|en)/, "") ?? "";
+
+  const [open, setOpen] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+
+  const changeLang = (value: "pt" | "en") => {
+    setCookie("lang", value);
+    const prefix = value === "pt" ? "/pt" : "/en";
+    router.push(`${prefix}${newPathname}`);
+    setOpen(false);
+  };
 
   return (
-    <label>
-      <select
-        onChange={(e) => {
-          if (e.target.value === "pt-BR") {
-            setCookie("lang", "pt");
-            router.push(`/pt${newPathname}`);
-            return;
-          }
-          setCookie("lang", "en");
-          return router.push(`/en${newPathname}`);
-        }}
-        value={lang === "en" ? "en-US" : "pt-BR"}
-        className={`ml-2 text-xs border-2 text-end appearance-none rounded outline-10 outline-none cursor-pointer p-1 ${className}`}
+    <div
+      ref={wrapperRef}
+      className={`relative inline-block hover:scale-105 active:scale-95 cursor-pointer text-purple-bright hover:text-cyan-light transition-all duration-100 ${className}`}
+      tabIndex={0}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpen(false);
+      }}
+    >
+      <button
+        type="button"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+        className="flex items-center gap-2 px-2 py-1 border-purple-bright border-2 rounded text-xs"
       >
-        <option value="pt-BR">pt-BR</option>
-        <option value="en-US">en-US</option>
-      </select>
-    </label>
+        <CiGlobe className="text-base" />
+        <span className=" text-center">
+          {lang === "en" ? "en-US" : "pt-BR"}
+        </span>
+      </button>
+
+      {open && (
+        <div
+          role="listbox"
+          aria-label="Selecionar idioma"
+          className="absolute mt-1 rounded shadow bg-white z-50"
+        >
+          <button
+            className="w-full text-center text-xs px-2 py-1 hover:bg-gray-100"
+            onClick={() => changeLang("pt")}
+          >
+            pt-BR
+          </button>
+
+          <button
+            className="w-full text-center text-xs px-2 py-1 hover:bg-gray-100"
+            onClick={() => changeLang("en")}
+          >
+            en-US
+          </button>
+        </div>
+      )}
+    </div>
   );
 }

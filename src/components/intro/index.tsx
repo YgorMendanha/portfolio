@@ -10,6 +10,8 @@ import { BsWhatsapp } from "react-icons/bs";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { useEffect, useState } from "react";
 import { sendEventGA } from "@/utils/lib/customEvent";
+import { ScrollReveal } from "../partials/ScrollAnimate";
+import { Button } from "../partials/ui/button";
 
 export function IntroSection() {
   const { lang }: { lang?: "pt" | "en" } = useParams();
@@ -42,9 +44,14 @@ export function IntroSection() {
   }, [width]);
 
   return (
-    <section className="flex flex-col py-28 sm:py-36  lg:min-h-[700px] lg:h-screen  bg-black-purple">
+    <section className="flex flex-col py-28 sm:py-36 mt-10 h-screen  bg-black-purple overflow-x-hidden max-w-full">
       <div className="container px-5 mx-auto flex h-full flex-col lg:flex-row  items-center justify-center  ">
-        <div className="w-full lg:w-1/2 mb-0 z-10 flex flex-col gap-4 justify-center">
+        <ScrollReveal
+          reverse
+          speed={"slow"}
+          direction="top"
+          className="w-full lg:w-1/2 mb-0 z-10 flex flex-col gap-4 justify-center"
+        >
           <h2 className="text-4xl md:text-6xl text-white">
             {dict.digitalIdeasIntoResults}
           </h2>
@@ -52,15 +59,12 @@ export function IntroSection() {
             {dict.ecommerceErpExpert}
           </h4>
 
-          <div className="flex">
-            <Link
-              href={"#contact"}
-              className="bg-cyan-light/80 flex text-center hover:bg-cyan-light text-gray-lightest hover:text-gray-lightest hover:scale-105 rounded-2xl mr-7 px-2 sm:px-3 md:px-6 py-1 md:py-3"
-            >
+          <div className="flex flex-wrap gap-4">
+            <Button href={"#contact"} variant="ghost">
               {dict.letsTalk}
-            </Link>
+            </Button>
 
-            <nav className="flex items-center [&_a]:mr-7 text-xl md:text-4xl ">
+            <nav className="flex items-center gap-4 text-xl md:text-4xl ">
               <Link
                 href="https://github.com/YgorMendanha"
                 target="_blank"
@@ -93,11 +97,16 @@ export function IntroSection() {
               </Link>
             </nav>
           </div>
-        </div>
+        </ScrollReveal>
 
-        <div className="w-full lg:w-1/2 absolute top-24 lg:static opacity-30 lg:opacity-100 ">
+        <ScrollReveal
+          reverse
+          speed={"normal"}
+          direction="bottom"
+          className="w-full lg:w-1/2 absolute  lg:static opacity-30 lg:opacity-100 "
+        >
           <Lottie options={defaultOptions} height={size} width={size} />
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

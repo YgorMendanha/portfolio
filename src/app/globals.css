@@ -26,6 +26,41 @@ body,
   --color-white: #ffffff; /* Branco para títulos sobre fundo roxo */
 }
 
+@layer utilities {
+  /* Float lento */
+  @keyframes float-balloon {
+    0% {
+      transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+    15% {
+      transform: translate3d(-2px, -4px, 0) rotate(-1deg);
+    }
+    30% {
+      transform: translate3d(2px, -8px, 0) rotate(1deg);
+    }
+    45% {
+      transform: translate3d(-1px, -12px, 0) rotate(-0.5deg);
+    }
+    60% {
+      transform: translate3d(1px, -8px, 0) rotate(0.5deg);
+    }
+    75% {
+      transform: translate3d(-1px, -4px, 0) rotate(-0.5deg);
+    }
+    100% {
+      transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+  }
+
+  .animate-float-balloon {
+    --tw-animate: float-balloon 20s ease-in-out infinite;
+    animation: var(--tw-animate);
+    will-change: transform;
+    backface-visibility: hidden;
+    transform-origin: center bottom;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 5px;
   border-radius: 50%;

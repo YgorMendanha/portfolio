@@ -34,14 +34,22 @@ const nunito = Nunito({ subsets: ["latin"] });
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
   const pathname = cookieStore.get("pathname");
+  const urlsite = process.env.NEXT_PUBLIC_NEXT_SITE_URL ?? "";
 
   const path = pathname?.value || "/";
   const lang = path.startsWith("/en") ? "en" : "pt";
 
   const dict = getDictionary(lang ?? "pt");
 
+  const url = lang === "en" ? `${urlsite}${path}/` : `${urlsite}/br${path}`;
+
+  const getURL = () =>
+    lang === "en"
+      ? path.split("/").slice(2).join("/")
+      : path.split("/").slice(1).join("/");
+
   return {
-    metadataBase: new URL("https://www.ygormendanha.com"),
+    metadataBase: new URL(`${urlsite}`),
     title: {
       absolute: dict.metatags.title,
       template: `%s - ${dict.metatags.title}`,
@@ -61,7 +69,7 @@ export async function generateMetadata(): Promise<Metadata> {
         },
       ],
     },
-    authors: [{ name: "Ygor Mendanha", url: "https://www.ygormendanha.com" }],
+    authors: [{ name: "Ygor Mendanha", url: `${urlsite}` }],
     creator: "Ygor Mendanha",
     keywords: [
       "Next.js",
@@ -84,11 +92,11 @@ export async function generateMetadata(): Promise<Metadata> {
       title: dict.metatags.title,
     },
     alternates: {
-      canonical: `${lang === "pt" ? "/pt" : "/en"}`,
+      canonical: url,
       languages: {
-        en: "/en",
-        pt: "/pt",
-        "x-default": "/",
+        "pt-br": `${urlsite}/br/${getURL()}`,
+        en: `${urlsite}/usa/${getURL()}`,
+        "x-default": `${urlsite}/br/${getURL()}`,
       },
     },
   };
@@ -97,7 +105,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export function generateViewport(): Viewport {
   return {
     colorScheme: "dark",
-    themeColor: "#2e1065",
+    themeColor: "#19092e",
   };
 }
 

@@ -1,12 +1,11 @@
 import { CustomLink } from "@/components";
-import { getDictionary } from "@/utils/functions/getDictionary";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { GrClose } from "react-icons/gr";
 
 import { BsWhatsapp } from "react-icons/bs";
-import { SelectLang } from "../selectLang";
+import { MenuDetails } from "@/utils/functions/getMenuDetails";
 
 export function HeaderMenu({
   show,
@@ -15,9 +14,11 @@ export function HeaderMenu({
   show: boolean;
   onCLose: () => void;
 }) {
-  const { lang }: { lang?: "pt" | "en" } = useParams();
-  const dict = getDictionary(lang ?? "pt");
   const iconSize = 25;
+  const { lang }: { lang: "pt" | "en" } = useParams();
+
+  const pathname = usePathname();
+  const OptiosMenu = MenuDetails({ lang, pathname });
 
   return (
     <>
@@ -29,38 +30,28 @@ export function HeaderMenu({
 
       <div
         className={`max-w-[500px] w-full h-full fixed top-0 transition-all duration-500  ${
-          show ? "z-30 bg-[#19092E] left-0 " : "-left-32 invisible opacity-0"
+          show ? "z-30 bg-black-purple left-0 " : "-left-32 invisible opacity-0"
         } `}
       >
         <section
           className={`m-auto mt-2 w-[95%] p-5  rounded-xl transition-all duration-500  ${
-            show ? "z-400 bg-[#5E1DAD] left-0" : "-left-32 opacity-0 "
+            show ? "z-400 bg-purple-bright left-0" : "-left-32 opacity-0 "
           }`}
         >
           <section
             className="bg-violet-200 w-10 h-10 right-6 absolute flex top-5 rounded-full transition-[right,opacity] ease-in duration-300 z-10"
             onClick={onCLose}
           >
-            <GrClose className="m-auto text-violet-950" />
+            <GrClose className="m-auto bg-purple-bright/10 text-black-purple" />
           </section>
-          <nav className="container px-5  mx-auto flex flex-col">
-            <CustomLink onClick={onCLose} className="mb-3" href="/#intro">
-              {dict.home}
-            </CustomLink>
-            <CustomLink onClick={onCLose} className="mb-3" href="/#about">
-              {dict.about}
-            </CustomLink>
-            <CustomLink onClick={onCLose} className="mb-3" href="/#project">
-              {dict.projects}
-            </CustomLink>
-            <CustomLink onClick={onCLose} className="mb-3" href="/blog">
-              Blog
-            </CustomLink>
-            <CustomLink onClick={onCLose} href="/#contact">
-              {dict.contact.title}
-            </CustomLink>
+          <nav className="container px-5  mx-auto flex flex-col gap-2">
+            {OptiosMenu.map((o, idx) => (
+              <CustomLink key={idx} onClick={onCLose} href={o.href}>
+                {o.label}
+              </CustomLink>
+            ))}
 
-            <nav className="mt-5 flex items-center [&_a]:mr-3 [&_a]:my-2 [&_a]:text-lg">
+            <nav className="flex items-center [&_a]:mr-3 [&_a]:my-2 [&_a]:text-lg">
               <Link
                 onClick={onCLose}
                 id="iconGit"
@@ -88,7 +79,6 @@ export function HeaderMenu({
               >
                 <BsWhatsapp size={iconSize} />
               </Link>
-              <SelectLang className="ml-1 mt-3 mb-2 " />
             </nav>
           </nav>
         </section>

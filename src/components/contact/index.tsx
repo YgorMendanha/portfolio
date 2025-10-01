@@ -2,12 +2,13 @@
 
 import { getDictionary } from "@/utils/functions/getDictionary";
 import { toast } from "react-hot-toast";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { BsTelephoneForwardFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
-import Link from "next/link";
 import { sendEventGA } from "@/utils/lib/customEvent";
+import { Button } from "../partials/ui/button";
+import { ScrollReveal } from "../partials/ScrollAnimate";
 
 type Inputs = {
   name: string;
@@ -15,7 +16,15 @@ type Inputs = {
   msg: string;
 };
 
-export function Contact({ lang }: { lang: "pt" | "en" }) {
+export function Contact({
+  lang,
+  text,
+  title,
+}: {
+  lang: "pt" | "en";
+  title: string;
+  text: ReactNode;
+}) {
   const dict = getDictionary(lang ?? "pt");
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -54,49 +63,52 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
   };
 
   return (
-    <div className="bg-gray-lightest">
+    <ScrollReveal direction="top" className="bg-gray-lightest">
       <section
         id="contact"
-        className="flex min-h-[400px] text-black-purple py-20 flex-col container mx-auto mt-10 pb-10 backdrop-blur-sm  rounded-lg p-5"
+        className="flex min-h-[400px] text-black-purple py-10 flex-col container mx-auto pb-10 backdrop-blur-sm rounded-lg p-5"
       >
-        <section className="w-full  text-4xl font-bold underline-offset-4 ">
-          {dict.contact.call}
-        </section>
-        <div className="flex flex-col lg:flex-row h-[100%] w-full items-center mt-4">
-          <div className="w-1/1 lg:w-1/2 my-2 lg:mx-2 flex flex-col">
-            <p className="mb-auto text-lg">{dict.contact.text}</p>
-            <div className="flex mt-5 my-2">
+        <ScrollReveal
+          direction="top"
+          className="w-full  text-4xl font-bold underline-offset-4 "
+        >
+          {title}
+        </ScrollReveal>
+        <ScrollReveal
+          direction="bottom"
+          className="flex flex-col lg:flex-row h-[100%] w-full items-center gap-4"
+        >
+          <div className="w-1/1 lg:w-1/2 lg:mx-2 flex flex-col gap-4">
+            <div className="mb-auto text-lg">{text}</div>
+            <div className="flex">
               <BsTelephoneForwardFill className="mr-4" size={24} />
               <p>‪+55 (92) 98283‑2103‬</p>
             </div>
-            <div className="flex my-2">
-              <MdEmail className="mr-4" size={24} />
+            <div className="flex">
+              <MdEmail className="mr-4" size={25} />
               <p>contato@ygormendanha.com</p>
             </div>
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="w-[100%] lg:w-1/2 my-2 lg:mx-2 flex flex-col"
+            className="w-[100%] lg:w-1/2  lg:mx-2 flex flex-col  gap-3"
           >
             <input
               {...register("name", { required: true })}
-              className="my-2 bg-white rounded h-10 p-3  border-4 border-cyan-light focus:outline-none focus:border-purple-bright"
-              placeholder="Nome"
+              className=" bg-white rounded h-10 p-3  border-4 border-purple-bright focus:outline-none focus:border-cyan-light"
+              placeholder={dict.labelName}
             />
             <input
               {...register("contact", { required: true })}
-              className="my-2 bg-white rounded h-10 p-3  border-4 border-cyan-light focus:outline-none focus:border-purple-bright"
-              placeholder="Email/Telefone"
+              className=" bg-white rounded h-10 p-3  border-4 border-purple-bright focus:outline-none focus:border-cyan-light"
+              placeholder={dict.labelcontactForm}
             />
             <textarea
               {...register("msg", { required: true })}
-              className="my-2 bg-white rounded  p-3  border-4 border-cyan-light focus:outline-none focus:border-purple-bright"
-              placeholder="Mensagem"
+              className=" bg-white rounded  p-3  border-4 border-purple-bright focus:outline-none focus:border-cyan-light"
+              placeholder={dict.labelmessage}
             />
-            <button
-              type="submit"
-              className="py-2 px-5 my-2 text-white bg-purple-bright rounded-md flex items-center space-x-1.5 justify-center hover:bg-purple transition-all hover:scale-102 "
-            >
+            <Button type="submit">
               {loading && (
                 <div aria-label="Loading..." role="status">
                   <svg
@@ -116,8 +128,8 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
                 </div>
               )}
               <span>{loading ? dict.sendingEmail : dict.toSend}</span>
-            </button>
-            <Link
+            </Button>
+            <Button
               onClick={() =>
                 sendEventGA({
                   name: "click_whatsapp",
@@ -126,15 +138,15 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
               }
               href="https://wa.me/5592982832103"
               target="_blank"
-              rel="noopener noreferrer"
               aria-label="Whatsapp"
-              className="py-2 text-white w-[100%] px-5 my-2 text-center bg-cyan-light hover:bg-purple rounded-md transition-all hover:scale-102  cursor-pointer"
+              variant="ghost"
+              className="text-center"
             >
               {dict.speakWhatsapp}
-            </Link>
+            </Button>
           </form>
-        </div>
+        </ScrollReveal>
       </section>
-    </div>
+    </ScrollReveal>
   );
 }

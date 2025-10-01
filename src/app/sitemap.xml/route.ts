@@ -1,10 +1,16 @@
 import { listPosts } from "@/lib/notion";
 
 export async function GET() {
-  const siteUrl = process.env.SITE_URL ?? "ygormendanha.com";
+  const siteUrl = "ygormendanha.com";
   const langs = ["pt", "en"];
   const defaultLang = "pt";
-  const EXTRA_PAGES: string[] = ["shop", "about", "contact"]; // adicione aqui outras páginas (sem leading slash)
+  const EXTRA_PAGES: string[] = [
+    "projects",
+    "projects/shop",
+    "services",
+    "services/custom",
+    "services/shop",
+  ];
 
   const [postsPT, postsEN] = await Promise.all([
     listPosts({ lang: "pt" }),
@@ -13,6 +19,13 @@ export async function GET() {
 
   const postsPTMap = new Map(postsPT.map((p) => [p.slug, p]));
   const postsENMap = new Map(postsEN.map((p) => [p.slug, p]));
+
+  const encodePath = (rawPath: string) =>
+    rawPath
+      .split("/")
+      .filter(Boolean)
+      .map((segment) => encodeURIComponent(segment))
+      .join("/");
 
   const homeUrls = langs
     .map((lang) => {
@@ -39,22 +52,22 @@ export async function GET() {
     return langs
       .map((lang) => {
         const loc = cleanPath
-          ? `https://${siteUrl}/${lang}/${encodeURIComponent(cleanPath)}`
+          ? `https://${siteUrl}/${lang}/${encodePath(cleanPath)}`
           : `https://${siteUrl}/${lang}/`;
         const alternatesArr = [
           `  <xhtml:link rel="alternate" hreflang="pt" href="${
             cleanPath
-              ? `https://${siteUrl}/pt/${encodeURIComponent(cleanPath)}`
+              ? `https://${siteUrl}/pt/${encodePath(cleanPath)}`
               : `https://${siteUrl}/pt/`
           }" />`,
           `  <xhtml:link rel="alternate" hreflang="en" href="${
             cleanPath
-              ? `https://${siteUrl}/en/${encodeURIComponent(cleanPath)}`
+              ? `https://${siteUrl}/en/${encodePath(cleanPath)}`
               : `https://${siteUrl}/en/`
           }" />`,
           `  <xhtml:link rel="alternate" hreflang="x-default" href="${
             cleanPath
-              ? `https://${siteUrl}/${defaultLang}/${encodeURIComponent(
+              ? `https://${siteUrl}/${defaultLang}/${encodePath(
                   cleanPath
                 )}`
               : `https://${siteUrl}/${defaultLang}/`
@@ -86,22 +99,22 @@ export async function GET() {
       const alternatesArr = [];
       if (hasPT) {
         alternatesArr.push(
-          `  <xhtml:link rel="alternate" hreflang="pt" href="https://${siteUrl}/pt/blog/${encodeURIComponent(
+          `  <xhtml:link rel="alternate" hreflang="pt" href="https://${siteUrl}/pt/blog/${encodePath(
             slug
           )}" />`
         );
       }
       if (hasEN) {
         alternatesArr.push(
-          `  <xhtml:link rel="alternate" hreflang="en" href="https://${siteUrl}/en/blog/${encodeURIComponent(
+          `  <xhtml:link rel="alternate" hreflang="en" href="https://${siteUrl}/en/blog/${encodePath(
             slug
           )}" />`
         );
       }
       const xDefaultHref = hasPT
-        ? `https://${siteUrl}/pt/blog/${encodeURIComponent(slug)}`
+        ? `https://${siteUrl}/pt/blog/${encodePath(slug)}`
         : hasEN
-        ? `https://${siteUrl}/en/blog/${encodeURIComponent(slug)}`
+        ? `https://${siteUrl}/en/blog/${encodePath(slug)}`
         : null;
       if (xDefaultHref) {
         alternatesArr.push(
@@ -114,7 +127,7 @@ export async function GET() {
         const lastmod = post?.date ?? post?.date ?? new Date().toISOString();
         entries.push(`
           <url>
-            <loc>https://${siteUrl}/pt/blog/${encodeURIComponent(slug)}</loc>
+            <loc>https://${siteUrl}/pt/blog/${encodePath(slug)}</loc>
             <lastmod>${lastmod}</lastmod>
             <changefreq>weekly</changefreq>
             <priority>0.6</priority>
@@ -126,7 +139,7 @@ export async function GET() {
         const lastmod = post?.date ?? post?.date ?? new Date().toISOString();
         entries.push(`
           <url>
-            <loc>https://${siteUrl}/en/blog/${encodeURIComponent(slug)}</loc>
+            <loc>https://${siteUrl}/en/blog/${encodePath(slug)}</loc>
             <lastmod>${lastmod}</lastmod>
             <changefreq>weekly</changefreq>
             <priority>0.6</priority>
@@ -147,7 +160,7 @@ export async function GET() {
 
       ${homeUrls}
 
-   
+    ${extraPagesUrls}
 
       ${postsUrls}
       </urlset>`;

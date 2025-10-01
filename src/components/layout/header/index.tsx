@@ -1,20 +1,25 @@
 import { useState } from "react";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
 import { CustomLink } from "@/components";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { getDictionary } from "@/utils/functions/getDictionary";
 import { HeaderMenu } from "./partials/menu";
 import { SelectLang } from "./partials/selectLang";
+import { MenuDetails } from "@/utils/functions/getMenuDetails";
 
 export function Header() {
-  const { lang }: { lang?: "pt" | "en" } = useParams();
+  const { lang }: { lang: "pt" | "en" } = useParams();
   const dict = getDictionary(lang ?? "pt");
+
+  const pathname = usePathname();
 
   const [showMenu, setShowMenu] = useState<boolean>(false);
 
+  const OptiosMenu = MenuDetails({ lang, pathname });
+
   return (
     <header
-      className={`bg-neutral-50 top-0 fixed w-screen z-50 h-14 flex items-center`}
+      className={`bg-gray-lightest top-0 fixed w-screen z-50 h-14 flex items-center`}
     >
       <div className="container px-5 text-black font-bold mx-auto flex items-center ">
         <CustomLink
@@ -24,56 +29,21 @@ export function Header() {
           YM {dict.stepDevelopmentTitle}
         </CustomLink>
 
-        <nav className="ml-auto  items-center hidden sm:flex sm:[&_a]:text-base  md:[&_a]:text-lg underline-offset-4  ">
-          <CustomLink
-            className="mr-3 hover:underline hover:decoration-purple"
-            style={{
-              textDecorationThickness: "3px",
-            }}
-            href="/#intro"
-          >
-            {dict.home}
-          </CustomLink>
-          <CustomLink
-            className="mr-3 hover:underline hover:decoration-purple"
-            style={{
-              textDecorationThickness: "3px",
-            }}
-            href="/#about"
-          >
-            {dict.about}
-          </CustomLink>
-          <CustomLink
-            className="mr-3 hover:underline hover:decoration-purple"
-            style={{
-              textDecorationThickness: "3px",
-            }}
-            href="/#project"
-          >
-            {dict.projects}
-          </CustomLink>
-          <CustomLink
-            className="mr-3 hover:underline hover:decoration-purple"
-            style={{
-              textDecorationThickness: "3px",
-            }}
-            href="/blog"
-          >
-            Blog
-          </CustomLink>
-          <CustomLink
-            className="mr-3 hover:underline hover:decoration-purple"
-            style={{
-              textDecorationThickness: "3px",
-            }}
-            href="/#contact"
-          >
-            {dict.contact.title}
-          </CustomLink>
-          <SelectLang className="bg-white" />
+        <nav className="ml-auto  items-center flex sm:[&_a]:text-base  md:[&_a]:text-lg underline-offset-4  ">
+          {OptiosMenu.map((link, idx) => (
+            <CustomLink
+              key={idx}
+              className="mr-3 hover:underline hidden lg:flex hover:decoration-cyan-light"
+              style={{ textDecorationThickness: "3px" }}
+              href={link.href}
+            >
+              {link.label}
+            </CustomLink>
+          ))}
+          <SelectLang className="bg-white mr-2 mlg:mr-0" />
         </nav>
         <AiOutlineMenuUnfold
-          className=" text-black-purple  sm:hidden"
+          className=" text-black-cyan-light  lg:hidden"
           size={30}
           onClick={() => setShowMenu(true)}
         />
