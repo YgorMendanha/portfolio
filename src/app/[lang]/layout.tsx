@@ -33,23 +33,34 @@ const nunito = Nunito({ subsets: ["latin"] });
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
-  const pathname = cookieStore.get("pathname");
-  const urlsite = process.env.NEXT_PUBLIC_NEXT_SITE_URL ?? "";
+  const pathname = cookieStore.get("pathname")?.value ?? "/";
+  const urlsite = (process.env.NEXT_PUBLIC_NEXT_SITE_URL ?? "").replace(
+    /\/+$/,
+    ""
+  );
 
-  const path = pathname?.value || "/";
-  const lang = path.startsWith("/en") ? "en" : "pt";
+  const path = pathname === "/" ? "/" : pathname.replace(/\/+$/, "");
+  const segments = path.split("/").filter(Boolean);
+  const first = segments[0];
+  const hasLangPrefix = first === "en" || first === "pt";
+  const lang = first === "en" ? "en" : "pt";
 
-  const dict = getDictionary(lang ?? "pt");
+  const getURL = () => {
+    const parts = hasLangPrefix ? segments.slice(1) : segments;
+    return parts.join("/");
+  };
 
-  const url = lang === "en" ? `${urlsite}${path}/` : `${urlsite}/br${path}`;
-
-  const getURL = () =>
+  const canonicalPath =
     lang === "en"
-      ? path.split("/").slice(2).join("/")
-      : path.split("/").slice(1).join("/");
+      ? `/en${getURL() ? `/${getURL()}` : ""}/`
+      : `/pt${getURL() ? `/${getURL()}` : ""}/`;
+
+  const canonicalURL = `${urlsite}${canonicalPath}`;
+
+  const dict = getDictionary(lang);
 
   return {
-    metadataBase: new URL(`${urlsite}`),
+    metadataBase: new URL(`${urlsite}/`),
     title: {
       absolute: dict.metatags.title,
       template: `%s - ${dict.metatags.title}`,
@@ -57,7 +68,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description: dict.metatags.description,
     openGraph: {
-      url: path,
+      url: canonicalURL,
       title: dict.metatags.title,
       description: dict.metatags.description,
       siteName: "Ygor Mendanha",
@@ -69,7 +80,7 @@ export async function generateMetadata(): Promise<Metadata> {
         },
       ],
     },
-    authors: [{ name: "Ygor Mendanha", url: `${urlsite}` }],
+    authors: [{ name: "Ygor Mendanha", url: `${urlsite}/` }],
     creator: "Ygor Mendanha",
     keywords: [
       "Next.js",
@@ -92,11 +103,11 @@ export async function generateMetadata(): Promise<Metadata> {
       title: dict.metatags.title,
     },
     alternates: {
-      canonical: url,
+      canonical: canonicalURL,
       languages: {
-        "pt-br": `${urlsite}/br/${getURL()}`,
-        en: `${urlsite}/usa/${getURL()}`,
-        "x-default": `${urlsite}/br/${getURL()}`,
+        "pt-br": `${urlsite}/pt${getURL() ? `/${getURL()}` : ""}`,
+        en: `${urlsite}/en${getURL() ? `/${getURL()}` : ""}`,
+        "x-default": `${urlsite}/pt${getURL() ? `/${getURL()}` : ""}`,
       },
     },
   };
