@@ -103,6 +103,7 @@ export function IntroSection() {
           reverse
           speed={"normal"}
           direction="bottom"
+          mobileConfig={{ opacityTo: 0.4 }}
           className="w-full lg:w-1/2 absolute  lg:static opacity-30 lg:opacity-100 "
         >
           <Lottie options={defaultOptions} height={size} width={size} />
