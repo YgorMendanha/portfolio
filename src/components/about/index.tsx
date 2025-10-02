@@ -23,7 +23,6 @@ export function About({ lang }: { lang: "pt" | "en" }) {
               <br className="hidden sm:block" />
               {dict.recentExperience}
               <br className="hidden sm:block" />
-              {dict.servicesSummary}
             </h3>
           </>
         </ScrollReveal>
