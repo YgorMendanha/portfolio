@@ -19,7 +19,7 @@ export function MyProjects({ lang }: { lang: "pt" | "en" }) {
           <h2 className="text-3xl sm:text-4xl font-bold underline-offset-4 mb-8 text-white">
             {dict.projects}
           </h2>
-          <p className="mt-2 light-gray">{dict.requestQuote}</p>
+          <p className="mt-2 light-gray">{dict.workShowcaseDescription}</p>
         </ScrollReveal>
 
         {favorites.length > 0 &&

@@ -59,7 +59,7 @@
   "backBlog": " Back to blog",
   "services": "Services",
   "requestQuote": "See what I deliver and request a quote.",
-  "workShowcaseDescription": "Work in stores and apps — cases, demos, and custom projects. See what I deliver and request a quote.",
+  "workShowcaseDescription": "Development of stores, applications and systems — see my completed projects and request a quote.",
   "eCommerce": "E‑commerce",
   "checkout": "Checkout",
   "cro": "CRO",
@@ -70,7 +70,7 @@
   "moreDetails": "More details",
   "seeMore": "See more",
   "exploreProjects": "Explore my technology and web development projects, with practical solutions, experiences as a programmer, and innovative case studies.",
-  "understandStoreQuickly": "Understand the store in minutes — visually",
+  "understandStoreQuickly": "A store that explains itself",
   "focusOnSales": "Being found, being understood, and enabling frictionless purchases — this is what we focus on to generate real sales.",
   "openStoreDemo": "Open store (demo)",
   "requestReview": "Request review",
@@ -82,7 +82,7 @@
   "trackVisitsAndSales": "Track visits and sales",
   "pagesTitle": "Essential pages",
   "homeTitle": "Home",
-  "homeDesc": "Show offers, categories, and clear paths to products.",
+  "homeDesc": "Offers, categories, and clear paths make browsing and buying easier.",
   "categoriesTitle": "Categories",
   "categoriesDesc": "Filters that help the customer find what they are looking for",
   "productTitle": "Product",
@@ -90,7 +90,7 @@
 
   "checkoutTitle": "Checkout that converts",
   "guestCheckoutTitle": "Guest checkout",
-  "guestCheckoutDesc": "Allow purchases without creating an account — offer account later",
+  "guestCheckoutDesc": "Checkout starts without barriers — the customer creates their account only when completing the purchase.",
   "simpleFormsTitle": "Simple forms",
   "simpleFormsDesc": "Clear validation and autofill to speed up",
   "popularMethodsTitle": "Popular methods",
@@ -98,7 +98,7 @@
 
   "mobileTitle": "Designed for mobile",
   "whyMobileTitle": "Why",
-  "whyMobileDesc": "Most people buy on mobile — optimize for touch and speed",
+  "whyMobileDesc": "Experience designed for mobile — quick taps, fast loading, and smooth navigation.",
   "howMobileTitle": "How",
   "howMobileDesc": "Large buttons, optimized images, simple checkout",
 
@@ -107,7 +107,7 @@
   "impactDesc": "Slow pages lose customers — speed is conversion",
   "whatWeDoTitle": "What we do",
   "whatWeDoDesc": "Light images, reliable hosting, and fewer scripts",
-  "servicesOverview": "Everything I offer — from stores that sell to custom apps and support.Choose the service that fits your needs or request a free assessment.",
+  "servicesOverview": "Create an app or store that truly works for you. Personalized services and dedicated support — or request a free quote to get started.",
   "main": "Main",
   "others": "Others",
   "ecommerceTitleCard": "E-commerce Store Creation",
@@ -188,10 +188,10 @@
   "iWantToTalk": "I want to talk",
 
   "customAppHighlights": [
-    "Interviews with stakeholders and users",
-    "Testable prototypes in 1-2 weeks",
-    "Architecture designed to grow with your business",
-    "Measurement of results and continuous optimization"
+    "We talk with you and your users to understand real needs and create an app that makes sense for your business.",
+    "Functional prototypes in 1-2 weeks, to quickly validate ideas and reduce risks.",
+    "App structure designed to scale as your business grows, without losing performance.",
+    "We monitor the app's performance and continuously optimize it to deliver real results."
   ],
 
   "stepDiscoveryDesc": "Deep understanding of the business, users and desired metrics.",
@@ -214,7 +214,7 @@
     "Post-delivery support: follow-up, fixes and small improvements to ensure results."
   ],
 
-  "noPublicExamplesText": "No public examples? No problem — I work with samples and proofs of concept. Request a brief and I’ll reply with an initial free roadmap. I offer post-delivery support including fixes, monitoring and small improvements to ensure the product reaches its goals.",
+  "noPublicExamplesText": "Have an idea? Let's bring it to life. Get in touch and receive a free initial roadmap showing how your app can take shape quickly. After delivery, you receive continuous support for adjustments, monitoring, and small improvements, ensuring the product delivers real results for your business.",
   "storeCreationConsulting": "Store creation & consulting",
   "ecommerceStoreDescription": "We create e-commerce stores that truly sell, with responsive design, optimized checkout, technical SEO, and ongoing support. Check out the demo store and see how your sales journey can be transformed.",
   "shopBadge": "Ready store + consulting",

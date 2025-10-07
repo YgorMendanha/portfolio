@@ -8,15 +8,21 @@ export function MenuDetails({
   pathname: string;
 }) {
   const dict = getDictionary(lang);
+  const noRedirectProject =
+    pathname === "/" || pathname === "/pt" || pathname === "/en";
+
+  const inBlog =
+    pathname === "/blog" || pathname === "/pt/blog" || pathname === "/en/blog";
+
   return [
     { href: "/#intro", label: dict.home },
     { href: "/#about", label: dict.about },
     {
-      href: pathname === "/" ? "/#project" : "/projects",
+      href: noRedirectProject ? "#project" : "/projects",
       label: dict.projects,
     },
     { href: "/services", label: dict.services },
     { href: "/blog", label: "Blog" },
-    { href: "/#contact", label: dict.contact.title },
+    { href: inBlog ? "/#contact" : "#contact", label: dict.contact.title },
   ];
 }

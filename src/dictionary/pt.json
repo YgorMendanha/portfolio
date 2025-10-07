@@ -60,7 +60,7 @@
   "backBlog": "Voltar para o blog",
   "services": "Serviços",
   "requestQuote": "Veja o que entrego e peça um orçamento.",
-  "workShowcaseDescription": "Trabalhos em lojas e apps — cases, demos e projetos sob encomenda. Veja o que entrego e peça um orçamento.",
+  "workShowcaseDescription": "Desenvolvimento de lojas, aplicativos e sistemas — veja meus projetos realizados e peça um orçamento.",
   "eCommerce": "E‑commerce",
   "checkout": "Checkout",
   "cro": "CRO",
@@ -71,7 +71,7 @@
   "moreDetails": "Mais detalhes",
   "seeMore": "Ver mais",
   "exploreProjects": "Explore meus projetos de tecnologia e desenvolvimento web, com soluções práticas, experiências como programador e cases inovadores.",
-  "understandStoreQuickly": "Entenda a loja em minutos — visualmente",
+  "understandStoreQuickly": "Uma loja que se explica sozinha",
   "focusOnSales": "Ser encontrado, ser entendido e permitir a compra sem fricção — é nisso que focamos para gerar vendas reais.",
   "openStoreDemo": "Abrir loja (demo)",
   "requestReview": "Pedir avaliação",
@@ -83,15 +83,15 @@
   "trackVisitsAndSales": "Acompanhe visitas e vendas",
   "pagesTitle": "Páginas essenciais",
   "homeTitle": "Home",
-  "homeDesc": "Apresente ofertas, categorias e caminhos claros para os produtos.",
+  "homeDesc": "Ofertas, categorias e caminhos claros facilitam a navegação e a compra.",
   "categoriesTitle": "Categorias",
   "categoriesDesc": "Filtros que ajudam o cliente a achar o que procura",
   "productTitle": "Produto",
   "productDesc": "Fotos reais, preço, benefícios e opções fáceis de escolher",
 
   "checkoutTitle": "Checkout que converte",
-  "guestCheckoutTitle": "Guest checkout",
-  "guestCheckoutDesc": "Permita comprar sem criar conta — ofereça conta depois",
+  "guestCheckoutTitle": "Checkout sem Barreiras",
+  "guestCheckoutDesc": "O checkout começa sem barreiras — o cliente cria sua conta apenas no momento de finalizar a compra.",
   "simpleFormsTitle": "Formulários simples",
   "simpleFormsDesc": "Validação clara e autofill para acelerar",
   "popularMethodsTitle": "Métodos populares",
@@ -99,7 +99,7 @@
 
   "mobileTitle": "Projetado para celular",
   "whyMobileTitle": "Por que",
-  "whyMobileDesc": "A maioria compra pelo celular — otimize para toque e velocidade",
+  "whyMobileDesc": "Experiência pensada para o celular — toque ágil, carregamento rápido e navegação fluida.",
   "howMobileTitle": "Como",
   "howMobileDesc": "Botões grandes, imagens otimizadas, checkout simples",
 
@@ -108,7 +108,7 @@
   "impactDesc": "Páginas lentas perdem clientes — velocidade é conversão",
   "whatWeDoTitle": "O que fazemos",
   "whatWeDoDesc": "Imagens leves, hospedagem confiável e menos scripts",
-  "servicesOverview": "Tudo o que eu ofereço — desde lojas que vendem até apps sob encomenda e suporte. Escolha o serviço que se encaixa na sua necessidade ou peça um diagnóstico gratuito.",
+  "servicesOverview": "Crie um app ou loja que realmente funcione para você. Serviços personalizados e suporte dedicado — ou peça um orçamento gratuito para começar.",
   "main": "Principais",
   "others": "Outros",
   "ecommerceTitleCard": "Criação de Lojas E-commerce",
@@ -190,10 +190,10 @@
   "iWantToTalk": "Quero conversar",
 
   "customAppHighlights": [
-    "Entrevistas com stakeholders e usuários",
-    "Protótipos testáveis em 1-2 semanas",
-    "Arquitetura pensada para crescer com seu negócio",
-    "Medição de resultados e otimização contínua"
+    "Conversamos com você e seus usuários para entender necessidades reais e criar um app que faz sentido para o seu negócio.",
+    "Protótipos funcionais em 1-2 semanas, para validar ideias rapidamente e reduzir riscos.",
+    "Estrutura do app projetada para escalar conforme seu negócio evolui, sem perder performance.",
+    "Monitoramos o desempenho do app e otimizamos continuamente para gerar resultados reais."
   ],
 
   "stepDiscoveryDesc": "Entendimento profundo do negócio, usuários e métricas desejadas.",
@@ -216,7 +216,7 @@
     "Suporte pós-entrega: acompanhamento, correções e pequenas melhorias para garantir resultados."
   ],
 
-  "noPublicExamplesText": "Sem exemplos públicos? Sem problema — eu trabalho com amostras e prova de conceito. Solicite um brief e eu respondo com um roteiro inicial gratuito. Ofereço suporte pós-entrega, incluindo correções, monitoramento e pequenas melhorias para garantir que o produto alcance suas metas.",
+  "noPublicExamplesText": "Tem uma ideia? Vamos tirá-la do papel. Entre em contato e receba um roteiro inicial gratuito mostrando como seu app pode ganhar forma rapidamente. Depois da entrega, você conta com suporte contínuo para ajustes, monitoramento e pequenas melhorias, garantindo que o produto entregue resultados reais para o seu negócio.",
   "storeCreationConsulting": "Criação de lojas & consultoria",
   "ecommerceStoreDescription": "Criamos lojas e-commerce que vendem de verdade, com design responsivo, checkout otimizado, SEO técnico e suporte contínuo. Veja a loja de exemplo e descubra como sua jornada de vendas pode ser transformada.",
   "shopBadge": "Loja pronta + consultoria",
