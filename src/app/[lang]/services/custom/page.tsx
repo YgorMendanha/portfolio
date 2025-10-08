@@ -32,6 +32,13 @@ export async function generateMetadata({
       title: dict.customAppCreation,
       description: dict.customAppDescription,
       url: path,
+      images: [
+        {
+          url: "https://myymbucket.s3.sa-east-1.amazonaws.com/imagens/Logo.png",
+          width: 800,
+          height: 600,
+        },
+      ],
     },
     twitter: {
       site: "@site",

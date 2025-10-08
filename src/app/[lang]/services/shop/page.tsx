@@ -37,6 +37,13 @@ export async function generateMetadata({
       title: dict.storeCreationConsulting,
       description: dict.ecommerceStoreDescription,
       url: path,
+      images: [
+        {
+          url: "https://myymbucket.s3.sa-east-1.amazonaws.com/imagens/Logo.png",
+          width: 800,
+          height: 600,
+        },
+      ],
     },
     twitter: {
       site: "@site",
