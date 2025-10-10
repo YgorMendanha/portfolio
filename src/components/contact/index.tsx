@@ -9,6 +9,7 @@ import { MdEmail } from "react-icons/md";
 import { sendEventGA } from "@/utils/lib/customEvent";
 import { Button } from "../partials/ui/button";
 import { ScrollReveal } from "../partials/ScrollAnimate";
+import { usePostHog } from "posthog-js/react";
 
 type Inputs = {
   name: string;
@@ -28,6 +29,8 @@ export function Contact({
   const dict = getDictionary(lang ?? "pt");
   const [loading, setLoading] = useState<boolean>(false);
 
+  const posthog = usePostHog();
+
   const { register, handleSubmit, reset } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (dataForm) => {
     setLoading(true);
@@ -36,6 +39,7 @@ export function Contact({
         name: "click_email",
         params: { linkText: "E-mail" },
       });
+      posthog.capture("click_email");
       const response = await fetch("/api/sendEmail", {
         method: "POST",
         body: JSON.stringify({
@@ -130,12 +134,13 @@ export function Contact({
               <span>{loading ? dict.sendingEmail : dict.toSend}</span>
             </Button>
             <Button
-              onClick={() =>
+              onClick={() => {
                 sendEventGA({
                   name: "click_whatsapp",
-                  params: { linkText: "E-WhatsApp" },
-                })
-              }
+                  params: { linkText: "WhatsApp" },
+                });
+                posthog.capture("click_whatsapp");
+              }}
               href="https://wa.me/5592982832103"
               target="_blank"
               aria-label="Whatsapp"

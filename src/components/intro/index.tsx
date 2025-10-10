@@ -12,10 +12,13 @@ import { useEffect, useState } from "react";
 import { sendEventGA } from "@/utils/lib/customEvent";
 import { ScrollReveal } from "../partials/ScrollAnimate";
 import { Button } from "../partials/ui/button";
+import { usePostHog } from "posthog-js/react";
 
 export function IntroSection() {
   const { lang }: { lang?: "pt" | "en" } = useParams();
   const dict = getDictionary(lang ?? "pt");
+
+  const posthog = usePostHog();
 
   const defaultOptions = {
     loop: true,
@@ -82,12 +85,13 @@ export function IntroSection() {
                 <FaLinkedinIn />
               </Link>
               <Link
-                onClick={() =>
+                onClick={() => {
                   sendEventGA({
                     name: "click_whatsapp",
-                    params: { linkText: "E-WhatsApp" },
-                  })
-                }
+                    params: { linkText: "WhatsApp" },
+                  });
+                  posthog.capture("click_whatsapp");
+                }}
                 href="https://wa.me/5592982832103"
                 target="_blank"
                 rel="noopener noreferrer"

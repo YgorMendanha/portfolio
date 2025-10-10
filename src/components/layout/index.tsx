@@ -6,17 +6,21 @@ import { Toaster } from "react-hot-toast";
 import { BsWhatsapp } from "react-icons/bs";
 import Link from "next/link";
 import { sendEventGA } from "@/utils/lib/customEvent";
+import { usePostHog } from "posthog-js/react";
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const posthog = usePostHog();
+
   const WhatsappButton = () => {
     return (
       <Link
-        onClick={() =>
+        onClick={() => {
           sendEventGA({
             name: "click_whatsapp",
-            params: { linkText: "E-WhatsApp" },
-          })
-        }
+            params: { linkText: "WhatsApp" },
+          });
+          posthog.capture("click_whatsapp");
+        }}
         href="https://wa.me/5592982832103"
         target="_blank"
         rel="noopener noreferrer"
