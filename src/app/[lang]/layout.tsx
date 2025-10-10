@@ -7,7 +7,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalytics } from "@/utils/lib/analytics";
 import { ProfilePage, WithContext, Organization } from "schema-dts";
 import Script from "next/script";
-import { CSPostHogProvider } from "../providers";
+import { Providers } from "../providers";
 import { cookies } from "next/headers";
 
 const jsonLdPerson: WithContext<ProfilePage> = {
@@ -152,14 +152,14 @@ export default async function RootLayout({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }}
       />
 
-      <CSPostHogProvider>
+      <Providers>
         <body className={nunito.className}>
           <Layout>{children}</Layout>
 
           <Analytics />
           <GoogleAnalytics />
         </body>
-      </CSPostHogProvider>
+      </Providers>
     </html>
   );
 }

@@ -29,6 +29,13 @@ export async function generateMetadata({
       title: post?.title ?? "Post",
       description: description || undefined,
       url: path,
+      images: [
+        {
+          url: "https://myymbucket.s3.sa-east-1.amazonaws.com/imagens/Logo.png",
+          width: 800,
+          height: 600,
+        },
+      ],
     },
     alternates: {
       canonical: `${lang === "pt" ? "/pt" : "/en"}/blog/${post?.slug}`,
