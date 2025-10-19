@@ -38,7 +38,7 @@ export function middleware(request: NextRequest) {
     if (cookieLocale === "BR") {
       const newUrl = request.nextUrl.clone();
       newUrl.pathname = `/pt${pathname}`;
-      const response = NextResponse.rewrite(newUrl);
+      const response = NextResponse.redirect(newUrl);
       response.cookies.set("pathname", pathname);
       !cookieLang && response.cookies.set("lang", "pt");
       return response;
@@ -52,14 +52,14 @@ export function middleware(request: NextRequest) {
     return response;
   }
 
-  // 3) Já tem /pt no início: tira o /pt e serve sem alterar query
+  // 3) Já tem /pt no início
   if (hasBRPrefix) {
     const newPathname = pathname || "/";
     const newUrl = request.nextUrl.clone();
     newUrl.pathname = newPathname;
     const response = NextResponse.rewrite(newUrl);
     response.cookies.set("locale", "BR");
-    !cookieLang && response.cookies.set("lang", "pt");
+    response.cookies.set("lang", "pt");
     response.cookies.set("pathname", pathname);
     return response;
   }
@@ -70,8 +70,8 @@ export function middleware(request: NextRequest) {
     const newUrl = request.nextUrl.clone();
     newUrl.pathname = newPathname;
     const response = NextResponse.rewrite(newUrl);
-    response.cookies.set("locale", "USA");
-    !cookieLang && response.cookies.set("lang", "en");
+    response.cookies.set("locale", "BR");
+    response.cookies.set("lang", "en");
     response.cookies.set("pathname", pathname);
     return response;
   }

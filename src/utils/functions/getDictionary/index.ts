@@ -1,8 +1,8 @@
 import en from '@/dictionary/en.json'
 import pt from '@/dictionary/pt.json'
 
-export const getDictionary = (locale: string) => {
-  if (locale === 'pt') {
+export const getDictionary = (lang: string) => {
+  if (lang === 'pt') {
     return pt
   }
   return en

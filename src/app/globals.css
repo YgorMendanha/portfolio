@@ -80,3 +80,7 @@ body,
 .react-multiple-carousel__arrow {
   z-index: 28 !important;
 }
+
+.container {
+  @apply px-5 mx-auto;
+}

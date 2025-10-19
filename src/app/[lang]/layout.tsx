@@ -52,15 +52,15 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const canonicalPath =
     lang === "en"
-      ? `/en${getURL() ? `/${getURL()}` : ""}/`
-      : `/pt${getURL() ? `/${getURL()}` : ""}/`;
+      ? `/en${getURL() ? `/${getURL()}` : ""}`
+      : `/pt${getURL() ? `/${getURL()}` : ""}`;
 
   const canonicalURL = `${urlsite}${canonicalPath}`;
 
   const dict = getDictionary(lang);
 
   return {
-    metadataBase: new URL(`${urlsite}/`),
+    metadataBase: new URL(`${urlsite}`),
     title: {
       absolute: dict.metatags.title,
       template: `%s - ${dict.metatags.title}`,
@@ -80,7 +80,7 @@ export async function generateMetadata(): Promise<Metadata> {
         },
       ],
     },
-    authors: [{ name: "Ygor Mendanha", url: `${urlsite}/` }],
+    authors: [{ name: "Ygor Mendanha", url: `${urlsite}` }],
     creator: "Ygor Mendanha",
     keywords: [
       "Next.js",

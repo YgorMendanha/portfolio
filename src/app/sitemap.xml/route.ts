@@ -29,12 +29,12 @@ export async function GET() {
 
   const homeUrls = langs
     .map((lang) => {
-      const loc = `https://${siteUrl}/${lang}/`;
+      const loc = `https://${siteUrl}/${lang}`;
       const lastmod = new Date().toISOString();
       const alternates = [
-        `  <xhtml:link rel="alternate" hreflang="pt" href="https://${siteUrl}/pt/" />`,
-        `  <xhtml:link rel="alternate" hreflang="en" href="https://${siteUrl}/en/" />`,
-        `  <xhtml:link rel="alternate" hreflang="x-default" href="https://${siteUrl}/${defaultLang}/" />`,
+        `  <xhtml:link rel="alternate" hreflang="pt" href="https://${siteUrl}/pt" />`,
+        `  <xhtml:link rel="alternate" hreflang="en" href="https://${siteUrl}/en" />`,
+        `  <xhtml:link rel="alternate" hreflang="x-default" href="https://${siteUrl}/${defaultLang}" />`,
       ].join("\n");
       return `
             <url>
@@ -53,24 +53,24 @@ export async function GET() {
       .map((lang) => {
         const loc = cleanPath
           ? `https://${siteUrl}/${lang}/${encodePath(cleanPath)}`
-          : `https://${siteUrl}/${lang}/`;
+          : `https://${siteUrl}/${lang}`;
         const alternatesArr = [
           `  <xhtml:link rel="alternate" hreflang="pt" href="${
             cleanPath
               ? `https://${siteUrl}/pt/${encodePath(cleanPath)}`
-              : `https://${siteUrl}/pt/`
+              : `https://${siteUrl}/pt`
           }" />`,
           `  <xhtml:link rel="alternate" hreflang="en" href="${
             cleanPath
               ? `https://${siteUrl}/en/${encodePath(cleanPath)}`
-              : `https://${siteUrl}/en/`
+              : `https://${siteUrl}/en`
           }" />`,
           `  <xhtml:link rel="alternate" hreflang="x-default" href="${
             cleanPath
               ? `https://${siteUrl}/${defaultLang}/${encodePath(
                   cleanPath
                 )}`
-              : `https://${siteUrl}/${defaultLang}/`
+              : `https://${siteUrl}/${defaultLang}`
           }" />`,
         ].join("\n");
         const lastmod = new Date().toISOString();
