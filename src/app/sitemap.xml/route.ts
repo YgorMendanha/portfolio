@@ -1,7 +1,7 @@
 import { listPosts } from "@/lib/notion";
 
 export async function GET() {
-  const siteUrl = "ygormendanha.com";
+  const siteUrl = "www.ygormendanha.com";
   const langs = ["pt", "en"];
   const defaultLang = "pt";
   const EXTRA_PAGES: string[] = [
