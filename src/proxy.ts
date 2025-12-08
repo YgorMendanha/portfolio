@@ -1,7 +1,7 @@
 import { geolocation } from "@vercel/functions";
 import { NextRequest, NextResponse } from "next/server";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const cookieLocale = request.cookies.get("locale")?.value;
   const cookieLang = request.cookies.get("lang")?.value;
