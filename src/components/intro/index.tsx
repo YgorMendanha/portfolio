@@ -47,7 +47,10 @@ export function IntroSection() {
   }, [width]);
 
   return (
-    <section className="flex flex-col py-28 sm:py-36 mt-10 h-screen  bg-black-purple overflow-x-hidden max-w-full">
+    <section
+      id="intro"
+      className="flex flex-col py-28 sm:py-36 mt-10 h-screen  bg-black-purple overflow-x-hidden max-w-full"
+    >
       <div className="container px-5 mx-auto flex h-full flex-col lg:flex-row  items-center justify-center  ">
         <ScrollReveal
           reverse

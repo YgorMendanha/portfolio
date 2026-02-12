@@ -1,4 +1,3 @@
-import { CustomLink } from "@/components";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
@@ -46,9 +45,9 @@ export function HeaderMenu({
           </section>
           <nav className="container px-5  mx-auto flex flex-col gap-2">
             {OptiosMenu.map((o, idx) => (
-              <CustomLink key={idx} onClick={onCLose} href={o.href}>
+              <Link key={idx} onClick={onCLose} href={o.href}>
                 {o.label}
-              </CustomLink>
+              </Link>
             ))}
 
             <nav className="flex items-center [&_a]:mr-3 [&_a]:my-2 [&_a]:text-lg">

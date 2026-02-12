@@ -14,9 +14,11 @@ export function MenuDetails({
   const inBlog =
     pathname === "/blog" || pathname === "/pt/blog" || pathname === "/en/blog";
 
+  const inHome = pathname === "/" || pathname === "/pt" || pathname === "/en";
+
   return [
-    { href: "/#intro", label: dict.home },
-    { href: "/#about", label: dict.about },
+    { href: inHome ? "#intro" : "/#intro", label: dict.home },
+    { href: inHome ? "#about" : "/#about", label: dict.about },
     {
       href: noRedirectProject ? "#project" : "/projects",
       label: dict.projects,

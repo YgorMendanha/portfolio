@@ -3,14 +3,13 @@ import { NextRequest, NextResponse } from "next/server";
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const cookieLocale = request.cookies.get("locale")?.value;
   const cookieLang = request.cookies.get("lang")?.value;
 
   const hasBRPrefix = pathname.startsWith("/pt");
   const hasUSAPrefix = pathname.startsWith("/en");
 
   // 1) Sem prefixo e sem cookie: usa geolocation
-  if (!hasBRPrefix && !hasUSAPrefix && !cookieLocale) {
+  if (!hasBRPrefix && !hasUSAPrefix && !cookieLang) {
     const { country = "BR" } = geolocation(request);
     const isBrazil = country === "BR";
 
@@ -18,7 +17,6 @@ export function proxy(request: NextRequest) {
       const newUrl = request.nextUrl.clone();
       newUrl.pathname = `/pt${pathname}`;
       const response = NextResponse.rewrite(newUrl);
-      response.cookies.set("locale", "BR");
       response.cookies.set("lang", "pt");
       response.cookies.set("pathname", pathname);
       return response;
@@ -27,20 +25,18 @@ export function proxy(request: NextRequest) {
     const newUrl = request.nextUrl.clone();
     newUrl.pathname = `/en${pathname}`;
     const response = NextResponse.redirect(newUrl);
-    response.cookies.set("locale", "USA");
     response.cookies.set("lang", "en");
     response.cookies.set("pathname", pathname);
     return response;
   }
 
   // 2) Sem prefixo e com cookie: redireciona conforme cookieLocale
-  if (!hasBRPrefix && !hasUSAPrefix && cookieLocale) {
-    if (cookieLocale === "BR") {
+  if (!hasBRPrefix && !hasUSAPrefix && cookieLang) {
+    if (cookieLang === "pt") {
       const newUrl = request.nextUrl.clone();
       newUrl.pathname = `/pt${pathname}`;
       const response = NextResponse.redirect(newUrl);
       response.cookies.set("pathname", pathname);
-      !cookieLang && response.cookies.set("lang", "pt");
       return response;
     }
 
@@ -48,7 +44,6 @@ export function proxy(request: NextRequest) {
     newUrl.pathname = `/en${pathname}`;
     const response = NextResponse.redirect(newUrl);
     response.cookies.set("pathname", pathname);
-    !cookieLang && response.cookies.set("lang", "en");
     return response;
   }
 
@@ -58,7 +53,6 @@ export function proxy(request: NextRequest) {
     const newUrl = request.nextUrl.clone();
     newUrl.pathname = newPathname;
     const response = NextResponse.rewrite(newUrl);
-    response.cookies.set("locale", "BR");
     response.cookies.set("lang", "pt");
     response.cookies.set("pathname", pathname);
     return response;
@@ -70,7 +64,6 @@ export function proxy(request: NextRequest) {
     const newUrl = request.nextUrl.clone();
     newUrl.pathname = newPathname;
     const response = NextResponse.rewrite(newUrl);
-    response.cookies.set("locale", "BR");
     response.cookies.set("lang", "en");
     response.cookies.set("pathname", pathname);
     return response;
