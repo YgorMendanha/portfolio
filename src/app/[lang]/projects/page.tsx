@@ -1,176 +1,177 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
-import type { Metadata } from "next";
-import { FiExternalLink, FiLink } from "react-icons/fi";
+import { FiExternalLink, FiLink, FiStar } from "react-icons/fi";
 import { Contact } from "@/components";
-import { getDictionary } from "@/utils/functions/getDictionary";
 import { ScrollReveal } from "@/components/partials/ScrollAnimate";
 import { Button } from "@/components/partials/ui/button";
 import { ProjectsDetails } from "@/utils/functions/getProjectsDetails";
-import { cookies } from "next/headers";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ lang: "en" | "pt" }>;
-}): Promise<Metadata> {
-  const { lang } = await params;
-  const cookieStore = await cookies();
-  const pathname = cookieStore.get("pathname");
-  const dict = getDictionary(lang);
-
-  const path = pathname?.value || "/";
-
-  return {
-    title: dict.projects,
-    description: dict.exploreProjects,
-    openGraph: {
-      title: dict.projects,
-      description: dict.exploreProjects,
-      url: path,
-      images: [
-        {
-          url: "https://myymbucket.s3.sa-east-1.amazonaws.com/imagens/Logo.png",
-          width: 800,
-          height: 600,
-        },
-      ],
-    },
-    twitter: {
-      site: "@site",
-      card: "summary",
-      description: dict.exploreProjects,
-      creator: "@YgorMendanha",
-      title: dict.projects,
-    },
-  };
-}
-
-export default async function ProjectsPage({
+export default function ProjectsPage({
   params,
 }: {
   params: Promise<{ lang: "en" | "pt" }>;
 }) {
-  const { lang } = await params;
-  const dict = getDictionary(lang);
+  const { lang } = React.use(params);
   const Projects = ProjectsDetails({ lang }) ?? [];
 
+  const texts =
+    lang === "pt"
+      ? {
+          projects: "Projetos",
+          workShowcaseDescription:
+            "Desenvolvimento de lojas, aplicativos e sistemas — veja meus projetos realizados e peça um orçamento.",
+          moreDetails: "Mais detalhes",
+          toView: "Visualizar",
+          contactCall: "Fale Comigo",
+          contactText:
+            "Fale comigo pelo WhatsApp ou e-mail. Vou entender sua ideia, propor soluções criativas e transformar sua necessidade em um app sob medida. O próximo passo para o seu projeto começa agora.",
+          ctaTitle: "Busca uma solução exclusiva?",
+          ctaButton: "Conhecer meus Serviços",
+        }
+      : {
+          projects: "Projects",
+          workShowcaseDescription:
+            "Development of stores, apps and systems — see my completed projects and request a quote.",
+          moreDetails: "More details",
+          toView: "View",
+          contactCall: "Contact",
+          contactText:
+            "Chat with me via WhatsApp or email. I'll understand your idea, propose creative solutions and turn your need into a custom app. The next step for your project starts now.",
+          ctaTitle: "Looking for a unique solution?",
+          ctaButton: "Explore my Services",
+        };
+
   return (
-    <div className="bg-black-purple text-white">
-      <section className="container mx-auto pt-20 md:pt-30 px-5 py-30 min-h-screen gap-20 flex flex-col">
-        <ScrollReveal
-          speed={"slow"}
-          direction="left"
-          reverse
-          className="flex flex-col sm:flex-row sm:items-center sm:justify-between"
-        >
-          <div>
-            <h1 className="text-3xl font-extrabold">{dict.projects}</h1>
-            <p className="mt-2 light-gray">{dict.workShowcaseDescription}</p>
+    <div className="bg-black-purple text-white pt-10">
+      <section className="container mx-auto px-5 py-24 min-h-screen flex flex-col gap-16">
+        {/* Header da Página com sotaque Amarelo */}
+        <ScrollReveal direction="left" className="max-w-3xl">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-12 h-1 bg-yellow rounded-full" />
+            <span className="text-yellow uppercase tracking-widest text-xs font-black">
+              Showcase
+            </span>
           </div>
+
+          <h1 className="text-4xl md:text-7xl font-black mb-6 tracking-tight">
+            {texts.projects}
+            <span className="text-yellow">.</span>
+          </h1>
+
+          <p className="text-xl text-gray-400 leading-relaxed">
+            {texts.workShowcaseDescription}
+          </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch ">
-          {Projects.map((project, idx) => (
-            <article
-              key={idx}
-              className="group flex flex-col h-full p-6 rounded-2xl bg-white shadow-sm hover:shadow-lg transition-all transform-gpu hover:-translate-y-0.5 duration-300 focus-within:shadow-lg outline-none"
-              tabIndex={0}
-              aria-labelledby={`project-title-${project.title}`}
-              role="article"
-            >
-              <div className="rounded-lg overflow-hidden h-44 lg:h-56 relative">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  width={1200}
-                  height={800}
-                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                  priority={idx === 0}
-                />
+        {/* Grid de Projetos */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          {Projects.map((project, idx) => {
+            const isFavorite = Boolean(project.favorite);
 
-                <div
-                  aria-hidden
-                  className="absolute left-0 top-0 w-full h-full bg-gradient-to-t from-black/20 to-transparent pointer-events-none"
-                />
-              </div>
-
-              <div className="mt-4">
-                <h3
-                  id={`project-title-${project.title}`}
-                  className="text-xl text-dark font-semibold"
-                >
-                  {project.title}
-                </h3>
-
-                {project.tags && project.tags.length > 0 && (
-                  <div
-                    className="mt-3 flex flex-wrap gap-2"
-                    aria-label="Tags do projeto"
-                  >
-                    {project.tags.map((t) => (
-                      <span
-                        key={t}
-                        className="text-xs px-2 py-1 bg-purple-bright/10 text-black-purple rounded-full border border-purple-bright/20"
-                      >
-                        {t}
-                      </span>
-                    ))}
+            return (
+              <article
+                key={idx}
+                className="group flex flex-col h-full bg-white/[0.02] border border-white/5 rounded-[2rem] overflow-hidden transition-all duration-500 hover:border-yellow/30 hover:bg-white/[0.04] hover:-translate-y-3 shadow-2xl relative"
+                role="article"
+              >
+                {/* Badge de Destaque Amarelo */}
+                {isFavorite && (
+                  <div className="absolute top-4 right-4 z-20 bg-yellow text-black-purple p-2 rounded-xl shadow-lg">
+                    <FiStar fill="currentColor" size={16} />
                   </div>
                 )}
 
-                <p className="text-sm text-dark mt-2 md:h-full max-h-[200px] overflow-y-auto whitespace-pre-wrap">
-                  {project.details}
-                </p>
-              </div>
-
-              <div className="flex-1" />
-
-              <footer className="mt-4 pt-4 border-t w-full border-slate-100 flex items-center justify-between gap-3">
-                <div className="flex items-center w-full gap-2 flex-wrap">
-                  {project.internalLink && (
-                    <Button
-                      className="w-full"
-                      href={project.internalLink}
-                      aria-label={`${lang === "pt" ? "Ver" : "View"} ${
-                        project.title
-                      }`}
-                    >
-                      {dict.moreDetails}
-                      <FiLink size={25} className="ml-1" />
-                    </Button>
+                {/* Container da Imagem com Zoom Profundo */}
+                <div className="h-64 relative overflow-hidden">
+                  {project.image && (
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      width={1200}
+                      height={800}
+                      className="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-105"
+                      priority={idx === 0}
+                    />
                   )}
-                  <Button
-                    className="w-full"
-                    target={project.link ? "_blank" : undefined}
-                    rel={project.link ? "noopener noreferrer" : undefined}
-                    href={project.link ?? "#contact"}
-                    aria-label={`${lang === "pt" ? "Ver" : "View"} ${
-                      project.title
-                    }`}
-                  >
-                    {dict.toView ?? (lang === "pt" ? "Ver" : "View")}{" "}
-                    <FiExternalLink size={25} className="ml-1" />
-                  </Button>
+                  {project.logo && project.logo}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black-purple via-transparent to-transparent opacity-60" />
                 </div>
-              </footer>
-            </article>
-          ))}
+
+                {/* Conteúdo */}
+                <div className="p-8 flex flex-col flex-1">
+                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-yellow transition-colors duration-300">
+                    {project.title}
+                  </h3>
+
+                  {/* Tags Reativas */}
+                  {project.tags && project.tags.length > 0 && (
+                    <div className="mb-6 flex flex-wrap gap-2">
+                      {project.tags.map((t) => (
+                        <span
+                          key={t}
+                          className="text-[10px] uppercase font-black tracking-tighter px-2.5 py-1 bg-cyan-light/10 text-cyan-light border border-cyan-light/20 rounded-md group-hover:border-yellow/50 group-hover:text-yellow transition-all duration-500"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  <p className="text-gray-400 text-sm leading-relaxed mb-8 line-clamp-3">
+                    {project.details}
+                  </p>
+
+                  {/* Ações com hierarquia de cores */}
+                  <div className="mt-auto pt-6 border-t border-white/5 flex flex-col gap-3">
+                    {project.internalLink && (
+                      <Button
+                        href={project.internalLink}
+                        variant="ghost"
+                        className="w-full border-white/10 hover:border-white/20 text-white py-4"
+                      >
+                        {texts.moreDetails}
+                        <FiLink size={18} className="ml-2" />
+                      </Button>
+                    )}
+
+                    {project.link && (
+                      <Button
+                        href={project.link ?? "#contact"}
+                        target={project.link ? "_blank" : undefined}
+                        className="w-full bg-cyan-light hover:bg-yellow text-black-purple font-black py-4 transition-all duration-300"
+                      >
+                        {texts.toView}
+                        <FiExternalLink size={18} className="ml-2" />
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
+
+        {/* Footer com CTA Amarelo */}
         <ScrollReveal
-          direction="bottom"
-          className="flex w-full flex-col items-center justify-between"
+          direction="top"
+          className="flex flex-col items-center gap-6 mt-20 py-16 border-t border-white/5 relative"
         >
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-px bg-gradient-to-r from-transparent via-yellow to-transparent" />
+
+          <p className="text-gray-400 font-medium">{texts.ctaTitle}</p>
+
           <Button
             href="/services"
-            variant="ghost"
-            aria-label={`${dict.seeMore} ${dict.services}`}
+            className="bg-transparent border-2 border-yellow text-yellow hover:bg-yellow hover:text-black-purple px-12 py-4 rounded-2xl font-black transition-all duration-300 shadow-[0_0_20px_rgba(255,204,0,0.1)]"
           >
-            {`${dict.seeMore} ${dict.services}`}
+            {texts.ctaButton}
           </Button>
         </ScrollReveal>
       </section>
-      <Contact lang={lang} title={dict.contact.call} text={dict.contact.text} />
+
+      <Contact lang={lang} />
     </div>
   );
 }

@@ -1,152 +1,180 @@
 "use client";
-import { getDictionary } from "@/utils/functions/getDictionary";
-import Link from "next/link";
+
 import React from "react";
+import Link from "next/link";
 import { BsArrowRight } from "react-icons/bs";
 import { FaCode } from "react-icons/fa";
 import { FiPackage } from "react-icons/fi";
 import { HiOutlineDocumentText } from "react-icons/hi";
 import { MdOutlineExplore } from "react-icons/md";
 import { ScrollReveal } from "../partials/ScrollAnimate";
-import { useWindowSize } from "@/hooks/useWindowSize";
+import clsx from "clsx";
 
 export function Steps({ lang }: { lang: "pt" | "en" }) {
-  const dict = getDictionary(lang ?? "pt");
-
-  const steps = [
-    {
-      icon: (
-        <MdOutlineExplore
-          size={48}
-          className="text-purple-bright group-hover:text-cyan-light"
-          aria-hidden
-        />
-      ),
-      title: dict.stepDiscoveryTitle,
-      description: dict.stepDiscoveryDescription,
+  const content = {
+    pt: {
+      title: "Processo de desenvolvimento",
+      description:
+        "Um fluxo claro e transparente — da descoberta à entrega — para garantir resultado e confiança em cada etapa.",
+      btn: "Vamos conversar",
+      items: [
+        {
+          icon: <MdOutlineExplore size={40} />,
+          title: "Descoberta",
+          desc: "Entendemos juntos suas necessidades",
+        },
+        {
+          icon: <HiOutlineDocumentText size={40} />,
+          title: "Planejamento",
+          desc: "Defino a solução mais eficiente para seu caso",
+        },
+        {
+          icon: <FaCode size={40} />,
+          title: "Desenvolvimento",
+          desc: "Criação ágil, transparente e personalizada",
+        },
+        {
+          icon: <FiPackage size={40} />,
+          title: "Entrega e suporte",
+          desc: "Você recebe a solução pronta, com acompanhamento para garantir resultados",
+        },
+      ],
     },
-    {
-      icon: (
-        <HiOutlineDocumentText
-          size={48}
-          className="text-purple-bright group-hover:text-cyan-light"
-          aria-hidden
-        />
-      ),
-      title: dict.stepPlanningTitle,
-      description: dict.stepPlanningDescription,
+    en: {
+      title: "Development Process",
+      description:
+        "A clear and transparent workflow — from discovery to delivery — to ensure results and trust at every stage.",
+      btn: "Let's Talk",
+      items: [
+        {
+          icon: <MdOutlineExplore size={40} />,
+          title: "Discovery",
+          desc: "We understand your needs together",
+        },
+        {
+          icon: <HiOutlineDocumentText size={40} />,
+          title: "Planning",
+          desc: "I define the most efficient solution for your case",
+        },
+        {
+          icon: <FaCode size={40} />,
+          title: "Development",
+          desc: "Agile, transparent, and personalized creation",
+        },
+        {
+          icon: <FiPackage size={40} />,
+          title: "Delivery & Support",
+          desc: "You receive the ready solution, with follow-up to ensure results",
+        },
+      ],
     },
-    {
-      icon: (
-        <FaCode
-          size={48}
-          className="text-purple-bright group-hover:text-cyan-light"
-          aria-hidden
-        />
-      ),
-      title: dict.stepDevelopmentTitle,
-      description: dict.stepDevelopmentDescription,
-    },
-    {
-      icon: (
-        <FiPackage
-          size={48}
-          className="text-purple-bright group-hover:text-cyan-light"
-          aria-hidden
-        />
-      ),
-      title: dict.stepDeliveryTitle,
-      description: dict.stepDeliveryDescription,
-    },
-  ];
+  };
 
-  const { width } = useWindowSize();
-
-  type mov = "left" | "right" | "top" | "bottom";
-
-  const isMobile = width ? width <= 900 : true;
-  const fistMov: mov = isMobile ? "right" : "bottom";
-  const secMov: mov = isMobile ? "left" : "top";
+  const t = content[lang] || content.pt;
 
   return (
-    <div className="bg-gray-lightest overflow-hidden">
-      <section
-        aria-labelledby="processo-title"
-        className="container mx-auto px-5 flex flex-col items-center text-center pb-20 text-black-purple"
-      >
-        <ScrollReveal direction="bottom">
-          <h2
-            id="processo-title"
-            className="text-3xl sm:text-4xl font-extrabold mb-2"
-          >
-            {dict.developmentProcessTitle}
+    <section
+      id="steps"
+      className="bg-black-purple py-24 relative overflow-hidden"
+    >
+      {/* Detalhe de fundo decorativo */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-purple-bright/5 blur-[120px] pointer-events-none" />
+
+      <div className="container mx-auto px-5 relative z-10">
+        {/* Header da Seção */}
+        <ScrollReveal direction="bottom" className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+            {t.title}
           </h2>
-          <p className="sm:text-2xl text-base text-dark mb-8 max-w-2xl mx-auto">
-            {dict.developmentProcessDescription}
+          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+            {t.description}
           </p>
         </ScrollReveal>
 
-        <div className="flex flex-col lg:flex-row items-stretch justify-between gap-8">
-          {steps.map((step, idx) => {
-            const isLast = idx === steps.length - 1;
-
-            const isReverse = idx % 2 === 0;
+        {/* Grade de Processos */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 relative">
+          {t.items.map((step, idx) => {
+            const isLast = idx === t.items.length - 1;
 
             return (
-              <React.Fragment key={step.title}>
+              <React.Fragment key={idx}>
                 <ScrollReveal
-                  speed={"slow"}
-                  direction={isReverse ? secMov : fistMov}
-                  className="flex flex-col items-center justify-between rounded-2xl bg-white shadow-xl p-6 sm:flex-1 hover:scale-105 transition-transform duration-300 group "
+                  direction="bottom"
+                  className="relative group h-full"
                 >
-                  <div className="mb-2">{step.icon}</div>
-                  <h3 className="font-semibold text-lg mb-2">{step.title}</h3>
-                  <p className="text-sm text-gray-600 text-center flex-1 flex items-center justify-center">
-                    {step.description}
-                  </p>
+                  <div
+                    className={clsx(
+                      "h-full flex flex-col items-center text-center p-8 rounded-3xl bg-white/5 border transition-all duration-300 relative overflow-hidden",
+                      isLast
+                        ? "border-yellow/20 hover:border-yellow/50 group-hover:shadow-[0_0_20px_rgba(255,204,0,0.05)]"
+                        : "border-white/10 hover:border-cyan-light/30",
+                    )}
+                  >
+                    {/* Número da etapa */}
+                    <span
+                      className={clsx(
+                        "absolute top-4 right-6 font-black text-4xl opacity-10 transition-colors",
+                        isLast ? "text-yellow" : "text-white",
+                      )}
+                    >
+                      0{idx + 1}
+                    </span>
+
+                    {/* Ícone com Amarelo no último item */}
+                    <div
+                      className={clsx(
+                        "mb-6 transition-all duration-300 transform group-hover:scale-110",
+                        isLast
+                          ? "text-yellow shadow-yellow"
+                          : "text-cyan-light",
+                      )}
+                    >
+                      {step.icon}
+                    </div>
+
+                    <h3
+                      className={clsx(
+                        "text-xl font-bold mb-3 transition-colors",
+                        isLast
+                          ? "group-hover:text-yellow text-white"
+                          : "text-white",
+                      )}
+                    >
+                      {step.title}
+                    </h3>
+
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      {step.desc}
+                    </p>
+                  </div>
+
+                  {/* Seta Decorativa Desktop - Amarela na transição para o último */}
+                  {!isLast && (
+                    <div className="hidden lg:block absolute top-1/2 -right-6 -translate-y-1/2 z-20">
+                      <BsArrowRight
+                        className={clsx(
+                          "text-2xl animate-pulse",
+                          idx === 2 ? "text-yellow" : "text-purple-bright",
+                        )}
+                      />
+                    </div>
+                  )}
                 </ScrollReveal>
-
-                {!isLast && (
-                  <ScrollReveal
-                    distance={0}
-                    className="hidden lg:flex items-center mx-2"
-                  >
-                    <BsArrowRight
-                      size={28}
-                      className="text-cyan-light"
-                      aria-hidden
-                    />
-                  </ScrollReveal>
-                )}
-
-                {!isLast && (
-                  <ScrollReveal
-                    distance={0}
-                    speed={"slow"}
-                    direction={isReverse ? secMov : fistMov}
-                    className="flex lg:hidden items-center justify-center my-2"
-                  >
-                    <BsArrowRight
-                      size={24}
-                      className="rotate-90 text-cyan-light"
-                      aria-hidden
-                    />
-                  </ScrollReveal>
-                )}
               </React.Fragment>
             );
           })}
         </div>
 
-        <ScrollReveal direction="bottom" className="mt-20">
+        {/* CTA Final */}
+        <ScrollReveal direction="top" className="mt-20 text-center">
           <Link
-            href={"#contact"}
-            className="bg-purple-bright hover:bg-cyan-light hover:scale-105 text-white px-8 py-4 rounded-2xl font-semibold transition-transform duration-200 cursor-pointer"
+            href="#contact"
+            className="inline-block bg-cyan-light hover:bg-yellow text-black-purple px-10 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,204,0,0.4)] transform hover:-translate-y-1"
           >
-            {dict.letsTalk}
+            {t.btn}
           </Link>
         </ScrollReveal>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }

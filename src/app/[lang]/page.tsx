@@ -1,5 +1,4 @@
 import { About, Contact, IntroSection, MyProjects, Steps } from "@/components";
-import { getDictionary } from "@/utils/functions/getDictionary";
 
 export default async function App({
   params,
@@ -8,15 +7,30 @@ export default async function App({
 }) {
   const { lang } = await params;
 
-  const dict = getDictionary(lang);
-
   return (
-    <div className="">
+    <div className="flex flex-col pb-20 overflow-x-hidden">
+      {/* 1. Impacto Inicial */}
       <IntroSection />
-      <About lang={lang} />
-      <Steps lang={lang} />
-      <MyProjects lang={lang} />
-      <Contact lang={lang} title={dict.contact.call} text={dict.contact.text} />
+
+      {/* 2. Quem é o profissional (Storytelling) */}
+      <section id="about" className="scroll-mt-20">
+        <About lang={lang} />
+      </section>
+
+      {/* 3. Como funciona o processo (Autoridade) */}
+      <section id="steps" className="scroll-mt-20 py-10 bg-white/[0.02]">
+        <Steps lang={lang} />
+      </section>
+
+      {/* 4. Prova de competência (Resultados) */}
+      <section id="projects" className="scroll-mt-20">
+        <MyProjects lang={lang} />
+      </section>
+
+      {/* 5. Conversão (CTA Final) */}
+      <section id="contact" className="scroll-mt-20">
+        <Contact lang={lang} />
+      </section>
     </div>
   );
 }

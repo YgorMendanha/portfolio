@@ -23,7 +23,8 @@ export function SelectLang({ className = "" }: { className?: string }) {
   return (
     <div
       ref={wrapperRef}
-      className={`relative inline-block hover:scale-105 active:scale-95 cursor-pointer text-purple-bright hover:text-cyan-light transition-all duration-100 ${className}`}
+      // Alteração Visual: Texto light-gray por padrão, hover ciano
+      className={`relative inline-block hover:scale-105 active:scale-95 cursor-pointer text-light-gray hover:text-cyan-light transition-all duration-300 ${className}`}
       tabIndex={0}
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpen(false);
@@ -34,10 +35,11 @@ export function SelectLang({ className = "" }: { className?: string }) {
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-2 px-2 py-1 border-purple-bright border-2 rounded text-xs"
+        // Alteração Visual: Borda roxa, sem fundo fixo, texto ajustável
+        className="flex items-center gap-2 px-3 py-1 border border-purple-bright rounded-md text-xs font-medium tracking-wide hover:border-cyan-light transition-colors"
       >
         <CiGlobe className="text-base" />
-        <span className=" text-center">
+        <span className="text-center uppercase">
           {lang === "en" ? "en-US" : "pt-BR"}
         </span>
       </button>
@@ -46,17 +48,18 @@ export function SelectLang({ className = "" }: { className?: string }) {
         <div
           role="listbox"
           aria-label="Selecionar idioma"
-          className="absolute mt-1 rounded shadow bg-white z-50"
+          // Alteração Visual: Dropdown escuro (black-purple) com borda subtil
+          className="absolute mt-2 right-0 w-24 rounded-md shadow-xl bg-black-purple border border-purple-bright/30 z-50 overflow-hidden"
         >
           <button
-            className="w-full text-center text-xs px-2 py-1 hover:bg-gray-100"
+            className="w-full text-center text-xs px-2 py-2 text-light-gray hover:bg-purple-bright hover:text-white transition-colors"
             onClick={() => changeLang("pt")}
           >
             pt-BR
           </button>
 
           <button
-            className="w-full text-center text-xs px-2 py-1 hover:bg-gray-100"
+            className="w-full text-center text-xs px-2 py-2 text-light-gray hover:bg-purple-bright hover:text-white transition-colors"
             onClick={() => changeLang("en")}
           >
             en-US

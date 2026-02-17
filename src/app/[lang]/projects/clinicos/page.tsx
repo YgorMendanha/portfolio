@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import {
   Activity,
   CheckCircle2,
@@ -25,15 +27,28 @@ import {
   Briefcase,
   Building2,
   Plus,
+  Menu,
+  X,
 } from "lucide-react";
 import Link from "next/link";
 
 export default function LandingPage() {
-  const diasRestantes = 43;
-  const inscritosIniciais = 3;
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [diasRestantes, setDiasRestantes] = useState(0);
+
+  // Lógica de cálculo de data dinâmica
+  useEffect(() => {
+    const dataLancamento = new Date("2026-03-30"); // Defina sua data aqui
+    const hoje = new Date();
+    const diffTime = dataLancamento.getTime() - hoje.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    setDiasRestantes(diffDays > 0 ? diffDays : 0);
+  }, []);
+
+  const inscritosIniciais = 0;
   const incrementoPorDiaPassado = 1;
   const totalInscritos =
-    inscritosIniciais + (55 - diasRestantes) * incrementoPorDiaPassado;
+    inscritosIniciais + Math.abs(diasRestantes - 55) * incrementoPorDiaPassado;
 
   const especialidades = [
     "Odontologia",
@@ -48,60 +63,97 @@ export default function LandingPage() {
 
   return (
     <div className="bg-black-purple text-white font-sans selection:bg-cyan-light selection:text-black-purple">
-      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-black-purple/70 backdrop-blur-xl border-b border-white/5 shadow-2xl shadow-black/20">
-        <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-black-purple/80 backdrop-blur-xl border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
           <div className="flex items-center gap-3 group cursor-pointer select-none">
-            <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-purple-bright to-black-purple border border-white/10 group-hover:border-cyan-light/50 shadow-lg group-hover:shadow-[0_0_20px_rgba(0,194,255,0.25)] transition-all duration-500">
-              <Activity
-                className="text-cyan-light transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6"
-                size={22}
-              />
+            <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-purple-bright to-black-purple border border-white/10 group-hover:border-cyan-light/50 transition-all">
+              <Activity className="text-cyan-light" size={20} />
             </div>
-            <div className="flex flex-col justify-center h-full">
-              <span className="text-xl font-bold tracking-tighter text-white leading-none group-hover:text-cyan-light transition-colors duration-300">
+            <div className="flex flex-col justify-center">
+              <span className="text-lg md:text-xl font-bold tracking-tighter text-white leading-none">
                 CLINIC OS
               </span>
-              <span className="text-[10px] font-bold tracking-[0.3em] text-light-gray/40 uppercase leading-none mt-1 group-hover:text-white transition-colors duration-300">
+              <span className="text-[9px] font-bold tracking-[0.3em] text-light-gray/40 uppercase mt-1 group-hover:text-white transition-colors">
                 System
               </span>
             </div>
           </div>
 
+          {/* Menu Desktop */}
           <nav className="hidden md:flex items-center gap-10">
             <a
-              href="#publico-alvo"
+              href={`#publico-alvo`}
               className="text-sm font-medium text-light-gray/70 hover:text-white transition-all relative py-2 group"
             >
               Para quem?
-              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-cyan-light transition-all duration-300 group-hover:w-full shadow-[0_0_8px_#00c2ff]"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-cyan-light transition-all duration-300 group-hover:w-full"></span>
             </a>
             <a
               href="#funcionalidades"
               className="text-sm font-medium text-light-gray/70 hover:text-white transition-all relative py-2 group"
             >
-              Funcionalidades
-              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-cyan-light transition-all duration-300 group-hover:w-full shadow-[0_0_8px_#00c2ff]"></span>
+              Funcionalidade
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-cyan-light transition-all duration-300 group-hover:w-full"></span>
             </a>
             <a
               href="#economia"
               className="text-sm font-medium text-light-gray/70 hover:text-white transition-all relative py-2 group"
             >
               Economia
-              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-cyan-light transition-all duration-300 group-hover:w-full shadow-[0_0_8px_#00c2ff]"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-cyan-light transition-all duration-300 group-hover:w-full"></span>
             </a>
           </nav>
 
-          <a
-            href="#cadastro"
-            className="hidden md:flex items-center gap-3 bg-white/5 border border-white/10 hover:border-cyan-light/40 px-6 py-3 rounded-full text-xs font-bold text-white transition-all duration-300 hover:bg-cyan-light/10 hover:shadow-[0_0_30px_rgba(0,194,255,0.15)] group"
-          >
-            <span className="tracking-wide">LISTA DE ESPERA</span>
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-light opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-light"></span>
-            </span>
-          </a>
+          {/* Botão Mobile & CTA */}
+          <div className="flex items-center gap-4">
+            <a
+              href="#cadastro"
+              className="hidden md:flex items-center gap-3 bg-white/5 border border-white/10 px-6 py-3 rounded-full text-xs font-bold hover:bg-cyan-light/10 transition-all"
+            >
+              LISTA DE ESPERA
+            </a>
+            <button
+              className="md:hidden text-white p-2"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
         </div>
+
+        {/* Overlay Menu Mobile */}
+        {isMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 w-full bg-black-purple border-b border-white/10 p-6 flex flex-col gap-6 animate-in slide-in-from-top duration-300">
+            <a
+              href="#publico-alvo"
+              onClick={() => setIsMenuOpen(false)}
+              className="text-lg font-bold"
+            >
+              Para quem?
+            </a>
+            <a
+              href="#funcionalidades"
+              onClick={() => setIsMenuOpen(false)}
+              className="text-lg font-bold"
+            >
+              Funcionalidades
+            </a>
+            <a
+              href="#economia"
+              onClick={() => setIsMenuOpen(false)}
+              className="text-lg font-bold"
+            >
+              Economia
+            </a>
+            <a
+              href="#cadastro"
+              onClick={() => setIsMenuOpen(false)}
+              className="bg-yellow text-black-purple text-center py-4 rounded-xl font-black"
+            >
+              ENTRAR NA LISTA
+            </a>
+          </div>
+        )}
       </header>
 
       <section className="pt-40 pb-10 px-6 relative overflow-hidden bg-black-purple">
@@ -192,36 +244,36 @@ export default function LandingPage() {
       </section>
 
       <section className="pb-24 pt-10 relative overflow-hidden">
-  <div className="max-w-7xl mx-auto px-6 relative z-10">
-    <p className="text-center text-[10px] tracking-[0.4em] text-cyan-light font-black uppercase mb-10 opacity-80">
-      Ecossistema Versátil
-    </p>
-    
-    <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-      {especialidades.map((item, idx) => (
-        <div
-          key={idx}
-          className="flex items-center gap-3 bg-white/5 border border-white/10 px-5 py-2.5 rounded-full hover:border-cyan-light/50 hover:bg-cyan-light/5 transition-all duration-300 group shadow-sm hover:shadow-[0_0_20px_rgba(0,194,255,0.15)]"
-        >
-          <div className="w-1.5 h-1.5 rounded-full bg-cyan-light shadow-[0_0_8px_#00c2ff] group-hover:scale-125 transition-transform"></div>
-          <span className="text-xs md:text-sm font-semibold text-white/90 group-hover:text-white">
-            {item}
-          </span>
-        </div>
-      ))}
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <p className="text-center text-[10px] tracking-[0.4em] text-cyan-light font-black uppercase mb-10 opacity-80">
+            Ecossistema Versátil
+          </p>
 
-      <div className="flex items-center gap-2 bg-gradient-to-r from-purple-bright/20 to-cyan-light/20 border border-cyan-light/30 px-5 py-2.5 rounded-full hover:scale-105 transition-all duration-300 cursor-default">
-        <Plus size={16} className="text-cyan-light animate-pulse" />
-        <span className="text-xs md:text-sm font-black text-white tracking-tight">
-          em breve
-        </span>
-      </div>
-    </div>
-  </div>
-  
-  {/* Detalhe de luz de fundo para tirar o aspecto escuro */}
-  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-32 bg-cyan-light/5 blur-[100px] -z-10"></div>
-</section>
+          <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+            {especialidades.map((item, idx) => (
+              <div
+                key={idx}
+                className="flex items-center gap-3 bg-white/5 border border-white/10 px-5 py-2.5 rounded-full hover:border-cyan-light/50 hover:bg-cyan-light/5 transition-all duration-300 group shadow-sm hover:shadow-[0_0_20px_rgba(0,194,255,0.15)]"
+              >
+                <div className="w-1.5 h-1.5 rounded-full bg-cyan-light shadow-[0_0_8px_#00c2ff] group-hover:scale-125 transition-transform"></div>
+                <span className="text-xs md:text-sm font-semibold text-white/90 group-hover:text-white">
+                  {item}
+                </span>
+              </div>
+            ))}
+
+            <div className="flex items-center gap-2 bg-gradient-to-r from-purple-bright/20 to-cyan-light/20 border border-cyan-light/30 px-5 py-2.5 rounded-full hover:scale-105 transition-all duration-300 cursor-default">
+              <Plus size={16} className="text-cyan-light animate-pulse" />
+              <span className="text-xs md:text-sm font-black text-white tracking-tight">
+                em breve
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Detalhe de luz de fundo para tirar o aspecto escuro */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-32 bg-cyan-light/5 blur-[100px] -z-10"></div>
+      </section>
 
       <section id="publico-alvo" className="py-20 relative bg-black-purple">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -718,25 +770,49 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <footer className="py-12 border-t absolute w-full border-purple-bright/20 bg-black-purple text-white/50 text-sm">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+      <footer className="py-12 border-t border-purple-bright/20 bg-black-purple text-white/50 text-sm">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
             <div className="text-center md:text-left">
               <p className="font-bold text-white mb-1">CLINIC OS</p>
               <p>© {new Date().getFullYear()} Todos os direitos reservados.</p>
             </div>
-            <Link
-              href={"/"}
-              className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-purple-bright/30 hover:border-cyan-light/50 transition-colors  group cursor-pointer"
-            >
-              <Code2 className="w-4 h-4 text-cyan-light" />
-              <span className="text-white/80 text-xs">
-                Desenvolvido por{" "}
-                <strong className="text-white group-hover:text-cyan-light transition-colors">
-                  YM Desenvolvimento
-                </strong>
-              </span>
-            </Link>
+
+            <div className="flex justify-center gap-6 font-medium">
+              <Link
+                href="/politica-de-privacidade"
+                className="hover:text-cyan-light transition-colors"
+              >
+                Política de Privacidade
+              </Link>
+              <Link
+                href="/termos-de-uso"
+                className="hover:text-cyan-light transition-colors"
+              >
+                Termos de Uso
+              </Link>
+              <Link
+                href="/privacidade"
+                className="hover:text-cyan-light transition-colors"
+              >
+                Privacidade
+              </Link>
+            </div>
+
+            <div className="flex justify-center md:justify-end">
+              <Link
+                href={"/"}
+                className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-purple-bright/30 hover:border-cyan-light/50 transition-colors  group cursor-pointer"
+              >
+                <Code2 className="w-4 h-4 text-cyan-light" />
+                <span className="text-white/80 text-xs text-center group-hover:text-cyan-light transition-colors">
+                  Desenvolvido por{" "}
+                  <strong className="text-white group-hover:text-cyan-light transition-colors">
+                    YM Desenvolvimento
+                  </strong>
+                </span>
+              </Link>
+            </div>
           </div>
         </div>
       </footer>

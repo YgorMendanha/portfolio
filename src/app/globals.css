@@ -1,86 +1,92 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-html,
-body,
-:root {
-  height: 100%;
-  scroll-behavior: smooth;
-  background-color: #19092e;
-}
-
+/* Configuração do Tema */
 @theme {
   /* Cores de fundo / principais */
-  --color-black-purple: #19092e; /* Roxo escuro, identidade, fundo e áreas fortes */
-  --color-white: #ffffff; /* Branco puro */
-  --color-gray-lightest: #f4f4f4; /* Cinza muito claro (quase branco) */
+  --color-black-purple: #19092e;
+  --color-white: #ffffff;
+  --color-gray-lightest: #f4f4f4;
 
   /* Cores de destaque / CTAs */
-  --color-purple-bright: #3f20ba; /* Roxo vibrante para destaques sutis */
-  --color-cyan-light: #00c2ff; /* Azul claro/ciano para botões e ícones de ação */
-  --color-yellow: #ffcc00; /* Amarelo vibrante para detalhes ou ênfase */
+  --color-purple-bright: #3f20ba;
+  --color-cyan-light: #00c2ff;
+  --color-yellow: #ffcc00;
 
   /* Cores de texto */
-  --color-dark: #222222; /* Cinza escuro para corpo do texto sobre fundo claro */
-  --color-light-gray: #eaeaea; /* Cinza claro para legenda sobre fundo escuro */
-  --color-white: #ffffff; /* Branco para títulos sobre fundo roxo */
+  --color-dark: #222222;
+  --color-light-gray: #eaeaea;
 }
 
+/* Configurações Base */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background-color: var(--color-black-purple);
+    color: var(--color-light-gray);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+  }
+
+  /* Estilo da seleção de texto (Highlight) */
+  ::selection {
+    background-color: var(--color-cyan-light);
+    color: var(--color-black-purple);
+  }
+}
+
+/* Utilitários e Animações */
 @layer utilities {
-  /* Float lento */
   @keyframes float-balloon {
-    0% {
-      transform: translate3d(0, 0, 0) rotate(0deg);
-    }
-    15% {
-      transform: translate3d(-2px, -4px, 0) rotate(-1deg);
-    }
-    30% {
-      transform: translate3d(2px, -8px, 0) rotate(1deg);
-    }
-    45% {
-      transform: translate3d(-1px, -12px, 0) rotate(-0.5deg);
-    }
-    60% {
-      transform: translate3d(1px, -8px, 0) rotate(0.5deg);
-    }
-    75% {
-      transform: translate3d(-1px, -4px, 0) rotate(-0.5deg);
-    }
-    100% {
-      transform: translate3d(0, 0, 0) rotate(0deg);
-    }
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+    15% { transform: translate3d(-2px, -4px, 0) rotate(-1deg); }
+    30% { transform: translate3d(2px, -8px, 0) rotate(1deg); }
+    45% { transform: translate3d(-1px, -12px, 0) rotate(-0.5deg); }
+    60% { transform: translate3d(1px, -8px, 0) rotate(0.5deg); }
+    75% { transform: translate3d(-1px, -4px, 0) rotate(-0.5deg); }
   }
 
   .animate-float-balloon {
-    --tw-animate: float-balloon 20s ease-in-out infinite;
-    animation: var(--tw-animate);
+    animation: float-balloon 20s ease-in-out infinite;
     will-change: transform;
     backface-visibility: hidden;
     transform-origin: center bottom;
   }
+  
+  .container {
+    @apply px-5 mx-auto max-w-7xl;
+  }
 }
+
 
 ::-webkit-scrollbar {
-  width: 5px;
-  border-radius: 50%;
-  height: 5px;
-}
-::-webkit-scrollbar-track {
-  background-color: #ffffff;
-}
-::-webkit-scrollbar-thumb {
-  background-color: #a855f7;
-  width: 1px;
-  border-radius: 50px;
-}
-::-webkit-scrollbar-corner {
-  background-color: #ffffff;
-}
-.react-multiple-carousel__arrow {
-  z-index: 28 !important;
+  width: 8px; 
+  height: 8px;
 }
 
-.container {
-  @apply px-5 mx-auto;
+::-webkit-scrollbar-track {
+  background-color: var(--color-black-purple); /* Fundo escuro */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-purple-bright); /* Roxo da marca */
+  border-radius: 4px;
+  border: 2px solid var(--color-black-purple); /* Borda para dar "respiro" */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-cyan-light); /* Hover ciano */
+}
+
+::-webkit-scrollbar-corner {
+  background-color: var(--color-black-purple);
+}
+
+/* Ajuste específico para carousel se necessário */
+.react-multiple-carousel__arrow {
+  z-index: 28 !important;
 }

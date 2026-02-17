@@ -2,7 +2,6 @@ import { Layout } from "@/components";
 import "@/app/globals.css";
 import type { Metadata, Viewport } from "next";
 import { Nunito } from "next/font/google";
-import { getDictionary } from "@/utils/functions/getDictionary";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalytics } from "@/utils/lib/analytics";
 import { ProfilePage, WithContext, Organization } from "schema-dts";
@@ -57,20 +56,32 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const canonicalURL = `${urlsite}${canonicalPath}`;
 
-  const dict = getDictionary(lang);
+  // metatags inline (pt / en)
+  const metatags =
+    lang === "pt"
+      ? {
+          title: "Ygor Mendanha - YM Desenvolvimento",
+          description:
+            "Especialista em soluções digitais: e-commerce, apps personalizados e sistemas ERP para empresas que buscam vender mais e otimizar processos.",
+        }
+      : {
+          title: "Ygor Mendanha - YM Development",
+          description:
+            "Specialist in digital solutions: e-commerce, custom apps and ERP systems for companies looking to increase sales and optimize processes.",
+        };
 
   return {
     metadataBase: new URL(`${urlsite}`),
     title: {
-      absolute: dict.metatags.title,
-      template: `%s - ${dict.metatags.title}`,
-      default: dict.metatags.title,
+      absolute: metatags.title,
+      template: `%s - ${metatags.title}`,
+      default: metatags.title,
     },
-    description: dict.metatags.description,
+    description: metatags.description,
     openGraph: {
       url: canonicalURL,
-      title: dict.metatags.title,
-      description: dict.metatags.description,
+      title: metatags.title,
+      description: metatags.description,
       siteName: "Ygor Mendanha",
       images: [
         {
@@ -98,9 +109,9 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       site: "@site",
       card: "summary",
-      description: dict.metatags.description,
+      description: metatags.description,
       creator: "@YgorMendanha",
-      title: dict.metatags.title,
+      title: metatags.title,
     },
     alternates: {
       canonical: canonicalURL,

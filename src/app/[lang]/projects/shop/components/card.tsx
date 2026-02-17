@@ -136,43 +136,68 @@ export function CardChangeImg({
 
   const textClasses = `order-1 ${
     imageOnRight ? "lg:order-1" : "lg:order-2"
-  } lg:col-span-2`;
+  } lg:col-span-1`;
 
   const imageWrapperClasses = `order-2 ${
     imageOnRight ? "lg:order-2" : "lg:order-1"
-  } flex justify-center`;
+  } flex justify-center lg:col-span-2`;
 
   return (
     <article
       key={item.id}
       id={item.id}
-      className="bg-white p-6 rounded-2xl shadow-sm grid grid-cols-1 lg:grid-cols-3 gap-6 items-center"
+      className="bg-white/[0.03] border border-white/10 p-8 rounded-3xl shadow-2xl grid grid-cols-1 lg:grid-cols-3 gap-12 items-center transition-all duration-500 hover:bg-white/[0.05]"
     >
-      <div className={clsx("h-full", textClasses)}>
-        <h2 className="text-xl font-semibold mb-auto">{item.title}</h2>
+      <div className={clsx("h-full flex flex-col justify-center", textClasses)}>
+        <h2 className="text-2xl font-bold text-white mb-2">{item.title}</h2>
+        <div className="w-12 h-1 bg-yellow mb-6 rounded-full" />
 
         {item.items?.length ? (
-          <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {item.items.map((it) => (
-              <li
-                key={it.title}
-                className="p-3 bg-light-gray rounded-lg cursor-pointer hover:bg-gray-lightest transition"
-                onPointerEnter={() => swapTo(it)}
-                onFocus={() => swapTo(it)}
-                tabIndex={0}
-                aria-label={`${it.title}: ${it.desc}`}
-              >
-                <div className="font-medium">{it.title}</div>
-                <div className="text-sm text-slate-700 mt-1">{it.desc}</div>
-                {it.img && <FiEye className="mt-auto ml-auto" />}
-              </li>
-            ))}
+          <ul className="grid grid-cols-1 gap-4">
+            {item.items.map((it) => {
+              const isActive = front.src === it.img || back?.src === it.img;
+              
+              return (
+                <li
+                  key={it.title}
+                  className={clsx(
+                    "p-4 rounded-xl cursor-pointer transition-all duration-300 border flex flex-col group",
+                    isActive 
+                      ? "bg-yellow/10 border-yellow/30 shadow-[0_0_15px_rgba(255,204,0,0.1)]" 
+                      : "bg-white/5 border-white/5 hover:border-white/20 hover:bg-white/10"
+                  )}
+                  onPointerEnter={() => swapTo(it)}
+                  onFocus={() => swapTo(it)}
+                  tabIndex={0}
+                  aria-label={`${it.title}: ${it.desc}`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className={clsx(
+                      "font-bold transition-colors",
+                      isActive ? "text-yellow" : "text-white"
+                    )}>
+                      {it.title}
+                    </div>
+                    {it.img && (
+                      <FiEye className={clsx(
+                        "transition-colors",
+                        isActive ? "text-yellow" : "text-gray-600 group-hover:text-cyan-light"
+                      )} />
+                    )}
+                  </div>
+                  <div className="text-sm text-gray-400 mt-1 leading-relaxed">
+                    {it.desc}
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         ) : null}
       </div>
 
       <div className={imageWrapperClasses}>
-        <div className="w-full max-w-[400px] h-[400px] relative rounded-lg overflow-hidden shadow">
+        {/* Moldura de imagem com efeito de monitor em Ciano */}
+        <div className="w-full relative rounded-2xl overflow-hidden border border-cyan-light/20 shadow-[0_0_30px_rgba(0,194,255,0.1)] aspect-[4/3] lg:aspect-auto lg:h-[500px] bg-black/40">
           {front.src && (
             <ImageZoomModal imageUrl={front.src} link={front.link}>
               <Image
@@ -180,8 +205,8 @@ export function CardChangeImg({
                 src={front.src!}
                 alt={`Ilustração ${item.title}`}
                 fill
-                sizes="(max-width: 480px) 400px, 400px"
-                className={`transition-opacity duration-[${TRANSITION_MS}ms] ease-in-out object-contain ${
+                sizes="(max-width: 1024px) 100vw, 800px"
+                className={`transition-opacity duration-[${TRANSITION_MS}ms] ease-in-out object-contain p-4 ${
                   back?.visible ? "opacity-0" : "opacity-100"
                 }`}
                 priority={true}
@@ -195,8 +220,8 @@ export function CardChangeImg({
               src={back.src}
               alt={`Ilustração ${item.title}`}
               fill
-              sizes="(max-width: 480px) 400px, 400px"
-              className={`transition-opacity duration-[${TRANSITION_MS}ms] ease-in-out object-contain absolute top-0 left-0 ${
+              sizes="(max-width: 1024px) 100vw, 800px"
+              className={`transition-opacity duration-[${TRANSITION_MS}ms] ease-in-out object-contain p-4 absolute top-0 left-0 ${
                 back.visible ? "opacity-100" : "opacity-0"
               }`}
             />

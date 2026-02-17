@@ -1,7 +1,8 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
 import {
   FiShoppingCart,
   FiBarChart2,
@@ -11,411 +12,240 @@ import {
   FiTrendingUp,
 } from "react-icons/fi";
 import { Contact } from "@/components";
-import { getDictionary } from "@/utils/functions/getDictionary";
 import { FaCheckCircle } from "react-icons/fa";
 import { Button } from "@/components/partials/ui/button";
 import { ProjectsDetails } from "@/utils/functions/getProjectsDetails";
 import { ScrollReveal } from "@/components/partials/ScrollAnimate";
-import { cookies } from "next/headers";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ lang: "en" | "pt" }>;
-}): Promise<Metadata> {
-  const { lang } = await params;
-  const cookieStore = await cookies();
-  const pathname = cookieStore.get("pathname");
-  const dict = getDictionary(lang);
-
-  const path = pathname?.value || "/";
-
-  return {
-    title: dict.storeCreationConsulting,
-    description: dict.ecommerceStoreDescription,
-    openGraph: {
-      title: dict.storeCreationConsulting,
-      description: dict.ecommerceStoreDescription,
-      url: path,
-      images: [
-        {
-          url: "https://myymbucket.s3.sa-east-1.amazonaws.com/imagens/Logo.png",
-          width: 800,
-          height: 600,
-        },
-      ],
-    },
-    twitter: {
-      site: "@site",
-      card: "summary",
-      description: dict.ecommerceStoreDescription,
-      creator: "@YgorMendanha",
-      title: dict.storeCreationConsulting,
-    },
-  };
-}
-
-type Feature = { title: string; desc: string; icon: React.ReactNode };
-
-export default async function ShopService({
+export default function ShopService({
   params,
 }: {
   params: Promise<{ lang: "en" | "pt" }>;
 }) {
-  const { lang } = await params;
-  const dict = getDictionary(lang);
+  const { lang } = React.use(params);
   const Projects = ProjectsDetails({ lang });
 
-  const features: Feature[] = [
+  const content = {
+    pt: {
+      badge: "Loja pronta + consultoria",
+      heading:
+        "Crio lojas que vendem — e consultorias que fazem elas crescerem.",
+      sub: "Desenvolvimento sob medida, otimização de conversão e SEO técnico focado em resultados reais.",
+      proofs: "Performance comprovada",
+      proofsSub:
+        "Não é apenas design; é engenharia focada em velocidade e conversão.",
+      ctaTitle: "Quer que eu crie ou otimize sua loja?",
+      ctaPoints: [
+        "Brief rápido — sem compromisso",
+        "Plano de melhorias realista",
+        "Preço inicial aproximado",
+      ],
+    },
+    en: {
+      badge: "Ready Store + Consulting",
+      heading:
+        "I build stores that sell — and consulting that makes them grow.",
+      sub: "Bespoke development, conversion optimization, and technical SEO focused on real results.",
+      proofs: "Proven Performance",
+      proofsSub:
+        "It's not just design; it's engineering focused on speed and conversion.",
+      ctaTitle: "Want me to build or optimize your store?",
+      ctaPoints: [
+        "Quick brief — no commitment",
+        "Realistic improvement plan",
+        "Approximate starting price",
+      ],
+    },
+  };
+
+  const t = content[lang] || content.pt;
+
+  const features = [
     {
-      title: dict.shopFeatureCreationTitle,
-      desc: dict.shopFeatureCreationDesc,
-      icon: <FiShoppingCart className="w-6 h-6" aria-hidden />,
+      title:
+        lang === "pt" ? "Criação de lojas sob medida" : "Custom Store Creation",
+      desc:
+        lang === "pt"
+          ? "Loja otimizada, responsiva e alinhada à identidade da sua marca — pronta para vender desde o primeiro dia."
+          : "Optimized, responsive store aligned with your brand identity — ready to sell from day one.",
+      icon: <FiShoppingCart className="w-6 h-6" />,
+      color: "border-cyan-light/20",
     },
     {
-      title: dict.shopFeatureConsultingTitle,
-      desc: dict.shopFeatureConsultingDesc,
-      icon: <FiBarChart2 className="w-6 h-6" aria-hidden />,
+      title:
+        lang === "pt"
+          ? "Consultoria de vendas & CRO"
+          : "Sales Consulting & CRO",
+      desc:
+        lang === "pt"
+          ? "Aumentamos a taxa de conversão com testes A/B, copy que converte e jornadas de compra eficientes."
+          : "We increase conversion rates with A/B testing, high-converting copy and efficient purchase journeys.",
+      icon: <FiBarChart2 className="w-6 h-6" />,
+      color: "border-yellow/20",
     },
     {
-      title: dict.shopFeatureSeoTitle,
-      desc: dict.shopFeatureSeoDesc,
-      icon: <FiSearch className="w-6 h-6" aria-hidden />,
+      title: lang === "pt" ? "SEO & Performance" : "SEO & Performance",
+      desc:
+        lang === "pt"
+          ? "Ranqueamento técnico e conteúdo estratégico para trazer tráfego orgânico qualificado."
+          : "Technical ranking and strategic content to drive qualified organic traffic.",
+      icon: <FiSearch className="w-6 h-6" />,
+      color: "border-purple-bright/20",
     },
   ];
 
   const images = {
     shop: {
       img: "/finesse-store.png",
-      ulr: Projects.find((p) => p.id === "ecommerce")?.link ?? "#",
+      url: Projects.find((p) => p.id === "ecommerce")?.link ?? "#",
     },
-    shopMetrics: {
-      img: "/metrics/metric_shop.png",
-      ulr: "https://pagespeed.web.dev/analysis/https-store-ygormendanha-com-pt/7tg64xawqn?form_factor=desktop",
-    },
-    shopSingleProduct: { img: "", ulr: "" },
-    shopSingleProductMetrics: {
-      img: "/metrics/metric_shop_page_product.png",
-      ulr: "https://pagespeed.web.dev/analysis/https-store-ygormendanha-com-pt-shop-1/py6hh4og95?form_factor=desktop",
-    },
+    shopMetrics: "/metrics/metric_shop.png",
+    shopProductMetrics: "/metrics/metric_shop_page_product.png",
   };
+
   return (
-    <div className="bg-light-gray text-black-purple flex flex-col gap-16">
-      <section className="pt-25 md:pt-20 container mx-auto p-5  items-center flex min-h-screen  overflow-hidden">
-        <div className="grid grid-cols-1 h-full lg:grid-cols-2 gap-10 items-center">
-          <ScrollReveal
-            speed={"slow"}
-            direction="left"
-            reverse
-            mobileConfig={{ direction: "top" }}
-          >
-            <div className="relative w-full animate-float-balloon flex items-center flex-col justify-center">
-              <Link
-                href={images.shop.ulr}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-2xl overflow-hidden shadow-2xl "
-              >
-                <Image
-                  src={images.shop.img}
-                  alt={dict.shopPreviewAlt}
-                  width={600}
-                  height={600}
-                  className="object-cover"
-                  priority
-                />
-              </Link>
+    <div className="bg-black-purple text-white flex flex-col gap-24 pb-20">
+      {/* Hero Section */}
+      <section className="relative pt-32 min-h-screen flex items-center overflow-hidden">
+        <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-purple-bright/10 rounded-full blur-[120px] pointer-events-none" />
 
-              <div className="mt-4 text-sm text-slate-500">
-                {dict.viewExampleStore} • {dict.shopPreviewAlt}
-              </div>
-            </div>
-          </ScrollReveal>
+        <div className="container mx-auto px-5 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <ScrollReveal direction="left">
+            <span className="inline-block px-4 py-1.5 bg-yellow/10 text-yellow border border-yellow/20 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
+              {t.badge}
+            </span>
 
-          <div className="flex flex-col gap-3">
-            <ScrollReveal
-              reverse
-              speed={"slow"}
-              direction="top"
-              mobileConfig={{ opacityFrom: 1 }}
-            >
-              <>
-                <p className="inline-block px-3 py-1 bg-purple-bright/20 text-black-purple rounded-full font-medium">
-                  {dict.shopBadge}
-                </p>
+            <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight">
+              {t.heading}
+            </h1>
 
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
-                  {dict.shopHeading}
-                </h1>
-
-                <p className="text-lg text-black max-w-xl">{dict.shopIntro}</p>
-              </>
-            </ScrollReveal>
-
-            <ScrollReveal
-              reverse
-              speed={"slow"}
-              direction="right"
-              className="flex flex-col sm:flex-row gap-3"
-              mobileConfig={{
-                direction: "right",
-                reverse: false,
-              }}
-            >
-              <Button
-                href="#example-store"
-                aria-label={dict.openExampleBtn}
-                className="w-full sm:w-auto"
-              >
-                {dict.viewExampleStore}
-              </Button>
-
-              <Button
-                variant="ghost"
-                href="#contact"
-                aria-label={dict.requestConsulting}
-                className="w-full sm:w-auto"
-              >
-                {dict.requestConsulting}
-              </Button>
-            </ScrollReveal>
-
-            <div className="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <ScrollReveal
-                reverse
-                speed={"slow"}
-                direction="bottom"
-                mobileConfig={{ reverse: false }}
-                className="bg-white p-4 rounded-lg shadow-sm flex items-center gap-3"
-              >
-                <FiShield className="w-6 h-6 text-purple-bright" />
-                <div>
-                  <div className="text-sm text-slate-500">
-                    {dict.cardSecurityTitle}
-                  </div>
-                  <div className="font-semibold">
-                    {dict.cardSecuritySubtitle}
-                  </div>
-                </div>
-              </ScrollReveal>
-
-              <ScrollReveal
-                reverse
-                speed={"slow"}
-                direction="bottom"
-                mobileConfig={{ reverse: false }}
-                className="bg-white p-4 rounded-lg shadow-sm flex items-center gap-3"
-              >
-                <FiClock className="w-6 h-6 text-purple-bright" />
-                <div>
-                  <div className="text-sm text-slate-500">
-                    {dict.cardDeliveryTitle}
-                  </div>
-                  <div className="font-semibold">
-                    {dict.cardDeliverySubtitle}
-                  </div>
-                </div>
-              </ScrollReveal>
-
-              <ScrollReveal
-                reverse
-                speed={"slow"}
-                direction="bottom"
-                mobileConfig={{ reverse: false }}
-                className="bg-white p-4 rounded-lg shadow-sm flex items-center gap-3"
-              >
-                <FiTrendingUp className="w-6 h-6 text-purple-bright" />
-                <div>
-                  <div className="text-sm text-slate-500">
-                    {dict.cardResultsTitle}
-                  </div>
-                  <div className="font-semibold">
-                    {dict.cardResultsSubtitle}
-                  </div>
-                </div>
-              </ScrollReveal>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-gray-lightest py-14 overflow-hidden">
-        <div className="container mx-auto px-5">
-          <ScrollReveal direction="top">
-            <h2 className="text-2xl font-bold mb-6 animate-wiggle motion-reduce:animate-none">
-              {dict.whatIDeliverTitle}
-            </h2>
-          </ScrollReveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((f, idx) => {
-              const isReverse = idx % 2 === 0;
-              const direction: "top" | "left" | "right" | "bottom" = isReverse
-                ? "left"
-                : "right";
-              return (
-                <ScrollReveal
-                  direction={isReverse ? "bottom" : "top"}
-                  mobileConfig={{ direction }}
-                  key={f.title}
-                  className="p-6 bg-slate-50 rounded-2xl shadow-sm hover:-translate-y-1 transition-transform motion-reduce:transition-none group"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="p-3 rounded-lg shadow bg-purple-bright/10 text-black-purple group-hover:text-cyan-light">
-                      {f.icon}
-                    </div>
-                    <div>
-                      <h3 className="font-semibold">{f.title}</h3>
-                      <p className="text-sm text-black mt-1">{f.desc}</p>
-                    </div>
-                  </div>
-                </ScrollReveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section id="proof" className="container mx-auto px-5">
-        <ScrollReveal direction="top">
-          <h2 className="text-2xl font-bold mb-1  motion-reduce:animate-none">
-            {dict.proofsTitle}
-          </h2>
-        </ScrollReveal>
-        <ScrollReveal direction="bottom">
-          <p className="text-black mb-1">{dict.proofsIntro}</p>
-          <div className="bg-black/20 w-full h-[2px] mb-10" />
-        </ScrollReveal>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <ScrollReveal direction="bottom">
-            <Link
-              target="_blank"
-              rel="noopener noreferrer"
-              href={images.shopMetrics.ulr}
-              className="shadow-sm hover:scale-101 active:scale-95 transition-all duration-100"
-            >
-              <Image
-                src={images.shopMetrics.img}
-                alt={dict.shopMetricsAlt}
-                width={500}
-                height={500}
-                className=" object-cover rounded-xl"
-              />
-            </Link>
-          </ScrollReveal>
-          <ScrollReveal direction="bottom">
-            <Link
-              target="_blank"
-              rel="noopener noreferrer"
-              href={images.shopSingleProductMetrics.ulr}
-              className="shadow-sm"
-            >
-              <Image
-                src={images.shopSingleProductMetrics.img}
-                alt={dict.shopSingleProductMetricsAlt}
-                width={800}
-                height={800}
-                className="object-cover rounded-xl"
-              />
-            </Link>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      <section id="example-store" className="overflow-hidden">
-        <div className="container mx-auto px-5">
-          <ScrollReveal direction="bottom">
-            <h2 className="text-3xl font-bold">{dict.demoStoreTitle}</h2>
-            <div className="bg-black/20 w-full h-[2px] mb-10" />
-          </ScrollReveal>
-
-          <div className="grid lg:grid-cols-2 gap-8 items-center ">
-            <ScrollReveal
-              direction="left"
-              className="bg-gray-lightest rounded-2xl p-6"
-            >
-              <p className="text-black mt-2">{dict.demoStoreIntro}</p>
-
-              <ul className="mt-4 space-y-2">
-                <li className="flex items-center gap-3 group">
-                  <span className="inline-block p-2  rounded-md shadow-sm group-hover:text-cyan-light bg-purple-bright/10 text-black-purple">
-                    <FiShoppingCart className="w-5 h-5" aria-hidden />
-                  </span>
-                  <span className="text-sm">{dict.demoFeatureCheckout}</span>
-                </li>
-                <li className="flex items-center gap-3 group">
-                  <span className="inline-block p-2  rounded-md shadow-sm group-hover:text-cyan-light bg-purple-bright/10 text-black-purple">
-                    <FiBarChart2 className="w-5 h-5" aria-hidden />
-                  </span>
-                  <span className="text-sm">{dict.demoFeatureSeo}</span>
-                </li>
-              </ul>
-
-              <div className="mt-6 flex gap-3 flex-wrap">
-                <Button
-                  href={Projects.find((p: any) => p.id === "ecommerce")?.link}
-                  target="_blank"
-                  aria-label={dict.openExampleBtn}
-                  className="w-full md:w-auto"
-                >
-                  {dict.openExampleBtn}
-                </Button>
-
-                <Button
-                  href="#contact"
-                  className="w-full md:w-auto"
-                  variant="ghost"
-                >
-                  {dict.iWantConversionBtn}
-                </Button>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal direction="right">
-              <Link
-                href={
-                  Projects.find((p: any) => p.id === "ecommerce")?.link ?? "#"
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-2xl overflow-hidden shadow hover:scale-101 active:scale-95 transition-all duration-100"
-              >
-                <Image
-                  src={images.shop.img}
-                  alt={dict.shopPreviewAlt}
-                  width={900}
-                  height={600}
-                  className="w-full h-auto object-cover"
-                />
-              </Link>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      <Contact
-        lang={lang}
-        title="Quer que eu crie ou otimize sua loja?"
-        text={
-          <>
-            <p className="mt-2">
-              Envie detalhes da sua loja atual ou fale sobre o projeto que
-              imagina. Vou analisar e responder com um plano e orçamento.
+            <p className="text-xl text-gray-400 mb-10 leading-relaxed">
+              {t.sub}
             </p>
 
-            <ul className="mt-4 text-sm flex gap-2 flex-col">
-              <li className="flex gap-2">
-                <FaCheckCircle size={24} /> Brief rápido — sem compromisso
-              </li>
-              <li className="flex gap-2">
-                <FaCheckCircle size={24} /> Plano de melhorias realista
-              </li>
-              <li className="flex gap-2">
-                <FaCheckCircle size={24} /> Preço inicial aproximado
-              </li>
-            </ul>
-          </>
-        }
-      />
+            <div className="flex flex-wrap gap-4 mb-12">
+              <Button
+                href="#example-store"
+                className="bg-cyan-light text-black-purple"
+              >
+                {lang === "pt" ? "Ver loja de exemplo" : "View example store"}
+              </Button>
+
+              <Button href="#contact" variant="ghost">
+                {lang === "pt" ? "Solicitar consultoria" : "Request consulting"}
+              </Button>
+            </div>
+
+            {/* Quick Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
+                {
+                  label: lang === "pt" ? "Segurança" : "Security",
+                  sub: lang === "pt" ? "Pagamentos seguros" : "Secure payments",
+                  icon: <FiShield />,
+                  color: "text-green-400",
+                },
+                {
+                  label: lang === "pt" ? "Entrega" : "Delivery",
+                  sub:
+                    lang === "pt"
+                      ? "Ritmo ágil e previsível"
+                      : "Agile and predictable pace",
+                  icon: <FiClock />,
+                  color: "text-cyan-light",
+                },
+                {
+                  label: lang === "pt" ? "Resultados" : "Results",
+                  sub:
+                    lang === "pt" ? "Foco em conversão" : "Conversion-focused",
+                  icon: <FiTrendingUp />,
+                  color: "text-yellow",
+                },
+              ].map((card, i) => (
+                <div
+                  key={i}
+                  className="bg-white/5 border border-white/10 p-4 rounded-2xl"
+                >
+                  <div className={`mb-2 ${card.color}`}>{card.icon}</div>
+                  <div className="text-[10px] text-gray-500 uppercase font-bold">
+                    {card.label}
+                  </div>
+                  <div className="text-sm font-bold text-white">{card.sub}</div>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="right" className="relative group">
+            <Link
+              href={images.shop.url}
+              target="_blank"
+              className="block relative z-10 rounded-3xl overflow-hidden border border-white/10 shadow-2xl"
+            >
+              <Image
+                src={images.shop.img}
+                alt={lang === "pt" ? "Preview da loja" : "Store preview"}
+                width={700}
+                height={500}
+                className="transition-transform duration-700 group-hover:scale-105"
+              />
+            </Link>
+            <div className="absolute -inset-4 bg-yellow/5 blur-2xl -z-10 group-hover:bg-yellow/10 transition-all" />
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="bg-white/[0.02] py-24 border-y border-white/5">
+        <div className="container mx-auto px-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {features.map((f, i) => (
+              <ScrollReveal
+                key={i}
+                direction="bottom"
+                className={`p-8 bg-black-purple border ${f.color} rounded-3xl group hover:-translate-y-2 transition-all`}
+              >
+                <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:text-white transition-colors">
+                  {f.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-4">{f.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  {f.desc}
+                </p>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Proofs Section */}
+      <section className="container mx-auto px-5">
+        <ScrollReveal direction="top" className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">{t.proofs}</h2>
+          <p className="text-gray-400 text-lg">{t.proofsSub}</p>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {[images.shopMetrics, images.shopProductMetrics].map((img, i) => (
+            <ScrollReveal
+              key={i}
+              direction="bottom"
+              className="rounded-3xl overflow-hidden border border-white/10 hover:border-cyan-light/50 transition-colors bg-white/5 p-2"
+            >
+              <Image
+                src={img}
+                alt={lang === "pt" ? "Métricas" : "Metrics"}
+                width={600}
+                height={400}
+                className="rounded-2xl"
+              />
+            </ScrollReveal>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact Section Overlay */}
+      <Contact lang={lang} />
     </div>
   );
 }
