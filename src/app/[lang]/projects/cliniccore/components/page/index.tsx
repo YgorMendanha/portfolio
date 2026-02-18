@@ -34,7 +34,7 @@ import Link from "next/link";
 
 export function LandingPageClinicCore() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [confirmados, setConfirmados] = useState(0);
+  const [confirmed, setConfirmed] = useState(0);
 
 useEffect(() => {
     // --- CONFIGURATION ---
@@ -247,7 +247,7 @@ useEffect(() => {
             </a>
             <p className="text-xs text-light-gray/40">
               Junte-se a{" "}
-              <strong className="text-white">+{confirmados} clínicas</strong> na
+              <strong className="text-white">+{confirmed} clínicas</strong> na
               lista de espera.
             </p>
           </div>
@@ -769,7 +769,7 @@ useEffect(() => {
             <div className="flex items-center gap-2">
               <Users size={14} className="text-cyan-light" />
               <span>
-                Mais de <strong>{confirmados}</strong> interessados.
+                Mais de <strong>{confirmed}</strong> interessados.
               </span>
             </div>
             <div className="hidden md:block w-1 h-1 bg-light-gray/30 rounded-full"></div>
