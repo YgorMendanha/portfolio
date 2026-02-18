@@ -11,13 +11,12 @@ export default function NotFound() {
 
   return (
     <main className="min-h-screen bg-black-purple flex items-center justify-center p-5 overflow-hidden relative">
-      {/* Elementos Decorativos de Fundo */}
+
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-yellow/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute -bottom-20 -left-20 w-[300px] h-[300px] bg-purple-bright/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="container max-w-2xl mx-auto text-center relative z-10">
         <ScrollReveal direction="top">
-          {/* O Código do Erro em Amarelo - O Insight do que deu errado */}
           <h1 className="text-[120px] md:text-[180px] font-black leading-none text-yellow opacity-20 select-none">
             404
           </h1>
@@ -57,7 +56,7 @@ export default function NotFound() {
 
         {/* Detalhe de Código "Tech" Decorativo */}
         <ScrollReveal direction="top" className="mt-20">
-          <code className="text-xs text-purple-bright/40 font-mono">
+          <code className="text-xs text-purple-bright font-mono">
             Error_Code: 0x404_PAGE_NOT_FOUND_INSIGHT
           </code>
         </ScrollReveal>
