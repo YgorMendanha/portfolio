@@ -1,6 +1,3 @@
-"use client";
-
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -12,17 +9,64 @@ import {
   FiTrendingUp,
 } from "react-icons/fi";
 import { Contact } from "@/components";
-import { FaCheckCircle } from "react-icons/fa";
 import { Button } from "@/components/partials/ui/button";
 import { ProjectsDetails } from "@/utils/functions/getProjectsDetails";
 import { ScrollReveal } from "@/components/partials/ScrollAnimate";
+import { Metadata } from "next";
+import { cookies } from "next/headers";
 
-export default function ShopService({
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: "en" | "pt" }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const cookieStore = await cookies();
+  const pathname = cookieStore.get("pathname");
+
+  const path = pathname?.value || "/";
+
+  const titles = {
+    pt: "Criação de lojas & consultoria",
+    en: "Store creation & consulting",
+  };
+
+  const descriptions = {
+    pt: "Criamos lojas e-commerce que vendem de verdade, com design responsivo, checkout otimizado, SEO técnico e suporte contínuo. Veja a loja de exemplo e descubra como sua jornada de vendas pode ser transformada.",
+    en: "We create e-commerce stores that truly sell, with responsive design, optimized checkout, technical SEO, and ongoing support. Check out the demo store and see how your sales journey can be transformed.",
+  };
+
+  return {
+    title: titles[lang] || titles.pt,
+    description: descriptions[lang] || descriptions.pt,
+    openGraph: {
+      title: titles[lang] || titles.pt,
+      description: descriptions[lang] || descriptions.pt,
+      url: path,
+      images: [
+        {
+          url: "https://myymbucket.s3.sa-east-1.amazonaws.com/imagens/Logo.png",
+          width: 800,
+          height: 600,
+        },
+      ],
+    },
+    twitter: {
+      site: "@site",
+      card: "summary",
+      description: descriptions[lang] || descriptions.pt,
+      creator: "@YgorMendanha",
+      title: titles[lang] || titles.pt,
+    },
+  };
+}
+
+export default async function ShopService({
   params,
 }: {
   params: Promise<{ lang: "en" | "pt" }>;
 }) {
-  const { lang } = React.use(params);
+  const { lang } = await params;
   const Projects = ProjectsDetails({ lang });
 
   const content = {

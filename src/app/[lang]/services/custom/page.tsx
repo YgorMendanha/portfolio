@@ -1,6 +1,3 @@
-"use client";
-
-import React from "react";
 import {
   FiBox,
   FiFeather,
@@ -11,13 +8,61 @@ import {
 import { Contact } from "@/components";
 import { Button } from "@/components/partials/ui/button";
 import { ScrollReveal } from "@/components/partials/ScrollAnimate";
+import { Metadata } from "next";
+import { cookies } from "next/headers";
 
-export default function CustomService({
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: "en" | "pt" }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const cookieStore = await cookies();
+  const pathname = cookieStore.get("pathname");
+
+  const path = pathname?.value || "/";
+
+  const titles = {
+    pt: "App sob encomenda — Criação de apps personalizados",
+    en: "Custom App — Creation of personalized apps",
+  };
+
+  const descriptions = {
+    pt: "Desenvolvo apps sob medida, alinhados às suas metas e processos, com protótipos rápidos, validação com usuários e entregas iterativas que geram valor real para o seu negócio.",
+    en: "I develop custom apps tailored to your goals and processes, with rapid prototypes, user validation, and iterative deliveries that generate real value for your business.",
+  };
+
+  return {
+    title: titles[lang] || titles.pt,
+    description: descriptions[lang] || descriptions.pt,
+    openGraph: {
+      title: titles[lang] || titles.pt,
+      description: descriptions[lang] || descriptions.pt,
+      url: path,
+      images: [
+        {
+          url: "https://myymbucket.s3.sa-east-1.amazonaws.com/imagens/Logo.png",
+          width: 800,
+          height: 600,
+        },
+      ],
+    },
+    twitter: {
+      site: "@site",
+      card: "summary",
+      description: descriptions[lang] || descriptions.pt,
+      creator: "@YgorMendanha",
+      title: titles[lang] || titles.pt,
+    },
+  };
+}
+
+export default async function CustomService({
   params,
 }: {
   params: Promise<{ lang: "en" | "pt" }>;
 }) {
-  const { lang } = React.use(params);
+  const { lang } = await params;
 
   const steps = [
     {

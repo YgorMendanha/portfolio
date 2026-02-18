@@ -1,19 +1,64 @@
-"use client";
-
-import React from "react";
 import Image from "next/image";
 import { FiExternalLink, FiLink, FiStar } from "react-icons/fi";
 import { Contact } from "@/components";
 import { ScrollReveal } from "@/components/partials/ScrollAnimate";
 import { Button } from "@/components/partials/ui/button";
 import { ProjectsDetails } from "@/utils/functions/getProjectsDetails";
+import { cookies } from "next/headers";
+import { Metadata } from "next";
 
-export default function ProjectsPage({
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: "en" | "pt" }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const cookieStore = await cookies();
+  const pathname = cookieStore.get("pathname");
+
+  const path = pathname?.value || "/";
+
+  const titles = {
+    pt: "Projetos",
+    en: "Projects",
+  };
+
+  const descriptions = {
+    pt: "Explore my technology and web development projects, with practical solutions, experiences as a programmer, and innovative case studies.",
+    en: "Explore meus projetos de tecnologia e desenvolvimento web, com soluções práticas, experiências como programador e cases inovadores.",
+  };
+
+  return {
+    title: titles[lang] || titles.pt,
+    description: descriptions[lang] || descriptions.pt,
+    openGraph: {
+      title: titles[lang] || titles.pt,
+      description: descriptions[lang] || descriptions.pt,
+      url: path,
+      images: [
+        {
+          url: "https://myymbucket.s3.sa-east-1.amazonaws.com/imagens/Logo.png",
+          width: 800,
+          height: 600,
+        },
+      ],
+    },
+    twitter: {
+      site: "@site",
+      card: "summary",
+      description: descriptions[lang] || descriptions.pt,
+      creator: "@YgorMendanha",
+      title: titles[lang] || titles.pt,
+    },
+  };
+}
+
+export default async function ProjectsPage({
   params,
 }: {
   params: Promise<{ lang: "en" | "pt" }>;
 }) {
-  const { lang } = React.use(params);
+  const { lang } = await params;
   const Projects = ProjectsDetails({ lang }) ?? [];
 
   const texts =

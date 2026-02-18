@@ -21,29 +21,29 @@ export function ProjectsDetails({
   return [
     {
       id: "erp",
-      title: "Clinic OS",
+      title: "Clinic Core",
       tags: ["Med", "ERP", "SaaS"],
       logo: (
         <div className="flex-1 w-full h-full bg-aqua flex items-center justify-center">
           <div className="flex items-center gap-3 group cursor-pointer select-none">
             <div className="relative flex items-center justify-center w-20 h-20 rounded-xl bg-gradient-to-br from-purple-bright to-black-purple border border-white/10 group-hover:border-cyan-light/50 shadow-lg group-hover:shadow-[0_0_20px_rgba(0,194,255,0.25)] transition-all duration-500">
               <Activity
-                className="text-cyan-light transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6"
+                className="text-cyan-light transition-transform duration-500 group-hover:scale-110 "
                 size={50}
               />
             </div>
             <div className="flex flex-col justify-center h-full">
               <span className="text-xl font-bold tracking-tighter text-white leading-none group-hover:text-cyan-light transition-colors duration-300">
-                CLINIC OS
+                CLINIC CORE
               </span>
               <span className="text-[10px] font-bold tracking-[0.3em] text-light-gray/40 uppercase leading-none mt-1 group-hover:text-white transition-colors duration-300">
-                {lang === "pt" ? "Sistema" : "System"}
+                System
               </span>
             </div>
           </div>
         </div>
       ),
-      internalLink: "/projects/clinicos",
+      internalLink: "/projects/cliniccore",
       details:
         lang === "pt"
           ? "Plataforma SaaS modular para clínicas médicas com automação via WhatsApp e IA Copiloto, focada em eficiência, organização e produtividade."

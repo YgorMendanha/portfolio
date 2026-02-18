@@ -7,6 +7,7 @@ export async function GET() {
   const EXTRA_PAGES: string[] = [
     "projects",
     "projects/shop",
+    "projects/cliniccore",
     "services",
     "services/custom",
     "services/shop",

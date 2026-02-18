@@ -15,9 +15,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   const pathname = usePathname();
 
-  const isClinicos = pathname.includes("projects/clinicos");
+  const isClinicCore = pathname.includes("projects/cliniccore");
 
-  console.log({ isClinicos });
+  
 
   const WhatsappButton = () => {
     return (
@@ -50,14 +50,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     // Estrutura flex-col min-h-screen garante que o footer fique sempre em baixo
     <div className="flex flex-col min-h-screen bg-black-purple text-light-gray font-sans selection:bg-cyan-light selection:text-black-purple">
-      {!isClinicos && <Header />}
+      {!isClinicCore && <Header />}
 
       {/* Main expande (flex-1) para ocupar o espaço vazio, empurrando o footer */}
       <main className="flex-1 w-full flex flex-col relative z-0">
         {children}
       </main>
 
-      {!isClinicos && <Footer />}
+      {!isClinicCore && <Footer />}
 
       <WhatsappButton />
 

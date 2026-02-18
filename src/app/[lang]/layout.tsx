@@ -35,7 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const pathname = cookieStore.get("pathname")?.value ?? "/";
   const urlsite = (process.env.NEXT_PUBLIC_NEXT_SITE_URL ?? "").replace(
     /\/+$/,
-    ""
+    "",
   );
 
   const path = pathname === "/" ? "/" : pathname.replace(/\/+$/, "");
@@ -56,7 +56,6 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const canonicalURL = `${urlsite}${canonicalPath}`;
 
-  // metatags inline (pt / en)
   const metatags =
     lang === "pt"
       ? {

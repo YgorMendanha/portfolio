@@ -1,16 +1,38 @@
-"use client";
-
-import React from "react";
 import { FileText, ArrowLeft, Mail, Globe, Phone } from "lucide-react";
 import Link from "next/link";
 import { ScrollReveal } from "@/components/partials/ScrollAnimate";
+import { Metadata } from "next";
 
-export default function TermsPage({
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: "en" | "pt" }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+
+  const titles = {
+    pt: "Termos de Uso",
+    en: "Terms of Use",
+  };
+
+  const descriptions = {
+    pt: "Consulte os termos e condições de uso do site da YM Desenvolvimento.",
+    en: "Check the terms and conditions of use for the YM Development website.",
+  };
+
+  return {
+    title: titles[lang] || titles.pt,
+    description: descriptions[lang] || descriptions.pt,
+    robots: "noindex, follow",
+  };
+}
+
+export default async function TermsPage({
   params,
 }: {
   params: Promise<{ lang: "en" | "pt" }>;
 }) {
-  const { lang } = React.use(params);
+  const { lang } = await params;
 
   const content = {
     pt: {

@@ -6,6 +6,54 @@ import {
   ServiceCard,
   ServicesForPage,
 } from "@/utils/functions/getServicesDetails";
+import { Metadata } from "next";
+import { cookies } from "next/headers";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: "en" | "pt" }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const cookieStore = await cookies();
+  const pathname = cookieStore.get("pathname");
+
+  const path = pathname?.value || "/";
+
+  const titles = {
+    pt: "Serviços",
+    en: "Services",
+  };
+
+  const descriptions = {
+    pt: "Oferecemos soluções digitais completas: criação de lojas e-commerce, apps personalizados, otimização de conversão, SEO, analytics, integrações, manutenção e design UX/UI, tudo pensado para gerar resultados e crescimento para o seu negócio",
+    en: "We offer complete digital solutions: e-commerce store creation, custom apps, conversion optimization, SEO, analytics, integrations, maintenance, and UX/UI design, all designed to deliver results and growth for your business",
+  };
+
+  return {
+    title: titles[lang] || titles.pt,
+    description: descriptions[lang] || descriptions.pt,
+    openGraph: {
+      title: titles[lang] || titles.pt,
+      description: descriptions[lang] || descriptions.pt,
+      url: path,
+      images: [
+        {
+          url: "https://myymbucket.s3.sa-east-1.amazonaws.com/imagens/Logo.png",
+          width: 800,
+          height: 600,
+        },
+      ],
+    },
+    twitter: {
+      site: "@site",
+      card: "summary",
+      description: descriptions[lang] || descriptions.pt,
+      creator: "@YgorMendanha",
+      title: titles[lang] || titles.pt,
+    },
+  };
+}
 
 export default async function ServicesPage({
   params,
@@ -30,7 +78,6 @@ export default async function ServicesPage({
             : "bg-white/[0.02] border-white/5 hover:border-cyan-light/30"
         }`}
       >
-       
         <div
           className={`absolute left-0 top-1/4 w-1 h-1/2 scale-y-0 group-hover:scale-y-100 transition-transform duration-500 rounded-r-full ${
             isMain
@@ -39,7 +86,6 @@ export default async function ServicesPage({
           }`}
         />
 
-        
         <div
           className={`absolute -inset-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-3xl -z-10 ${
             isMain ? "bg-yellow/10" : "bg-cyan-light/10"

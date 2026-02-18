@@ -32,7 +32,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-export default function LandingPage() {
+export function LandingPageClinicCore() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [diasRestantes, setDiasRestantes] = useState(0);
 
@@ -70,8 +70,8 @@ export default function LandingPage() {
               <Activity className="text-cyan-light" size={20} />
             </div>
             <div className="flex flex-col justify-center">
-              <span className="text-lg md:text-xl font-bold tracking-tighter text-white leading-none">
-                CLINIC OS
+              <span className="text-lg md:text-xl font-bold tracking-tighter text-white leading-none group-hover:text-cyan-light">
+                CLINIC CORE
               </span>
               <span className="text-[9px] font-bold tracking-[0.3em] text-light-gray/40 uppercase mt-1 group-hover:text-white transition-colors">
                 System
@@ -283,9 +283,9 @@ export default function LandingPage() {
               <span className="text-cyan-light">Crescer</span>
             </h2>
             <p className="text-light-gray/60 max-w-2xl mx-auto">
-              O Clinic OS não é apenas para agendar consultas. É uma ferramenta
-              de gestão estratégica para administradores que querem dominar os
-              números da clínica.
+              O Clinic Core não é apenas para agendar consultas. É uma
+              ferramenta de gestão estratégica para administradores que querem
+              dominar os números da clínica.
             </p>
           </div>
 
@@ -534,7 +534,7 @@ export default function LandingPage() {
               Sabemos que mudar de sistema dá medo de perder informações. Por
               isso, nossa equipe faz esse serviço técnico para você. Pegamos
               seus dados antigos (pacientes, histórico) e colocamos no Clinic
-              OS.
+              Core.
             </p>
             <div className="flex flex-col gap-2 text-sm text-light-gray/60">
               <div className="flex items-center gap-2">
@@ -774,7 +774,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
             <div className="text-center md:text-left">
-              <p className="font-bold text-white mb-1">CLINIC OS</p>
+              <p className="font-bold text-white mb-1">CLINIC CORE</p>
               <p>© {new Date().getFullYear()} Todos os direitos reservados.</p>
             </div>
 

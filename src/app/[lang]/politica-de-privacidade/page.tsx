@@ -1,16 +1,38 @@
-"use client";
-
-import React from "react";
 import { ShieldCheck, ArrowLeft, Mail, Globe, Phone } from "lucide-react";
 import Link from "next/link";
 import { ScrollReveal } from "@/components/partials/ScrollAnimate";
+import { Metadata } from "next";
 
-export default function PrivacyPage({
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: "en" | "pt" }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+
+  const titles = {
+    pt: "Política de Privacidade | YM Desenvolvimento",
+    en: "Privacy Policy | YM Development",
+  };
+
+  const descriptions = {
+    pt: "Leia a Política de Privacidade da YM Desenvolvimento e saiba como protegemos os seus dados.",
+    en: "Read the YM Development Privacy Policy and learn how we protect your data.",
+  };
+
+  return {
+    title: titles[lang] || titles.pt,
+    description: descriptions[lang] || descriptions.pt,
+    robots: "noindex, follow",
+  };
+}
+
+export default async function PrivacyPage({
   params,
 }: {
   params: Promise<{ lang: "en" | "pt" }>;
 }) {
-  const { lang } = React.use(params);
+  const { lang } = await params;
 
   const content = {
     pt: {
