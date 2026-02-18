@@ -37,6 +37,7 @@ export function IntroSection() {
         {/* Coluna de Texto */}
         <ScrollReveal
           reverse
+          speed={"slow"}
           direction="left"
           className="flex flex-col gap-6 text-center lg:text-left order-2 lg:order-1"
         >
@@ -124,6 +125,7 @@ export function IntroSection() {
         {/* Coluna da Animação */}
         <ScrollReveal
           reverse
+          speed={"slow"}
           direction="right"
           className="order-1 lg:order-2 flex justify-center lg:justify-end relative"
         >

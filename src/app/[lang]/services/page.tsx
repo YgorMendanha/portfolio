@@ -72,7 +72,8 @@ export default async function ServicesPage({
   }) => {
     return (
       <article
-        className={`group relative flex flex-col h-full p-8 rounded-3xl border transition-all duration-500 overflow-hidden hover:-translate-y-2 ${
+       
+        className={`group relative flex flex-col h-full p-6 md:p-8 rounded-3xl border transition-all duration-500 overflow-hidden hover:-translate-y-2 ${
           isMain
             ? "bg-white/[0.04] border-white/10 hover:border-yellow/40 shadow-2xl"
             : "bg-white/[0.02] border-white/5 hover:border-cyan-light/30"
@@ -133,14 +134,15 @@ export default async function ServicesPage({
             ))}
           </ul>
 
-          <div className="mt-auto flex flex-col sm:flex-row gap-3">
+          <div className="mt-auto flex flex-col sm:flex-row gap-3 w-full">
             <Button
               href="#contact"
-              className={
+            
+              className={`w-full sm:w-auto ${
                 isMain
                   ? "bg-yellow text-black-purple hover:bg-white"
                   : "bg-cyan-light text-black-purple hover:bg-white"
-              }
+              }`}
             >
               {lang === "pt" ? "Solicitar" : "Request"}
             </Button>
@@ -149,7 +151,7 @@ export default async function ServicesPage({
               <Button
                 variant="ghost"
                 href={s.url}
-                className="border-white/10 text-white hover:bg-white/5"
+                className="border-white/10 text-white hover:bg-white/5 w-full sm:w-auto"
               >
                 {lang === "pt" ? "Mais detalhes" : "More details"}
               </Button>
@@ -161,7 +163,8 @@ export default async function ServicesPage({
   };
 
   return (
-    <div className="min-h-screen bg-black-purple text-white pt-32 pb-20">
+    
+    <div className="min-h-screen bg-black-purple text-white pt-32 pb-20 overflow-x-hidden w-full">
       {/* Intro da Página */}
       <header className="container px-5 mx-auto mb-20">
         <ScrollReveal direction="bottom">
@@ -172,7 +175,8 @@ export default async function ServicesPage({
                 {lang === "pt" ? "Expertise" : "Expertise"}
               </span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight">
+            
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-black mb-6 tracking-tight break-words">
               {lang === "pt" ? "Serviços" : "Services"}
               <span className="text-yellow">.</span>
             </h1>
