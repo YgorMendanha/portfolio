@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Activity,
   CheckCircle2,
@@ -34,21 +34,28 @@ import Link from "next/link";
 
 export function LandingPageClinicCore() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [diasRestantes, setDiasRestantes] = useState(0);
+  const [confirmados, setConfirmados] = useState(0);
 
-  // Lógica de cálculo de data dinâmica
-  useEffect(() => {
-    const dataLancamento = new Date("2026-03-30"); // Defina sua data aqui
-    const hoje = new Date();
-    const diffTime = dataLancamento.getTime() - hoje.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    setDiasRestantes(diffDays > 0 ? diffDays : 0);
+useEffect(() => {
+    // --- CONFIGURATION ---
+    const launchDate = new Date("2026-03-30T00:00:00");
+    const startDate = new Date("2026-02-01T00:00:00");
+    const goalConfirmed = 30;
+    const today = new Date();
+
+    const totalCampaignDuration = launchDate.getTime() - startDate.getTime();
+    const timeElapsed = today.getTime() - startDate.getTime();
+
+    if (today >= launchDate) {
+      setConfirmed(goalConfirmed);
+    } else if (today <= startDate) {
+      setConfirmed(0);
+    } else {
+      const percentageComplete = timeElapsed / totalCampaignDuration;
+      const currentValue = Math.floor(percentageComplete * goalConfirmed);
+      setConfirmed(currentValue);
+    }
   }, []);
-
-  const inscritosIniciais = 0;
-  const incrementoPorDiaPassado = 1;
-  const totalInscritos =
-    inscritosIniciais + Math.abs(diasRestantes - 55) * incrementoPorDiaPassado;
 
   const especialidades = [
     "Odontologia",
@@ -63,7 +70,11 @@ export function LandingPageClinicCore() {
 
   return (
     <div className="bg-black-purple text-white font-sans selection:bg-cyan-light selection:text-black-purple">
-      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-black-purple/80 backdrop-blur-xl border-b border-white/5">
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-white/5 ${
+          isMenuOpen ? "bg-black-purple" : "bg-black-purple/80 backdrop-blur-xl"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
           <div className="flex items-center gap-3 group cursor-pointer select-none">
             <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-purple-bright to-black-purple border border-white/10 group-hover:border-cyan-light/50 transition-all">
@@ -123,7 +134,7 @@ export function LandingPageClinicCore() {
 
         {/* Overlay Menu Mobile */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-black-purple border-b border-white/10 p-6 flex flex-col gap-6 animate-in slide-in-from-top duration-300">
+          <div className="md:hidden absolute top-full left-0 w-full bg-black-purple border-b border-white/10 p-6 flex flex-col gap-6 animate-in slide-in-from-top duration-300 h-screen">
             <a
               href="#publico-alvo"
               onClick={() => setIsMenuOpen(false)}
@@ -148,7 +159,7 @@ export function LandingPageClinicCore() {
             <a
               href="#cadastro"
               onClick={() => setIsMenuOpen(false)}
-              className="bg-yellow text-black-purple text-center py-4 rounded-xl font-black"
+              className="bg-yellow text-black-purple text-center py-4 rounded-xl font-black mt-4"
             >
               ENTRAR NA LISTA
             </a>
@@ -236,8 +247,8 @@ export function LandingPageClinicCore() {
             </a>
             <p className="text-xs text-light-gray/40">
               Junte-se a{" "}
-              <strong className="text-white">+{totalInscritos} clínicas</strong>{" "}
-              na lista de espera.
+              <strong className="text-white">+{confirmados} clínicas</strong> na
+              lista de espera.
             </p>
           </div>
         </div>
@@ -758,7 +769,7 @@ export function LandingPageClinicCore() {
             <div className="flex items-center gap-2">
               <Users size={14} className="text-cyan-light" />
               <span>
-                Mais de <strong>{totalInscritos}</strong> interessados.
+                Mais de <strong>{confirmados}</strong> interessados.
               </span>
             </div>
             <div className="hidden md:block w-1 h-1 bg-light-gray/30 rounded-full"></div>
