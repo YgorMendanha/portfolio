@@ -12,7 +12,7 @@ export async function generateMetadata({
 
   const path = pathname?.value || "/";
 
-  const title = "Orbe - Sistema de Gestão para Clínicas";
+  const title = "Orbe - Controle Inteligente para Clínicas";
 
   const description =
     "Organize sua clínica e pare de perder dinheiro com o Orbe. Sistema de gestão completo com IA, automação de WhatsApp, prontuário e financeiro centralizados. Coloque sua clínica no piloto automático, elimine custos invisíveis e aumente seus lucros. Inscreva-se na lista de espera.";
@@ -38,6 +38,9 @@ export async function generateMetadata({
       description,
       creator: "@YgorMendanha",
       title,
+    },
+    icons: {
+      icon: [{ url: "/orbe.ico" }],
     },
   };
 }
