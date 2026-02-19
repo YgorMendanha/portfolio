@@ -43,18 +43,23 @@ export function IntroSection() {
         >
           <div className="space-y-2">
             <span className="text-cyan-light font-bold tracking-wider uppercase text-sm md:text-base">
-              {lang === "pt" ? "Olá, eu sou Ygor" : "Hello, I am Ygor"}
+              {lang === "pt"
+                ? "Sites e sistemas que dão resultado"
+                : "Websites and systems that deliver results"}
             </span>
+
             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
               {lang === "pt" ? (
                 <>
-                  Transformando ideias digitais em{" "}
-                  <span className="text-yellow">resultados</span> reais.
+                  Crio soluções para{" "}
+                  <span className="text-yellow">vender mais</span> e{" "}
+                  <span className="text-yellow">escalar</span> seu negócio.
                 </>
               ) : (
                 <>
-                  Turning digital ideas into real{" "}
-                  <span className="text-yellow">results</span>.
+                  I build solutions to{" "}
+                  <span className="text-yellow">sell more</span> and{" "}
+                  <span className="text-yellow">scale</span> your business.
                 </>
               )}
             </h2>

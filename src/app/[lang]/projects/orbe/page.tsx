@@ -39,9 +39,6 @@ export async function generateMetadata({
       creator: "@YgorMendanha",
       title,
     },
-    icons: {
-      icon: [{ url: "/orbe.ico" }],
-    },
   };
 }
 

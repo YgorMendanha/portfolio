@@ -19,11 +19,14 @@ type Inputs = {
 
 export function Contact({ lang }: { lang: "pt" | "en" }) {
   const labelName = lang === "pt" ? "Nome" : "Full name";
-  const labelContactForm = lang === "pt" ? "Forma de Contato" : "Contact method";
+  const labelContactForm =
+    lang === "pt" ? "Forma de Contato" : "Contact method";
   const labelMessage = lang === "pt" ? "Mensagem" : "Message";
 
-  const errorEmail = lang === "pt" ? "Houve um erro no envio 😢" : "There was an error sending.";
-  const successEmail = lang === "pt" ? "Obrigado pelo contato" : "Thanks for getting in touch";
+  const errorEmail =
+    lang === "pt" ? "Houve um erro no envio 😢" : "There was an error sending.";
+  const successEmail =
+    lang === "pt" ? "Obrigado pelo contato" : "Thanks for getting in touch";
 
   const [loading, setLoading] = useState<boolean>(false);
   const posthog = usePostHog();
@@ -61,7 +64,10 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
   };
 
   return (
-    <section id="contact" className="bg-black-purple py-24 relative overflow-hidden">
+    <section
+      id="contact"
+      className="bg-black-purple py-24 relative overflow-hidden"
+    >
       {/* Glows de fundo em Amarelo e Ciano */}
       <div className="absolute -bottom-24 -right-24 w-[500px] h-[500px] bg-yellow/5 blur-[120px] pointer-events-none" />
       <div className="absolute -top-24 -left-24 w-[400px] h-[400px] bg-cyan-light/5 blur-[120px] pointer-events-none" />
@@ -77,7 +83,9 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-yellow"></span>
                 </span>
                 <span className="text-yellow text-xs font-black uppercase tracking-[0.2em]">
-                  {lang === "pt" ? "Disponível para novos projetos" : "Available for new projects"}
+                  {lang === "pt"
+                    ? "Disponível para novos projetos"
+                    : "Available for new projects"}
                 </span>
               </div>
 
@@ -87,8 +95,8 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
 
               <div className="text-gray-400 text-lg leading-relaxed mb-10 space-y-4">
                 {lang === "pt"
-                  ? "Fale comigo pelo WhatsApp ou e-mail. Vou entender sua ideia, propor soluções criativas e transformar sua necessidade em um app sob medida."
-                  : "Talk to me via WhatsApp or email. I’ll understand your idea, propose creative solutions, and turn your needs into a custom-built app."}
+                  ? "Entre em contato por WhatsApp ou e-mail para apresentar sua necessidade. Cada projeto é analisado para propor a melhor solução e transformar ideias em produtos digitais eficientes."
+                  : "Get in touch via WhatsApp or email to share your needs. Every project is carefully evaluated to deliver the best solution and turn ideas into efficient digital products."}
               </div>
 
               <div className="space-y-6">
@@ -100,7 +108,9 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
                     <p className="text-xs text-gray-500 uppercase font-bold tracking-widest">
                       {lang === "pt" ? "Telefone" : "Phone"}
                     </p>
-                    <p className="text-white font-bold text-lg">‪+55 (92) 98283-2103‬</p>
+                    <p className="text-white font-bold text-lg">
+                      ‪+55 (92) 98283-2103‬
+                    </p>
                   </div>
                 </div>
 
@@ -109,8 +119,12 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
                     <MdEmail size={22} />
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500 uppercase font-bold tracking-widest">E-mail</p>
-                    <p className="text-white font-bold text-lg">contato@ygormendanha.com</p>
+                    <p className="text-xs text-gray-500 uppercase font-bold tracking-widest">
+                      E-mail
+                    </p>
+                    <p className="text-white font-bold text-lg">
+                      contato@ygormendanha.com
+                    </p>
                   </div>
                 </div>
               </div>
@@ -119,8 +133,14 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
 
           {/* Lado Direito: Formulário */}
           <div className="w-full lg:w-1/2">
-            <ScrollReveal direction="right" className="bg-white/[0.02] border border-white/10 p-8 md:p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
-              <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 relative z-10">
+            <ScrollReveal
+              direction="right"
+              className="bg-white/[0.02] border border-white/10 p-8 md:p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden"
+            >
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="flex flex-col gap-6 relative z-10"
+              >
                 <div className="space-y-4">
                   <input
                     {...register("name", { required: true })}
@@ -151,9 +171,9 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
                     {loading ? (
                       <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-black-purple"></div>
                     ) : lang === "pt" ? (
-                      "Iniciar Projeto"
+                      "Solicitar projeto"
                     ) : (
-                      "Start Project"
+                      "Request project"
                     )}
                   </Button>
 
@@ -162,16 +182,24 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
                     {lang === "pt" ? (
                       <>
                         Ao enviar, você concorda com nossa{" "}
-                        <Link href={`/politica-de-privacidade`} className="text-yellow hover:underline">
+                        <Link
+                          href={`/politica-de-privacidade`}
+                          className="text-yellow hover:underline"
+                        >
                           Política de Privacidade
-                        </Link>.
+                        </Link>
+                        .
                       </>
                     ) : (
                       <>
                         By sending, you agree to our{" "}
-                        <Link href={`/politica-de-privacidade`} className="text-yellow hover:underline">
+                        <Link
+                          href={`/politica-de-privacidade`}
+                          className="text-yellow hover:underline"
+                        >
                           Privacy Policy
-                        </Link>.
+                        </Link>
+                        .
                       </>
                     )}
                   </p>
@@ -183,14 +211,17 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
                   </div>
                   <div className="relative flex justify-center text-[10px] font-black uppercase tracking-widest">
                     <span className="bg-black-purple/80 px-4 text-gray-500">
-                      {lang === "pt" ? "Ou prefira" : "Or prefer"}
+                      {lang === "pt" ? "Ou fale direto" : "Or contact directly"}
                     </span>
                   </div>
                 </div>
 
                 <Button
                   onClick={() => {
-                    sendEventGA({ name: "click_whatsapp", params: { linkText: "WhatsApp" } });
+                    sendEventGA({
+                      name: "click_whatsapp",
+                      params: { linkText: "WhatsApp" },
+                    });
                     posthog.capture("click_whatsapp");
                   }}
                   href="https://wa.me/5592982832103"
