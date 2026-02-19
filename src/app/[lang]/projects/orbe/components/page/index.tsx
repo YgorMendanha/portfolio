@@ -86,7 +86,7 @@ export function LandingPageOrbe() {
                 ORBE
               </span>
               <span className="text-[9px] font-bold tracking-[0.3em] text-light-gray/40 uppercase mt-1 group-hover:text-white transition-colors">
-                Controle Inteligente
+                Clínica Inteligente
               </span>
             </div>
           </div>
