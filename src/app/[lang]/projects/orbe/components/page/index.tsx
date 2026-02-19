@@ -29,14 +29,15 @@ import {
   Plus,
   Menu,
   X,
+  Rotate3d,
 } from "lucide-react";
 import Link from "next/link";
 
-export function LandingPageClinicCore() {
+export function LandingPageOrbe() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [confirmed, setConfirmed] = useState(0);
 
-useEffect(() => {
+  useEffect(() => {
     // --- CONFIGURATION ---
     const launchDate = new Date("2026-03-30T00:00:00");
     const startDate = new Date("2026-02-01T00:00:00");
@@ -78,14 +79,14 @@ useEffect(() => {
         <div className="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
           <div className="flex items-center gap-3 group cursor-pointer select-none">
             <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-purple-bright to-black-purple border border-white/10 group-hover:border-cyan-light/50 transition-all">
-              <Activity className="text-cyan-light" size={20} />
+              <Rotate3d className="text-cyan-light" size={20} />
             </div>
             <div className="flex flex-col justify-center">
               <span className="text-lg md:text-xl font-bold tracking-tighter text-white leading-none group-hover:text-cyan-light">
-                CLINIC CORE
+                ORBE
               </span>
               <span className="text-[9px] font-bold tracking-[0.3em] text-light-gray/40 uppercase mt-1 group-hover:text-white transition-colors">
-                System
+                Controle Inteligente
               </span>
             </div>
           </div>
@@ -294,9 +295,9 @@ useEffect(() => {
               <span className="text-cyan-light">Crescer</span>
             </h2>
             <p className="text-light-gray/60 max-w-2xl mx-auto">
-              O Clinic Core não é apenas para agendar consultas. É uma
-              ferramenta de gestão estratégica para administradores que querem
-              dominar os números da clínica.
+              O Orbe não é apenas para agendar consultas. É uma ferramenta de
+              gestão estratégica para administradores que querem dominar os
+              números da clínica.
             </p>
           </div>
 
@@ -785,7 +786,7 @@ useEffect(() => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
             <div className="text-center md:text-left">
-              <p className="font-bold text-white mb-1">CLINIC CORE</p>
+              <p className="font-bold text-white mb-1">Orbe</p>
               <p>© {new Date().getFullYear()} Todos os direitos reservados.</p>
             </div>
 
