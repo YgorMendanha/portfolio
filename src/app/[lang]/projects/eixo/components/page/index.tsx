@@ -584,8 +584,7 @@ export function LandingPageEixo() {
             <p className="text-light-gray/80 mb-6 leading-relaxed">
               Sabemos que mudar de sistema dá medo de perder informações. Por
               isso, nossa equipe faz esse serviço técnico para você. Pegamos
-              seus dados antigos (pacientes, histórico) e colocamos no Clinic
-              Core.
+              seus dados antigos (pacientes, histórico) e colocamos no Eixo.
             </p>
             <div className="flex flex-col gap-2 text-sm text-light-gray/60">
               <div className="flex items-center gap-2">
@@ -604,8 +603,7 @@ export function LandingPageEixo() {
           </div>
           <div className="md:w-1/2 bg-black-purple p-6 rounded-2xl border border-white/10 opacity-80">
             <p className="text-center italic text-light-gray/70">
-              "A migração é apenas uma etapa técnica. Nós cuidamos dela para
-              você focar no atendimento."
+              Migração assistida sem interrupção da operação
             </p>
           </div>
         </div>
