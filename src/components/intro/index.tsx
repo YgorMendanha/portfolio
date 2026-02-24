@@ -13,7 +13,6 @@ import { usePostHog } from "posthog-js/react";
 
 export function IntroSection() {
   const { lang }: { lang?: "pt" | "en" } = useParams();
-
   const posthog = usePostHog();
 
   const defaultOptions = {
@@ -30,61 +29,79 @@ export function IntroSection() {
       id="intro"
       className="relative min-h-screen flex items-center justify-center pt-20 pb-10 bg-black-purple overflow-hidden"
     >
+      {/* Efeitos de Luz de Fundo */}
       <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-purple-bright/20 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-cyan-light/10 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="container px-5 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
-        {/* Coluna de Texto */}
+      {/* ANIMAÇÃO LOTTIE NO FUNDO */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-20 pointer-events-none">
+        <div className="w-full max-w-[600px] lg:max-w-[800px]">
+          <Lottie options={defaultOptions} isClickToPauseDisabled={true} />
+        </div>
+      </div>
+
+      {/* CONTEÚDO CENTRALIZADO */}
+      <div className="container px-5 mx-auto relative z-10 flex flex-col items-center text-center">
         <ScrollReveal
           reverse
           speed={"slow"}
-          direction="left"
-          className="flex flex-col gap-6 text-center lg:text-left order-2 lg:order-1"
+          direction="bottom"
+          className="flex flex-col gap-8 items-center max-w-4xl"
         >
-          <div className="space-y-2">
+          {/* Título e Subtítulo */}
+          <div className="space-y-6">
+            {/* Título Pequeno */}
             <span className="text-cyan-light font-bold tracking-wider uppercase text-sm md:text-base">
               {lang === "pt"
-                ? "Sites e sistemas que dão resultado"
-                : "Websites and systems that deliver results"}
+                ? "Engenharia de Software de Alto Impacto"
+                : "High-Impact Software Engineering"}
             </span>
 
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+            {/* Headline Principal */}
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight">
               {lang === "pt" ? (
                 <>
-                  Crio soluções para{" "}
-                  <span className="text-yellow">vender mais</span> e{" "}
-                  <span className="text-yellow">escalar</span> seu negócio.
+                  Arquitetura de Sistemas Sob Medida para{" "}
+                  <span className="text-yellow">Escalar</span> seu Negócio.
                 </>
               ) : (
                 <>
-                  I build solutions to{" "}
-                  <span className="text-yellow">sell more</span> and{" "}
-                  <span className="text-yellow">scale</span> your business.
+                  Custom System Architecture to{" "}
+                  <span className="text-yellow">Scale</span> Your Business.
                 </>
               )}
             </h2>
+
+            {/* Descrição */}
+            <h4 className="text-lg md:text-xl lg:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed">
+              {lang === "pt" ? (
+                <>
+                  Transformamos operações complexas em fluxos digitais eficientes. 
+                  Criamos plataformas personalizadas e integrações que garantem segurança, 
+                  escala e rentabilidade para o seu negócio.
+                </>
+              ) : (
+                <>
+                  We transform complex operations into efficient digital workflows. 
+                  We build custom platforms and integrations that ensure security, 
+                  scale, and profitability for your business.
+                </>
+              )}
+            </h4>
           </div>
 
-          <h4 className="text-lg md:text-2xl text-gray-300 font-light max-w-xl mx-auto lg:mx-0 leading-relaxed">
-            {lang === "pt" ? (
-              <>
-                Especialista em e-commerce, sistemas ERP e soluções sob medida
-                para empresas que querem vender mais e gerenciar melhor.
-              </>
-            ) : (
-              <>
-                Specialist in e-commerce, ERP systems, and custom solutions for
-                companies looking to sell more and manage better.
-              </>
-            )}
-          </h4>
-
-          <div className="flex flex-col sm:flex-row items-center gap-6 mt-4 justify-center lg:justify-start">
+          {/* Botão e Redes Sociais EMPILHADOS */}
+          <div className="flex flex-col items-center gap-6 mt-4">
+            {/* CTA */}
             <Button
               href={"#contact"}
               className="bg-purple-bright hover:bg-cyan-light hover:text-black-purple text-white px-8 py-6 text-lg rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(63,32,186,0.5)] hover:shadow-[0_0_25px_rgba(0,194,255,0.6)]"
             >
-              {lang === "pt" ? <>Vamos conversar</> : <>Let's talk</>}
+              {lang === "pt" ? (
+                <>Agende uma Consultoria Técnica</>
+              ) : (
+                <>Schedule a Technical Consultation</>
+              )}
             </Button>
 
             {/* Redes Sociais */}
@@ -124,20 +141,6 @@ export function IntroSection() {
                 <BsWhatsapp size={24} />
               </Link>
             </nav>
-          </div>
-        </ScrollReveal>
-
-        {/* Coluna da Animação */}
-        <ScrollReveal
-          reverse
-          speed={"slow"}
-          direction="right"
-          className="order-1 lg:order-2 flex justify-center lg:justify-end relative"
-        >
-          <div className="w-full max-w-[350px] lg:max-w-[500px] relative">
-            <div className="absolute inset-0 bg-gradient-to-tr from-cyan-light/20 to-purple-bright/20 rounded-full blur-3xl -z-10 animate-pulse" />
-
-            <Lottie options={defaultOptions} isClickToPauseDisabled={true} />
           </div>
         </ScrollReveal>
       </div>

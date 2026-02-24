@@ -1,11 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import {
-  Activity,
   CheckCircle2,
   ChevronRight,
-  Database,
   MessageSquare,
   Stethoscope,
   Users,
@@ -36,12 +35,59 @@ import Link from "next/link";
 export function LandingPageEixo() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [confirmed, setConfirmed] = useState(0);
+  const [sucesso, setSucesso] = useState(false);
+  const [erro, setErro] = useState("");
+
+  // Configuração do React Hook Form
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isSubmitting },
+  } = useForm({
+    defaultValues: {
+      nome: "",
+      tel: "",
+      email: "",
+    },
+  });
+
+  const onSubmit = async (data: any) => {
+    setErro("");
+    setSucesso(false);
+
+    const scriptURL =
+      "https://script.google.com/macros/s/AKfycbx_EIKeiN6u94yc2Frb4aqz91mO-jh7S4z0tUBj0wLyd-W7ynKbBknNxKTN-6c4J7VK/exec";
+
+    const parametros = new URLSearchParams({
+      nome: data.nome,
+      tel: data.tel,
+      email: data.email,
+    });
+
+    const urlFinal = `${scriptURL}?${parametros.toString()}`;
+
+    try {
+      const response = await fetch(urlFinal, { method: "GET" });
+      const result = await response.json();
+
+      if (result.status === "erro") {
+        setErro("Este e-mail ou WhatsApp já está cadastrado na lista!");
+      } else {
+        setSucesso(true);
+        reset(); // Limpa todos os campos do formulário automaticamente
+        setTimeout(() => setSucesso(false), 5000);
+      }
+    } catch (error) {
+      console.error("Erro ao enviar:", error);
+      setErro("Ops! Ocorreu um erro de conexão. Tente novamente.");
+    }
+  };
 
   useEffect(() => {
-    // --- CONFIGURATION ---
     const launchDate = new Date("2026-03-30T00:00:00");
     const startDate = new Date("2026-02-01T00:00:00");
-    const goalConfirmed = 30;
+    const goalConfirmed = 20;
     const today = new Date();
 
     const totalCampaignDuration = launchDate.getTime() - startDate.getTime();
@@ -91,7 +137,6 @@ export function LandingPageEixo() {
             </div>
           </div>
 
-          {/* Menu Desktop */}
           <nav className="hidden md:flex items-center gap-10">
             <a
               href={`#publico-alvo`}
@@ -116,7 +161,6 @@ export function LandingPageEixo() {
             </a>
           </nav>
 
-          {/* Botão Mobile & CTA */}
           <div className="flex items-center gap-4">
             <a
               href="#cadastro"
@@ -133,7 +177,6 @@ export function LandingPageEixo() {
           </div>
         </div>
 
-        {/* Overlay Menu Mobile */}
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 w-full bg-black-purple border-b border-white/10 p-6 flex flex-col gap-6 animate-in slide-in-from-top duration-300 h-screen">
             <a
@@ -260,7 +303,6 @@ export function LandingPageEixo() {
           <p className="text-center text-[10px] tracking-[0.4em] text-cyan-light font-black uppercase mb-10 opacity-80">
             Ecossistema Versátil
           </p>
-
           <div className="flex flex-wrap justify-center gap-3 md:gap-4">
             {especialidades.map((item, idx) => (
               <div
@@ -273,7 +315,6 @@ export function LandingPageEixo() {
                 </span>
               </div>
             ))}
-
             <div className="flex items-center gap-2 bg-gradient-to-r from-purple-bright/20 to-cyan-light/20 border border-cyan-light/30 px-5 py-2.5 rounded-full hover:scale-105 transition-all duration-300 cursor-default">
               <Plus size={16} className="text-cyan-light animate-pulse" />
               <span className="text-xs md:text-sm font-black text-white tracking-tight">
@@ -282,8 +323,6 @@ export function LandingPageEixo() {
             </div>
           </div>
         </div>
-
-        {/* Detalhe de luz de fundo para tirar o aspecto escuro */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-32 bg-cyan-light/5 blur-[100px] -z-10"></div>
       </section>
 
@@ -321,12 +360,12 @@ export function LandingPageEixo() {
               </p>
               <ul className="space-y-2 relative z-10">
                 <li className="flex items-center gap-2 text-xs font-medium text-light-gray/80">
-                  <CheckCircle2 size={14} className="text-cyan-light" />
-                  Fluxo de Caixa e DRE Automatizados
+                  <CheckCircle2 size={14} className="text-cyan-light" /> Fluxo
+                  de Caixa e DRE Automatizados
                 </li>
                 <li className="flex items-center gap-2 text-xs font-medium text-light-gray/80">
-                  <CheckCircle2 size={14} className="text-cyan-light" />
-                  Gestão de LTV e Fidelização de Clientes
+                  <CheckCircle2 size={14} className="text-cyan-light" /> Gestão
+                  de LTV e Fidelização de Clientes
                 </li>
               </ul>
             </div>
@@ -378,11 +417,11 @@ export function LandingPageEixo() {
               </p>
               <ul className="space-y-2 relative z-10">
                 <li className="flex items-center gap-2 text-xs font-medium text-light-gray/80">
-                  <CheckCircle2 size={14} className="text-purple-bright" />
+                  <CheckCircle2 size={14} className="text-purple-bright" />{" "}
                   Prontuário com IA Generativa
                 </li>
                 <li className="flex items-center gap-2 text-xs font-medium text-light-gray/80">
-                  <CheckCircle2 size={14} className="text-purple-bright" />
+                  <CheckCircle2 size={14} className="text-purple-bright" />{" "}
                   Gestão 100% Mobile
                 </li>
               </ul>
@@ -727,7 +766,11 @@ export function LandingPageEixo() {
             Não é apenas um software, é o sistema operacional do seu sucesso.
             Preencha abaixo para garantir sua posição prioritária no lançamento.
           </p>
-          <form className="max-w-md mx-auto space-y-4">
+
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="max-w-md mx-auto space-y-4"
+          >
             <div className="relative group text-left">
               <div className="absolute left-4 top-1/2 -translate-y-1/2 text-light-gray/40 group-focus-within:text-cyan-light transition-colors">
                 <User size={20} className="text-cyan-light" />
@@ -736,6 +779,7 @@ export function LandingPageEixo() {
                 type="text"
                 placeholder="Nome do responsável"
                 className="w-full bg-black-purple border border-white/10 px-5 py-4 pl-12 rounded-xl focus:outline-none focus:border-cyan-light focus:shadow-[0_0_20px_rgba(0,194,255,0.1)] transition-all text-white placeholder:text-light-gray/20"
+                {...register("nome", { required: true })}
               />
             </div>
             <div className="relative group text-left">
@@ -743,9 +787,22 @@ export function LandingPageEixo() {
                 <Phone size={20} className="text-cyan-light" />
               </div>
               <input
-                type="text"
-                placeholder="WhatsApp da clínica (DDD)"
+                type="tel"
+                maxLength={15}
+                placeholder="(00) 00000-0000"
                 className="w-full bg-black-purple border border-white/10 px-5 py-4 pl-12 rounded-xl focus:outline-none focus:border-cyan-light focus:shadow-[0_0_20px_rgba(0,194,255,0.1)] transition-all text-white placeholder:text-light-gray/20"
+                {...register("tel", {
+                  required: true,
+                  onChange: (e) => {
+                    let value = e.target.value.replace(/\D/g, "");
+                    if (value.length > 11) value = value.slice(0, 11);
+                    if (value.length > 2)
+                      value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+                    if (value.length > 10)
+                      value = `${value.slice(0, 10)}-${value.slice(10)}`;
+                    e.target.value = value;
+                  },
+                })}
               />
             </div>
             <div className="relative group text-left">
@@ -754,16 +811,38 @@ export function LandingPageEixo() {
               </div>
               <input
                 type="email"
-                placeholder="Melhor e-mail corporativo"
+                placeholder="Melhor e-mail"
                 className="w-full bg-black-purple border border-white/10 px-5 py-4 pl-12 rounded-xl focus:outline-none focus:border-cyan-light focus:shadow-[0_0_20px_rgba(0,194,255,0.1)] transition-all text-white placeholder:text-light-gray/20"
+                {...register("email", { required: true })}
               />
             </div>
-            <button className="w-full bg-yellow text-black-purple font-black py-4 rounded-xl text-lg hover:bg-[#ffdb4d] hover:scale-[1.02] transition-all shadow-[0_0_30px_rgba(255,204,0,0.2)] hover:shadow-[0_0_50px_rgba(255,204,0,0.4)] flex items-center justify-center gap-3 mt-6 group">
-              GARANTIR MINHA VAGA
-              <ArrowRight
-                size={20}
-                className="transition-transform group-hover:translate-x-1"
-              />
+
+            {sucesso && (
+              <div className="bg-green-500/20 text-green-400 border border-green-500/50 p-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2">
+                <CheckCircle2 size={18} />
+                Vaga garantida com sucesso!
+              </div>
+            )}
+
+            {erro && (
+              <div className="bg-red-500/20 text-red-400 border border-red-500/50 p-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 text-center">
+                <FileWarning size={18} className="shrink-0" />
+                {erro}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-yellow text-black-purple font-black py-4 rounded-xl text-lg hover:bg-[#ffdb4d] hover:scale-[1.02] transition-all shadow-[0_0_30px_rgba(255,204,0,0.2)] hover:shadow-[0_0_50px_rgba(255,204,0,0.4)] flex items-center justify-center gap-3 mt-6 group disabled:opacity-70 disabled:hover:scale-100 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? "ENVIANDO..." : "GARANTIR MINHA VAGA"}
+              {!isSubmitting && (
+                <ArrowRight
+                  size={20}
+                  className="transition-transform group-hover:translate-x-1"
+                />
+              )}
             </button>
           </form>
           <div className="mt-8 flex flex-col md:flex-row items-center justify-center gap-6 opacity-60 text-xs text-light-gray">
@@ -789,7 +868,6 @@ export function LandingPageEixo() {
               <p className="font-bold text-white mb-1">Eixo</p>
               <p>© {new Date().getFullYear()} Todos os direitos reservados.</p>
             </div>
-
             <div className="flex justify-center gap-6 font-medium">
               <Link
                 href="/politica-de-privacidade"
@@ -810,11 +888,10 @@ export function LandingPageEixo() {
                 Privacidade
               </Link>
             </div>
-
             <div className="flex justify-center md:justify-end">
               <Link
                 href={"/"}
-                className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-purple-bright/30 hover:border-cyan-light/50 transition-colors  group cursor-pointer"
+                className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-purple-bright/30 hover:border-cyan-light/50 transition-colors group cursor-pointer"
               >
                 <Code2 className="w-4 h-4 text-cyan-light" />
                 <span className="text-white/80 text-xs text-center group-hover:text-cyan-light transition-colors">

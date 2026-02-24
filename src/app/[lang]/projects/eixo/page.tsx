@@ -26,7 +26,7 @@ export async function generateMetadata({
       url: path,
       images: [
         {
-          url: "https://myymbucket.s3.sa-east-1.amazonaws.com/imagens/Eixo.png",
+          url: "https://myymbucket.s3.sa-east-1.amazonaws.com/imagens/eixo.png",
           width: 800,
           height: 600,
         },
