@@ -7,7 +7,7 @@ export async function GET() {
   const EXTRA_PAGES: string[] = [
     "projects",
     "projects/shop",
-    "projects/orbe",
+    "projects/Eixo",
     "services",
     "services/custom",
     "services/shop",
@@ -68,9 +68,7 @@ export async function GET() {
           }" />`,
           `  <xhtml:link rel="alternate" hreflang="x-default" href="${
             cleanPath
-              ? `https://${siteUrl}/${defaultLang}/${encodePath(
-                  cleanPath
-                )}`
+              ? `https://${siteUrl}/${defaultLang}/${encodePath(cleanPath)}`
               : `https://${siteUrl}/${defaultLang}`
           }" />`,
         ].join("\n");
@@ -101,25 +99,25 @@ export async function GET() {
       if (hasPT) {
         alternatesArr.push(
           `  <xhtml:link rel="alternate" hreflang="pt" href="https://${siteUrl}/pt/blog/${encodePath(
-            slug
-          )}" />`
+            slug,
+          )}" />`,
         );
       }
       if (hasEN) {
         alternatesArr.push(
           `  <xhtml:link rel="alternate" hreflang="en" href="https://${siteUrl}/en/blog/${encodePath(
-            slug
-          )}" />`
+            slug,
+          )}" />`,
         );
       }
       const xDefaultHref = hasPT
         ? `https://${siteUrl}/pt/blog/${encodePath(slug)}`
         : hasEN
-        ? `https://${siteUrl}/en/blog/${encodePath(slug)}`
-        : null;
+          ? `https://${siteUrl}/en/blog/${encodePath(slug)}`
+          : null;
       if (xDefaultHref) {
         alternatesArr.push(
-          `  <xhtml:link rel="alternate" hreflang="x-default" href="${xDefaultHref}" />`
+          `  <xhtml:link rel="alternate" hreflang="x-default" href="${xDefaultHref}" />`,
         );
       }
       const alternates = alternatesArr.join("\n");

@@ -33,7 +33,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-export function LandingPageOrbe() {
+export function LandingPageEixo() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [confirmed, setConfirmed] = useState(0);
 
@@ -83,7 +83,7 @@ export function LandingPageOrbe() {
             </div>
             <div className="flex flex-col justify-center">
               <span className="text-lg md:text-xl font-bold tracking-tighter text-white leading-none group-hover:text-cyan-light">
-                ORBE
+                EIXO
               </span>
               <span className="text-[9px] font-bold tracking-[0.3em] text-light-gray/40 uppercase mt-1 group-hover:text-white transition-colors">
                 Clínica Inteligente
@@ -295,7 +295,7 @@ export function LandingPageOrbe() {
               <span className="text-cyan-light">Crescer</span>
             </h2>
             <p className="text-light-gray/60 max-w-2xl mx-auto">
-              O Orbe não é apenas para agendar consultas. É uma ferramenta de
+              O Eixo não é apenas para agendar consultas. É uma ferramenta de
               gestão estratégica para administradores que querem dominar os
               números da clínica.
             </p>
@@ -786,7 +786,7 @@ export function LandingPageOrbe() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
             <div className="text-center md:text-left">
-              <p className="font-bold text-white mb-1">Orbe</p>
+              <p className="font-bold text-white mb-1">Eixo</p>
               <p>© {new Date().getFullYear()} Todos os direitos reservados.</p>
             </div>
 

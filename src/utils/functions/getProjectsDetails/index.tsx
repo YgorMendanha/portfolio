@@ -21,7 +21,7 @@ export function ProjectsDetails({
   return [
     {
       id: "erp",
-      title: "Orbe",
+      title: "Eixo",
       tags: ["Med", "ERP", "SaaS"],
       logo: (
         <div className="flex-1 w-full h-full bg-aqua flex items-center justify-center">
@@ -34,7 +34,7 @@ export function ProjectsDetails({
             </div>
             <div className="flex flex-col justify-center h-full">
               <span className="text-xl font-bold tracking-tighter text-white leading-none group-hover:text-cyan-light transition-colors duration-300">
-                ORBE
+                EIXO
               </span>
               <span className="text-[10px] font-bold tracking-[0.3em] text-light-gray/40 uppercase leading-none mt-1 group-hover:text-white transition-colors duration-300">
                 Clinica Inteligente
@@ -43,7 +43,7 @@ export function ProjectsDetails({
           </div>
         </div>
       ),
-      internalLink: "/projects/orbe",
+      internalLink: "/projects/eixo",
       details:
         lang === "pt"
           ? "Plataforma SaaS modular para clínicas médicas com automação via WhatsApp e IA Copiloto, focada em eficiência, organização e produtividade."

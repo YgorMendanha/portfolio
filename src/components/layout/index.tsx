@@ -15,7 +15,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   const pathname = usePathname();
 
-  const isOrbe = pathname.includes("projects/orbe");
+  const isEixo = pathname.includes("projects/eixo");
 
   const WhatsappButton = () => {
     return (
@@ -31,8 +31,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Falar no WhatsApp"
-        // Alteração Visual: Mudamos de bg-green-500 para as cores da paleta
-        // Usamos cyan-light para destaque máximo sobre o fundo roxo escuro
         className="fixed z-50 bottom-6 right-4 md:bottom-8 md:right-8 
                    bg-cyan-light hover:bg-white text-black-purple 
                    rounded-full p-3 md:p-4 shadow-[0_0_15px_rgba(0,194,255,0.4)] 
@@ -48,14 +46,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     // Estrutura flex-col min-h-screen garante que o footer fique sempre em baixo
     <div className="flex flex-col min-h-screen bg-black-purple text-light-gray font-sans selection:bg-cyan-light selection:text-black-purple">
-      {!isOrbe && <Header />}
+      {!isEixo && <Header />}
 
       {/* Main expande (flex-1) para ocupar o espaço vazio, empurrando o footer */}
       <main className="flex-1 w-full flex flex-col relative z-0">
         {children}
       </main>
 
-      {!isOrbe && <Footer />}
+      {!isEixo && <Footer />}
 
       <WhatsappButton />
 
