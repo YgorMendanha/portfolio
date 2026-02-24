@@ -7,7 +7,7 @@ export async function GET() {
   const EXTRA_PAGES: string[] = [
     "projects",
     "projects/shop",
-    "projects/Eixo",
+    "/projects/eixo",
     "services",
     "services/custom",
     "services/shop",
