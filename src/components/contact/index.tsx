@@ -171,9 +171,9 @@ export function Contact({ lang }: { lang: "pt" | "en" }) {
                     {loading ? (
                       <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-black-purple"></div>
                     ) : lang === "pt" ? (
-                      "Solicitar projeto"
+                      "Entre em Contato"
                     ) : (
-                      "Request project"
+                      "Get in Touch"
                     )}
                   </Button>
 

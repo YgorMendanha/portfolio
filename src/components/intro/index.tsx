@@ -53,8 +53,8 @@ export function IntroSection() {
             {/* Título Pequeno */}
             <span className="text-cyan-light font-bold tracking-wider uppercase text-sm md:text-base">
               {lang === "pt"
-                ? "Engenharia de Software de Alto Impacto"
-                : "High-Impact Software Engineering"}
+                ? "Sites, Lojas e Sistemas Sob Medida para a Sua Empresa Crescer"
+                : "Websites, E-commerce Stores, and Custom Systems for Your Business to Grow"}
             </span>
 
             {/* Headline Principal */}
@@ -98,9 +98,9 @@ export function IntroSection() {
               className="bg-purple-bright hover:bg-cyan-light hover:text-black-purple text-white px-8 py-6 text-lg rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(63,32,186,0.5)] hover:shadow-[0_0_25px_rgba(0,194,255,0.6)]"
             >
               {lang === "pt" ? (
-                <>Agende uma Consultoria Técnica</>
+                <>Falar com um Especialista</>
               ) : (
-                <>Schedule a Technical Consultation</>
+                <>Talk to a Specialist</>
               )}
             </Button>
 
