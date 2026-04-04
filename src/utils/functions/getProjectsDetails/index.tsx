@@ -43,7 +43,7 @@ export function ProjectsDetails({
           </div>
         </div>
       ),
-      internalLink: "/projects/eixo",
+      link: "https://www.eixocopiloto.com.br",
       details:
         lang === "pt"
           ? "Plataforma SaaS modular para clínicas médicas com automação via WhatsApp e IA Copiloto, focada em eficiência, organização e produtividade."
